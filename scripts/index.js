@@ -1,254 +1,132 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-$(document).ready(function(){
-	window.addEventListener("keydown", function (event) { //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key#example
-		if (event.defaultPrevented) {
-			return; // Do nothing if the event was already processed
-		}			
-		switch (event.key) {
-			case "Down": // IE/Edge specific value
-			case "ArrowDown":
-			$("#square").css("top", "+=5");
-			// Do something for "down arrow" key press.
-			break;
-			case "Up": // IE/Edge specific value
-			case "ArrowUp":
-			$("#square").css("top", "-=5");
-			// Do something for "up arrow" key press.
-			break;
-			case "Left": // IE/Edge specific value
-			case "ArrowLeft":
-			$("#square").css("left", "-=5");
-			// Do something for "left arrow" key press.
-			break;
-			case "Right": // IE/Edge specific value
-			case "ArrowRight":
-			$("#square").css("left", "+=5");
-			// Do something for "right arrow" key press.
-			break;
-			case "Enter":
-			// Do something for "enter" or "return" key press.
-			break;
-			case "Esc": // IE/Edge specific value
-			case "Escape":
-			// Do something for "esc" key press.
-			break;
-			default:
-			return; // Quit when this doesn't handle the key event.
-		}
+$(document).ready(function () {
 
-		// Cancel the default action to avoid it being handled twice
-		event.preventDefault();
-		}, true);
-})
-=======
-// $(document).ready(function(){
-// 	window.addEventListener("keydown", function (event) { //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key#example
-// 		if (event.defaultPrevented) {
-// 			return; // Do nothing if the event was already processed
-// 		}			
-// 		switch (event.key) {
-// 			case "Down": // IE/Edge specific value
-// 			case "ArrowDown":
-// 			$("#square").css("top", "+=5");
-// 			// Do something for "down arrow" key press.
-// 			break;
-// 			case "Up": // IE/Edge specific value
-// 			case "ArrowUp":
-// 			$("#square").css("top", "-=5");
-// 			// Do something for "up arrow" key press.
-// 			break;
-// 			case "Left": // IE/Edge specific value
-// 			case "ArrowLeft":
-// 			$("#square").css("left", "-=5");
-// 			// Do something for "left arrow" key press.
-// 			break;
-// 			case "Right": // IE/Edge specific value
-// 			case "ArrowRight":
-// 			$("#square").css("left", "+=5");
-// 			// Do something for "right arrow" key press.
-// 			break;
-// 			case "Enter":
-// 			// Do something for "enter" or "return" key press.
-// 			break;
-// 			case "Esc": // IE/Edge specific value
-// 			case "Escape":
-// 			// Do something for "esc" key press.
-// 			break;
-// 			default:
-// 			return; // Quit when this doesn't handle the key event.
-// 		}
+	let gameCanvas = document.getElementById("gameCanvas");
+	let playerAvatar = document.getElementById("playerAvatar");
+	let width;
+	let height;
 
-// 		// Cancel the default action to avoid it being handled twice
-// 		event.preventDefault();
-// 		}, true);
-// })
+	let resize = function () {
+		width = window.innerWidth * 2;
+		height = window.innerHeight * 2;
+		gameCanvas.style.width = width + "px";
+		gameCanvas.style.height = height + "px";
+	}
+	// window.onresize = resize;
+	// resize();
 
-// let playerData = new Player(400, 400, 0, 0);
-// playerAvatar.style.width = playerData.width;
-// playerAvatar.style.height = playerData.height;
+	function update(progress) {
+		//update the state of the world for the elapsed time since the last render
+	}
 
-$(document).ready(function(){
-=======
-// $(document).ready(function(){
-// 	window.addEventListener("keydown", function (event) { //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key#example
-// 		if (event.defaultPrevented) {
-// 			return; // Do nothing if the event was already processed
-// 		}			
-// 		switch (event.key) {
-// 			case "Down": // IE/Edge specific value
-// 			case "ArrowDown":
-// 			$("#square").css("top", "+=5");
-// 			// Do something for "down arrow" key press.
-// 			break;
-// 			case "Up": // IE/Edge specific value
-// 			case "ArrowUp":
-// 			$("#square").css("top", "-=5");
-// 			// Do something for "up arrow" key press.
-// 			break;
-// 			case "Left": // IE/Edge specific value
-// 			case "ArrowLeft":
-// 			$("#square").css("left", "-=5");
-// 			// Do something for "left arrow" key press.
-// 			break;
-// 			case "Right": // IE/Edge specific value
-// 			case "ArrowRight":
-// 			$("#square").css("left", "+=5");
-// 			// Do something for "right arrow" key press.
-// 			break;
-// 			case "Enter":
-// 			// Do something for "enter" or "return" key press.
-// 			break;
-// 			case "Esc": // IE/Edge specific value
-// 			case "Escape":
-// 			// Do something for "esc" key press.
-// 			break;
-// 			default:
-// 			return; // Quit when this doesn't handle the key event.
-// 		}
+	function draw() {
+		//draw the state of the world
+		playerAvatar.style.width = '50px';
+		playerAvatar.style.height = '50px';
+		playerAvatar.style.left = player.posX;
+		playerAvatar.style.top = player.posY;
+	}
 
-// 		// Cancel the default action to avoid it being handled twice
-// 		event.preventDefault();
-// 		}, true);
-// })
+	function loop(timestamp) {
+		let progress = timestamp - lastrender;
+		update(progress);
+		draw();
+		lastrender = timestamp;
+		window.requestAnimationFrame(loop);
+	}
 
-// let playerData = new Player(400, 400, 0, 0);
-// playerAvatar.style.width = playerData.width;
-// playerAvatar.style.height = playerData.height;
-
-$(document).ready(function(){
->>>>>>> 2dda061 (game loop running and animation moving across the screen)
-
-	// let gameCanvas = document.getElementById("gameCanvas");
-	// let playerAvatar = document.getElementById("playerAvatar");
-	// let width;
-	// let height;
-
-	// let resize = function(){
-	// 	width = window.innerWidth * 2
-	// 	height = window.innerHeight * 2
-	// 	gameCanvas.style.width = width + "px"
-	// 	gameCanvas.style.height = height + "px"
-	// }
-	// window.onresize = resize
-	// resize()
-
-	// let state = {
-	// 	x: width / 2,
-	// 	y: height / 2
-	// }
-
-	// function update(progress){
-	// 	//update the state of the world for the elapsed time since the last render
-	// 	state.x += progress
-	// 	if (state.x > width) {
-	// 		state.x -= width
-	// 	}
-	// }
-
-	// function draw(){
-	// 	//draw the state of the world
-	// 	playerAvatar.style.width = '50px';
-	// 	playerAvatar.style.height = '50px';
-	// 	playerAvatar.style.left = state.x - 10;
-	// 	playerAvatar.style.top = state.y - 10;
-	// }
-
-	// function loop(timestamp){
-	// 	let progress = timestamp - lastrender
-	// 	update(progress)
-	// 	draw()
-	// 	lastrender = timestamp
-	// 	window.requestAnimationFrame(loop)
-	// }
-
-	// let lastrender = 0
-	// window.requestAnimationFrame(loop)
+	let lastrender = 0;
+	window.requestAnimationFrame(loop);
 })
 
 let gameCanvas;
 let playerAvatar;
 
-let init = function(){
+class Player {
+	constructor(height, width, posX, posY, volX, volY) {
+		this.height = height;
+		this.width = width;
+		this.posX = posX;
+		this.posY = posY;
+		this.volX = volX;
+		this.volY = volY;
+	}
+}
+
+let init = function () {
 	gameCanvas = document.getElementById("gameCanvas");
 	playerAvatar = document.getElementById("playerAvatar");
 
 	window.requestAnimationFrame(gameLoop);
-	// console.log(playerAvatar.offsetLeft)
-	// console.log(playerAvatar.style.left)
-	// playerAvatar.offsetLeft = playerAvatar.offsetLeft + 10
-	// console.log(playerAvatar.offsetLeft)
 }
 
 window.onload = init;
 
-let playerX = 0;
-let playerY = 0;
+let player = new Player(50, 50, 0, 500, 0, 0);
 
 let secondsPassed = 0;
 let oldTimeStamp = 0;
-let movingSpeed = 50;
+let movingSpeed = 100;
 let timePassed = 0;
 
-let gameLoop = function(timestamp){
+function trackKeys(keys) {
+	let down = Object.create(null);
+	function track(event) {
+		if (keys.includes(event.key)) {
+			down[event.key] = event.type == "keydown";
+			event.preventDefault();
+		}
+	}
+	window.addEventListener("keydown", track);
+	window.addEventListener("keyup", track);
+	return down;
+}
+let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
+
+let gameLoop = function (timestamp) {
 	secondsPassed = (timestamp - oldTimeStamp) / 1000;
 	oldTimeStamp = timestamp;
-	update(secondsPassed);
+
+	update(secondsPassed, arrowKeys);
 	draw();
 	window.requestAnimationFrame(gameLoop);
 }
 
-let draw = function(){
-	// let randomColor = Math.random() > 0.5 ? '#ff8080' : '#0099b0';
-	// playerAvatar.style.background = randomColor;
-	playerAvatar.style.left = playerX + "px";
-	playerAvatar.style.top = playerY + "px";
+let draw = function () {
+	playerAvatar.style.left = player.posX + "px";
+	playerAvatar.style.top = player.posY + "px";
 }
 
-let update = function(secondsPassed){
+let update = function (secondsPassed, keys) {
+	// console.log(secondsPassed);
+	// console.log(player.posX);
+	timePassed += secondsPassed;
+	let speedX = 0;
+	let speedY = 0;
+	if (keys.ArrowLeft) speedX -= movingSpeed;
+	if (keys.ArrowRight) speedX += movingSpeed;
+	
+	if (keys.ArrowUp) speedY -= movingSpeed;
+	if (keys.ArrowDown) speedY += movingSpeed;
 
-	timePassed += secondsPassed
+	player.speedX = speedX;
+	player.speedY = speedY;
+	// console.log(speedX);
+	player.posX += speedX * secondsPassed;
+	
+	// player.posY += speedY * secondsPassed;
 
-	//test movement
-	// playerX = easeInOutQuint(timePassed, 50, 500, 1.5);
-	// playerY = easeLinear(timePassed, 50, 250, 1.5);
+	let gravity = 9.81;
+	if (keys.ArrowUp) player.speedY = 30;
 
-	//liner movement
-	playerX += (movingSpeed * secondsPassed);
-	playerY += (movingSpeed * secondsPassed);
+	if (player.posY < 300) {
+		player.posY = player.speedY * secondsPassed;
+	} else if (keys.ArrowUp && player.speedY > 0) {
+		player.posY += player.speedY * secondsPassed;
+		player.speedY += -1;
+	} else {
+		player.speedY = 0;
+		player.posY += gravity * secondsPassed;
+	}
+
+	// player.posY = speedY * secondsPassed;
 }
-
-//test easing functions for different animations
-function easeInOutQuint (t, b, c, d) {
-    if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
-    return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
-}
-
-function easeLinear (t, b, c, d) {
-    return c * t / d + b;
-<<<<<<< HEAD
-}
->>>>>>> JD
-=======
-}
->>>>>>> 2dda061 (game loop running and animation moving across the screen)
