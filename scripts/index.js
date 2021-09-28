@@ -97,35 +97,26 @@ let draw = function () {
 }
 
 let update = function (secondsPassed, keys) {
-	// console.log(secondsPassed);
-	// console.log(player.posX);
-	timePassed += secondsPassed;
-	let speedX = 0;
-	let speedY = 0;
-	if (keys.ArrowLeft) speedX -= movingSpeed;
-	if (keys.ArrowRight) speedX += movingSpeed;
+	let volX = 0;
+	if (keys.ArrowLeft) volX -= movingSpeed;
+	if (keys.ArrowRight) volX += movingSpeed;
+
+
+	player.volX = volX;
+	// player.speedY = speedY;
+	// console.log(volX);
+	player.posX += volX * secondsPassed;
 	
-	if (keys.ArrowUp) speedY -= movingSpeed;
-	if (keys.ArrowDown) speedY += movingSpeed;
 
-	player.speedX = speedX;
-	player.speedY = speedY;
-	// console.log(speedX);
-	player.posX += speedX * secondsPassed;
-	
-	// player.posY += speedY * secondsPassed;
+	let gravity = 10;
+	if (keys.ArrowUp){
+		player.volY = -30;
+		player.posY -= 1;
+	}
+	player.volY += secondsPassed * gravity;
 
-	let gravity = 9.81;
-	if (keys.ArrowUp) player.speedY = 30;
-
-	if (player.posY < 300) {
-		player.posY = player.speedY * secondsPassed;
-	} else if (keys.ArrowUp && player.speedY > 0) {
-		player.posY += player.speedY * secondsPassed;
-		player.speedY += -1;
-	} else {
-		player.speedY = 0;
-		player.posY += gravity * secondsPassed;
+	if(player.posY < 520){
+		player.posY += player.volY * secondsPassed;
 	}
 
 	// player.posY = speedY * secondsPassed;
