@@ -108,9 +108,9 @@ let update = function (secondsPassed, keys) {
 	player.posX += volX * secondsPassed;
 	
 
-	let gravity = 60; // positive is down, and negative is up; to jump up a negaitive volY is needed
+	let gravity =500; // positive is down, and negative is up; to jump up a negaitive volY is needed
 	if (keys.ArrowUp && player.volY > 0 && !(player.posY + player.volY * secondsPassed<520)){ 
-		player.volY = -90;
+		player.volY = -200;
 	}
 	player.volY += secondsPassed * gravity;
 
