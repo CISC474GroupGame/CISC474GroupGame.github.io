@@ -1,20 +1,20 @@
 var helpModal = document.getElementById("helpMenu");
-var helpBtn = documet.getElementById("helpButton");
+var helpBtn = document.getElementById("helpButton");
 var span = document.getElementsByClassName("close")[0];
-
-function openHelp(){
-    modal.style.display = "block";
-}
-
-function closeHelp(){
-    modal.style.display = "none";
-}
-
-helpBtn.onclick = openHelp();
-span.onclick = closeHelp();
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+function init(){
+    helpBtn.onclick = function(){
+        helpModal.style.display = "block";
     }
-  }
+    
+    span.onclick = function(){
+        helpModal.style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == helpModal) {
+          helpModal.style.display = "none";
+        }
+      }
+    
+}
+window.onload = init();
