@@ -98,8 +98,16 @@ let draw = function () {
 
 let update = function (secondsPassed, keys) {
 	let volX = 0;
-	if (keys.ArrowLeft) volX -= movingSpeed;
-	if (keys.ArrowRight) volX += movingSpeed;
+	if (keys.ArrowLeft){
+		volX -= movingSpeed;
+		// playerAvatar.style.webkit.transform = 'scaleX(-1)';
+		playerAvatar.style.transform = 'scaleX(-1)';
+	} 
+	if (keys.ArrowRight) {
+		volX += movingSpeed;
+		// playerAvatar.style.webkit.transform = 'scaleX(1)';
+		playerAvatar.style.transform = 'scaleX(1)';
+	} 
 
 
 	player.volX = volX;
@@ -117,6 +125,4 @@ let update = function (secondsPassed, keys) {
 	if(player.posY + player.volY * secondsPassed < 520){
 		player.posY += player.volY * secondsPassed;
 	}
-
-	// player.posY = speedY * secondsPassed;
 }
