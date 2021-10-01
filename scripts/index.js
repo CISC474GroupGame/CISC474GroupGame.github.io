@@ -9,6 +9,17 @@ let init = function () {
 	window.requestAnimationFrame(gameLoop);
 }
 
+
+const pages = ['tutorial', 'gameCanvas', 'about', 'signup', 'login'];
+function showPage(id){
+  document.getElementById(id).classList.remove('hidden');
+  const other_page = pages.filter(page => page != id);
+  other_page.forEach(element => {
+	document.getElementById(element).classList.add('hidden');
+  });
+}
+
+
 window.onload = init;
 
 let secondsPassed = 0;

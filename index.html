@@ -28,27 +28,40 @@
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			  <li class="nav-item">
-				<a class="nav-link active" aria-current="page" href="#">Home</a>
+				<a class="nav-link active" href="javascript:showPage('gameCanvas');">Home</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#">Tutorial</a>
+				<a class="nav-link" href="javascript:showPage('tutorial');">Tutorial</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#">About</a>
+				<a class="nav-link" href="javascript:showPage('about');">About</a>
 			  </li>
 			</ul>
 			<ul class="navbar-nav d-flex">
 				<li class="nav-item">
-				  <a class="nav-link" href="#">Sign Up</a>
+				  <a class="nav-link" href="javascript:showPage('signup');">Sign Up</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="#">Login</a>
+				  <a class="nav-link" href="javascript:showPage('login');">Login</a>
 				</li>
 			  </ul>
 		  </div>
 		</div>
 	  </nav>
-	<div id="gameCanvas">
+	<div class='hidden' id="gameCanvas">
+		<!-- <p>gameCanvas123</p> -->
+	</div>
+	<div class='hidden' id="tutorial">
+		<p>tutorial test</p>
+	</div>
+	<div class='hidden' id="about">
+		<p>about test</p>
+	</div>
+	<div class='hidden' id="signup">
+		<p>signup test</p>
+	</div>
+	<div class='hidden' id="login">
+		<p>login test</p>
 	</div>
 </body>
 </html>
