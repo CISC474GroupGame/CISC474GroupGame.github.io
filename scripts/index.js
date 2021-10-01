@@ -52,41 +52,31 @@ let draw = function () {
 	playerAvatar.style.top = playerModel.posY + "px";
 }
 
-let update = function (secondsPassed, keys) { 
-/*
-* this function gets called every frame,
-* should handle all data manipulation, like the "model"
-*/
-	// console.log(secondsPassed);
-	// console.log(playerModel.posX);
-	timePassed += secondsPassed;
-	let speedX = 0;
-	let speedY = 0;
-	if (keys.ArrowLeft) speedX -= movingSpeed;
-	if (keys.ArrowRight) speedX += movingSpeed;
-	
-	if (keys.ArrowUp) speedY -= movingSpeed;
-	if (keys.ArrowDown) speedY += movingSpeed;
+let update = function (secondsPassed, keys) {
+	let volX = 0;
+	if (keys.ArrowLeft){
+		volX -= movingSpeed;
+		// playerAvatar.style.webkit.transform = 'scaleX(-1)';
+		playerAvatar.style.transform = 'scaleX(-1)';
+	} 
+	if (keys.ArrowRight) {
+		volX += movingSpeed;
+		// playerAvatar.style.webkit.transform = 'scaleX(1)';
+		playerAvatar.style.transform = 'scaleX(1)';
+	} 
 
-	playerModel.speedX = speedX;
-	playerModel.speedY = speedY;
-	// console.log(speedX);
-	playerModel.posX += speedX * secondsPassed;
-	
-	// playerModel.posY += speedY * secondsPassed;
 
-	let gravity = 9.81;
-	if (keys.ArrowUp) playerModel.speedY = 30;
+	player.volX = volX;
+	// player.speedY = speedY;
+	// console.log(volX);
+	player.posX += volX * secondsPassed;	
 
-	if (playerModel.posY < 300) {
-		playerModel.posY = playerModel.speedY * secondsPassed;
-	} else if (keys.ArrowUp && playerModel.speedY > 0) {
-		playerModel.posY += playerModel.speedY * secondsPassed;
-		playerModel.speedY += -1;
-	} else {
-		playerModel.speedY = 0;
-		playerModel.posY += gravity * secondsPassed;
+	let gravity =500; // positive is down, and negative is up; to jump up a negaitive volY is needed
+	if (keys.ArrowUp && player.volY > 0 && !(player.posY + player.volY * secondsPassed<520)){ 
+		player.volY = -200;
 	}
-
-	// playerModel.posY = speedY * secondsPassed;
+	player.volY += secondsPassed * gravity;
+	if(player.posY + player.volY * secondsPassed < 520){
+		player.posY += player.volY * secondsPassed;
+	}
 }
