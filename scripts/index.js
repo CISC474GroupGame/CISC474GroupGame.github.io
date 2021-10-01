@@ -66,17 +66,17 @@ let update = function (secondsPassed, keys) {
 	} 
 
 
-	player.volX = volX;
-	// player.speedY = speedY;
+	playerModel.volX = volX;
+	// playerModel.speedY = speedY;
 	// console.log(volX);
-	player.posX += volX * secondsPassed;	
+	playerModel.posX += volX * secondsPassed;	
 
 	let gravity =500; // positive is down, and negative is up; to jump up a negaitive volY is needed
-	if (keys.ArrowUp && player.volY > 0 && !(player.posY + player.volY * secondsPassed<520)){ 
-		player.volY = -200;
+	if (keys.ArrowUp && playerModel.volY > 0 && !(playerModel.posY + playerModel.volY * secondsPassed<520)){ 
+		playerModel.volY = -200;
 	}
-	player.volY += secondsPassed * gravity;
-	if(player.posY + player.volY * secondsPassed < 520){
-		player.posY += player.volY * secondsPassed;
+	playerModel.volY += secondsPassed * gravity;
+	if(playerModel.posY + playerModel.volY * secondsPassed < 520){
+		playerModel.posY += playerModel.volY * secondsPassed;
 	}
 }
