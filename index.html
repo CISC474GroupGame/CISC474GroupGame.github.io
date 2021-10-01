@@ -21,47 +21,53 @@
 <body>
 	<nav class="navbar navbar-expand navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-		  <a class="navbar-brand" href="#">Game</a>
+		  <a class="navbar-brand" href="#">CISC474 Group 2 Game</a>
 		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			  <li class="nav-item">
-				<a class="nav-link active" href="javascript:showPage('gameCanvas');">Home</a>
+				<a class="nav-link active" href="javascript:showPage('#gameCanvas');">Home</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="javascript:showPage('tutorial');">Tutorial</a>
+				<a class="nav-link" href="javascript:showPage('#tutorial');">Tutorial</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="javascript:showPage('about');">About</a>
+				<a class="nav-link" href="javascript:showPage('#about');">About</a>
 			  </li>
 			</ul>
 			<ul class="navbar-nav d-flex">
 				<li class="nav-item">
-				  <a class="nav-link" href="javascript:showPage('signup');">Sign Up</a>
+				  <a class="nav-link" href="javascript:showPage('#signup');">Sign Up</a>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="javascript:showPage('login');">Login</a>
+				  <a class="nav-link" href="javascript:showPage('#login');">Login</a>
 				</li>
 			  </ul>
 		  </div>
 		</div>
 	  </nav>
-	<div class='hidden' id="gameCanvas">
+	<div class='subpage' id="gameCanvas">
 		<!-- <p>gameCanvas123</p> -->
 	</div>
-	<div class='hidden' id="tutorial">
-		<p>tutorial test</p>
+	<div class='hidden subpage' id="tutorial">
+		<h1>Game Tutorial</h1>
+		<h2>Control</h2>
+		<p>TODO</p>
 	</div>
-	<div class='hidden' id="about">
-		<p>about test</p>
+	<div class='hidden subpage' id="about">
+		<h1>About this game</h1>
+		<p>This game is written for CISC474.</p>
+		<p>TODO</p> 
 	</div>
-	<div class='hidden' id="signup">
+	<div class='hidden subpage' id="signup">
 		<p>signup test</p>
+		<p>TODO</p>
 	</div>
-	<div class='hidden' id="login">
+	<div class='hidden subpage' id="login">
 		<p>login test</p>
+		<p>TODO</p>
 	</div>
 </body>
 </html>

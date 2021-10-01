@@ -10,14 +10,21 @@ let init = function () {
 }
 
 
-const pages = ['tutorial', 'gameCanvas', 'about', 'signup', 'login'];
-function showPage(id){
-  document.getElementById(id).classList.remove('hidden');
-  const other_page = pages.filter(page => page != id);
-  other_page.forEach(element => {
-	document.getElementById(element).classList.add('hidden');
-  });
+// const pages = ['tutorial', 'gameCanvas', 'about', 'signup', 'login'];
+function showPage(id) {
+	$('.subpage').addClass('hidden');
+	$(id).removeClass('hidden');
+	// const other_page = pages.filter(page => page != id);
+	//   other_page.forEach(element => {
+	// 	document.getElementById(element).classList.add('hidden');
+	//   });
 }
+$(document).ready(function(){
+    $('.nav-link').click(function(){
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+    });
+});
 
 
 window.onload = init;
@@ -42,10 +49,10 @@ function trackKeys(keys) {
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 let gameLoop = function (timestamp) {
-/*
-* this function manages the frames and all timing
-* like the "controller"
-*/
+	/*
+	* this function manages the frames and all timing
+	* like the "controller"
+	*/
 	secondsPassed = (timestamp - oldTimeStamp) / 1000;
 	oldTimeStamp = timestamp;
 
@@ -55,39 +62,39 @@ let gameLoop = function (timestamp) {
 }
 
 let draw = function () {
-/*
-* this function is called each frame,
-* should handle all visual rendering, like the "view"
-*/
+	/*
+	* this function is called each frame,
+	* should handle all visual rendering, like the "view"
+	*/
 	playerAvatar.style.left = playerModel.posX + "px";
 	playerAvatar.style.top = playerModel.posY + "px";
 }
 
 let update = function (secondsPassed, keys) {
 	let volX = 0;
-	if (keys.ArrowLeft){
+	if (keys.ArrowLeft) {
 		volX -= movingSpeed;
 		// playerAvatar.style.webkit.transform = 'scaleX(-1)';
 		playerAvatar.style.transform = 'scaleX(-1)';
-	} 
+	}
 	if (keys.ArrowRight) {
 		volX += movingSpeed;
 		// playerAvatar.style.webkit.transform = 'scaleX(1)';
 		playerAvatar.style.transform = 'scaleX(1)';
-	} 
+	}
 
 
 	playerModel.volX = volX;
 	// playerModel.speedY = speedY;
 	// console.log(volX);
-	playerModel.posX += volX * secondsPassed;	
+	playerModel.posX += volX * secondsPassed;
 
-	let gravity =500; // positive is down, and negative is up; to jump up a negaitive volY is needed
-	if (keys.ArrowUp && playerModel.volY > 0 && !(playerModel.posY + playerModel.volY * secondsPassed<520)){ 
+	let gravity = 500; // positive is down, and negative is up; to jump up a negaitive volY is needed
+	if (keys.ArrowUp && playerModel.volY > 0 && !(playerModel.posY + playerModel.volY * secondsPassed < 520)) {
 		playerModel.volY = -200;
 	}
 	playerModel.volY += secondsPassed * gravity;
-	if(playerModel.posY + playerModel.volY * secondsPassed < 520){
+	if (playerModel.posY + playerModel.volY * secondsPassed < 520) {
 		playerModel.posY += playerModel.volY * secondsPassed;
 	}
 }
