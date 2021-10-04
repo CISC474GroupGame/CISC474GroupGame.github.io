@@ -6,16 +6,16 @@ let loadLevelOne = function(){
 
     //platform specs
     let platformOnePosX = 0;
-    let platformOnePosY = 500;
+    let platformOnePosY = 700;
     let platformOneWidth = 500;
     let platformOneHeight = 100;
     let platformTwoPosX = 1000;
-    let platformTwoPosY = 500;
+    let platformTwoPosY = 700;
     let platformTwoWidth = 500;
     let platformTwoHeight = 100;
     //player specs
     let playerPosX = 0;
-    let playerPosY = 450;
+    let playerPosY = 200;
     let playerHeight = 50;
     let playerWidth = 50;
     let playerVolX = 0;
