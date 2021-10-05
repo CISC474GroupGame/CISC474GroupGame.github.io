@@ -47,8 +47,3 @@ iframe {
   height: 100vh; /* Viewport-relative units */
   width: 100vw;
 }
-
-.page-wrapper {
-  max-width: 100%;
-  max-height: 100vh;
-}
