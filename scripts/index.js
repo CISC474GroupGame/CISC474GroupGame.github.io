@@ -33,7 +33,7 @@ window.onload = init;
 
 let secondsPassed = 0;
 let oldTimeStamp = 0;
-let movingSpeed = 100;
+let movingSpeed = 300;
 let timePassed = 0;
 
 function trackKeys(keys) {
@@ -51,24 +51,28 @@ function trackKeys(keys) {
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 let buildPlatformTable = function(){
-
+	
 }
 
 let detectPlayerToPlatformCollision = function(levelData){
 	let playerModel = levelData.playerModel;
-	levelData.platforms.forEach(platform => {
+	for (let platform of levelData.platforms){
 		let playerFloor = playerModel.posY - 5 ;
 		let platformCeiling = platform.posY - (platform.height / 2);
-		console.log('PLAYER FLOOR: ', playerFloor)
-		console.log('PLATFORM CEILING: ', platformCeiling)
-		if(playerFloor >= platformCeiling){
-			console.log("collision")
+		// console.log('PLAYER FLOOR: ', playerFloor)
+		// console.log('PLATFORM CEILING: ', platformCeiling)
+		if(playerFloor >= platformCeiling && playerModel.posX+playerModel.width > platform.posX && playerModel.posX+playerModel.width<(platform.posX+platform.width)){
+			console.log("collision");
 			playerModel.isColliding = true;
+			break;
 		}
 		else{
+			console.log(playerModel.posX);
+			console.log(platform.posX);
+			console.log(platform.posX+platform.width);
 			playerModel.isColliding = false;
 		}
-	});
+	}
 }
 
 let testGravity = function(){
@@ -104,8 +108,8 @@ let draw = function () {
 
 let update = function (secondsPassed, keys) {
 
-	detectPlayerToPlatformCollision(levelOneData)
-	testGravity();
+	detectPlayerToPlatformCollision(levelOneData);
+	// testGravity();
 	//make table of all coordinates of all platoforms and have collision function check against all platforms
 
 	let volX = 0;
@@ -125,13 +129,18 @@ let update = function (secondsPassed, keys) {
 	// console.log(volX);
 	playerModel.posX += volX * secondsPassed;
 
-	// let gravity = 500; // positive is down, and negative is up; to jump up a negaitive volY is needed
-	// if (keys.ArrowUp && playerModel.volY > 0 && !(playerModel.posY + playerModel.volY * secondsPassed < 520)) {
-	// 	playerModel.volY = -200;
-	// }
-	// playerModel.volY += secondsPassed * gravity;
-	// if (playerModel.posY + playerModel.volY * secondsPassed < 520) {
-	// 	playerModel.posY += playerModel.volY * secondsPassed;
-	// }
+	let gravity = 500; // positive is down, and negative is up; to jump up a negaitive volY is needed
+	console.log(playerModel.volY)
+	if (keys.ArrowUp && playerModel.volY >= 0 && playerModel.isColliding) {
+		playerModel.volY = -800;
+		playerModel.isColliding = false;
+	}
+	console.log(playerModel.volY)
+	if (!playerModel.isColliding) {
+		playerModel.volY += secondsPassed * gravity;
+		playerModel.posY += playerModel.volY * secondsPassed;
+	}else{
+		playerModel.volY=0;
+	}
 
 }
