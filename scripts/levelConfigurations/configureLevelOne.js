@@ -6,11 +6,11 @@ let loadLevelOne = function(){
 
     //platform specs
     let platformOnePosX = 0;
-    let platformOnePosY = 500;
+    let platformOnePosY = 600;
     let platformOneWidth = 500;
-    let platformOneHeight = 100;
+    let platformOneHeight = 200;
     let platformTwoPosX = 1000;
-    let platformTwoPosY = 500;
+    let platformTwoPosY = 800;
     let platformTwoWidth = 500;
     let platformTwoHeight = 100;
     //player specs
@@ -25,13 +25,15 @@ let loadLevelOne = function(){
     let platformTwo = new BasicPlatform(platformTwoPosX, platformTwoPosY, platformTwoWidth, platformTwoHeight);
     let playerModel = new Player(playerHeight, playerWidth, playerPosX, playerPosY, playerVolX, playerVolY);
 
+    let testPlatform = new BasicPlatform(0,0,100,100);
+
     let gameCanvas = document.getElementById('gameCanvas');
 
     let levelOneString = `
         <div class="levelContainer">
             <div id="playerAvatar"></div>
             <div class="platform basicPlatform" id="levelOneBasicPlatformOne"></div>
-            <div class="platform basicPlatform" id="levelOneBasicPlatformTwo"></div>
+            
         </div>
     `;
 
@@ -42,10 +44,15 @@ let loadLevelOne = function(){
     document.getElementById('levelOneBasicPlatformOne').style.left = platformOne.posX + "px";
     document.getElementById('levelOneBasicPlatformOne').style.top = platformOne.posY + "px";
 
-    document.getElementById('levelOneBasicPlatformTwo').style.width = platformTwo.width + "px";
-    document.getElementById('levelOneBasicPlatformTwo').style.height = platformTwo.height + "px";
-    document.getElementById('levelOneBasicPlatformTwo').style.left = platformTwo.posX + "px";
-    document.getElementById('levelOneBasicPlatformTwo').style.top = platformTwo.posY + "px";
+    // document.getElementById('levelOneBasicPlatformTwo').style.width = platformTwo.width + "px";
+    // document.getElementById('levelOneBasicPlatformTwo').style.height = platformTwo.height + "px";
+    // document.getElementById('levelOneBasicPlatformTwo').style.left = platformTwo.posX + "px";
+    // document.getElementById('levelOneBasicPlatformTwo').style.top = platformTwo.posY + "px";
+
+    // document.getElementById('testPlatform').style.width = testPlatform.width + "px";
+    // document.getElementById('testPlatform').style.height = testPlatform.height + "px";
+    // document.getElementById('testPlatform').style.left = testPlatform.posX + "px";
+    // document.getElementById('testPlatform').style.top = testPlatform.posY + "px";
 
     document.getElementById('playerAvatar').style.left = playerModel.posX + "px";
     document.getElementById('playerAvatar').style.top = playerModel.posY + "px";
@@ -58,7 +65,7 @@ let loadLevelOne = function(){
 
     let levelData = {
         playerModel: playerModel,
-        platforms: [platformOne, platformTwo],
+        platforms: [platformOne],
     }
     return levelData;
 }

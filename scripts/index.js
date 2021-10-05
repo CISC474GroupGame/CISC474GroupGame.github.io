@@ -56,19 +56,43 @@ let buildPlatformTable = function(){
 
 let detectPlayerToPlatformCollision = function(levelData){
 	let playerModel = levelData.playerModel;
-	levelData.platforms.forEach(platform => {
+	for (let platform of levelData.platforms) {
 		let playerFloor = playerModel.posY - 5 ;
+		let playerCeiling = playerModel.posY + playerModel.height - 5;
 		let platformCeiling = platform.posY - (platform.height / 2);
-		console.log('PLAYER FLOOR: ', playerFloor)
-		console.log('PLATFORM CEILING: ', platformCeiling)
-		if(playerFloor >= platformCeiling){
-			console.log("collision")
+		let platformFloor = platform.posY + (platform.height / 2);
+		let platformLeft = platform.posX;
+		let platformRight = platform.posX + platform.width;
+
+		if(playerFloor >= platformCeiling && playerModel.posX > platformLeft && playerModel.posX < platformRight){
 			playerModel.isColliding = true;
+			break;
 		}
 		else{
 			playerModel.isColliding = false;
 		}
-	});
+
+		// USE THIS FOR JUMPING COLLISION
+		// if(playerCeiling = platformFloor) {
+		// 	yVelocity = 0 
+
+		// }
+
+	}
+	// levelData.platforms.forEach(platform => {
+	// 	let playerFloor = playerModel.posY - 5 ;
+	// 	let platformCeiling = platform.posY - (platform.height / 2);
+	// 	let playerX = playerModel.posX;
+	// 	if(playerFloor >= platformCeiling){
+	// 		playerModel.isColliding = true;
+	// 		break;
+	// 	}
+	// 	else{
+	// 		playerModel.isColliding = false;
+	// 	}
+	// 	let platformLeft = platform.posX - (platform.width / 2);
+	// 	let platformRight = platform.posX + (platform.width / 2);
+	// });
 }
 
 let testGravity = function(){
@@ -103,7 +127,7 @@ let draw = function () {
 }
 
 let update = function (secondsPassed, keys) {
-
+	console.log(playerModel.isColliding)
 	detectPlayerToPlatformCollision(levelOneData)
 	testGravity();
 	//make table of all coordinates of all platoforms and have collision function check against all platforms
