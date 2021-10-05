@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aboutUs</title>
+
+    <style>
+        body {
+            background-color: navajowhite;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        #rcorners1 {
+            border-radius: 25px;
+            background: antiquewhite;
+            padding: 20px;
+            width: 200px;
+            height: 150px;
+        }
+
+        p1.inset {
+
+            border-style: inset;
+            width: 200px;
+            height: 50px;
+        }
+
+        ul {
+            background-color: #EBEBEB;
+
+
+            font-family: Verdana, Helvetica, sans-serif;
+            font-size: 17px;
+            padding: 20px;
+
+            width: 400px;
+            border-radius: 20px;
+            -moz-border-radius: 20px;
+            -webkit-border-radius: 30px;
+        }
+        li {
+
+            margin: 10px;
+            margin-left: 25px;
+        }
+
+        #contact-me-header{
+            border: 2px;
+        }
+
+        .field-label{
+            float:left;
+            margin-top: 15px;
+        }
+
+        .field-input{
+            float: right;
+            border-radius: 3px;
+            padding: 7px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid white;
+        }
+
+        .field-row{
+            border-bottom: 1px solid black;
+        }
+
+        #form-content{
+            width: 550px;
+            display: inline-grid;
+            border-radius: 3px;
+            background-color: #ffffff40;;
+            padding: 20px;
+        }
+
+        #contact-content{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #user_message{
+            max-width: 200px;
+            height:fit-content;
+            resize: vertical;
+        }
+
+        #submit-form-div{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+
+        .form-error {
+            color: red;
+            display: none;
+            width: 95%;
+            font-size: smaller;
+            display: none;
+            text-align: right;
+        }
+
+        #email-error{
+            width: 73%;
+        }
+
+        #req-fields-note{
+            font-size: smaller
+        }
+
+        #submit-form-btn{
+            width: 115px;
+            font: initial;
+        }
+
+        .center{
+
+            list-style-position: inside;
+            margin: auto;
+            padding-left: 200px;
+
+        }
+    </style>
+
+</head>
+<body>
+
+    <h1 class="inset" style="font-size:35px"><b>About Us</b></h1>
+<!--
+    <p id="rcorners1" style="font-size:15px">
+        <b>Program Contributors</b>
+    </p>-->
+
+    <h2>Program Contributors</h2>
+    <ul class="center">
+        <li>Jinheng Zhang</li>
+        <li>Collin Reich</li>
+        <li>Jiandong Wang</li>
+        <li>Dylan Kirk</li>
+    </ul>
+
+    <!-- need to functionary-->
+    <div id="contact-content">
+
+        <h1 id = "contact-me-header" class="h1-style">Contact Us</h1>
+
+        <!-- contact form -->
+        <form id="form-content">
+
+            <!-- first name -->
+            <div class="field-row" id="first-name">
+                <label class="field-label" >First Name*</label>
+                <input class="field-input" id="user_fname" name="user_fname">
+            </div>
+
+            <!-- last name -->
+            <div class="field-row" id="last-name">
+                <label class="field-label">Last Name*</label>
+                <input class="field-input" id="user_lname" name="user_lname">
+            </div>
+
+            <!-- email -->
+            <div class="field-row" id="email">
+                <label class="field-label">Email Address*</label>
+                <input class="field-input" id="user_email" name = "user_email" placeholder=" xyz@<domain>.<top-level domain>">
+                <label class = "form-error" id = "email-error">Invalid Email</label>
+            </div>
+
+            <!-- phone -->
+            <div class="field-row" id="phone">
+                <label class="field-label">Phone Number*</label>
+                <input class="field-input" id="user_phone" name = "user_phone" placeholder="xxx-xxx-xxxx">
+                <label class = "form-error" id = "phone-error" >Invalid Format (XXX-XXX-XXXX)</label>
+            </div>
+
+            <!-- message -->
+            <div class="field-row" id="message">
+                <label class="field-label">Message*</label>
+                <textarea id="user_message" class="field-input" name = "message"></textarea>
+            </div>
+
+            <!-- note of required fields -->
+            <label id = "req-fields-note">* Required Fields</label>
+
+            <!-- submit button -->
+            <div id="submit-form-div">
+                <input type="submit" class="btn-formatting" id="submit-form-btn" value = "Send">
+            </div>
+
+        </form>
+    </div>
+        </form>
+
+</body>
+</html>
