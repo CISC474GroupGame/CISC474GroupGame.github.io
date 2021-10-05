@@ -6,5 +6,6 @@ class Player {
 		this.posY = posY;
 		this.volX = volX;
 		this.volY = volY;
+		this.isColliding = false;
 	}
 }
