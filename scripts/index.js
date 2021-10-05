@@ -1,6 +1,7 @@
 let gameCanvas;
 let playerAvatar;
 let playerModel;
+let levelOneData;
 
 let init = function () {
 	levelOneData = loadLevelOne();
@@ -56,15 +57,26 @@ let buildPlatformTable = function(){
 let detectPlayerToPlatformCollision = function(levelData){
 	let playerModel = levelData.playerModel;
 	levelData.platforms.forEach(platform => {
-		let playerFloor = playerModel.posY + (playerModel.height / 2);
+		let playerFloor = playerModel.posY - 5 ;
 		let platformCeiling = platform.posY - (platform.height / 2);
-
+		console.log('PLAYER FLOOR: ', playerFloor)
+		console.log('PLATFORM CEILING: ', platformCeiling)
 		if(playerFloor >= platformCeiling){
 			console.log("collision")
-			return true;
+			playerModel.isColliding = true;
+		}
+		else{
+			playerModel.isColliding = false;
 		}
 	});
-	return false;
+}
+
+let testGravity = function(){
+	console.log(playerModel.isColliding)
+	if(!playerModel.isColliding){
+		playerModel.posY = playerModel.posY + 1;
+		// console.log("gravity being called")
+	}
 }
 
 let gameLoop = function (timestamp) {
@@ -92,9 +104,8 @@ let draw = function () {
 
 let update = function (secondsPassed, keys) {
 
-	if(!detectPlayerToPlatformCollision(levelOneData)){
-		//gravity()
-	}
+	detectPlayerToPlatformCollision(levelOneData)
+	testGravity();
 	//make table of all coordinates of all platoforms and have collision function check against all platforms
 
 	let volX = 0;
@@ -114,12 +125,13 @@ let update = function (secondsPassed, keys) {
 	// console.log(volX);
 	playerModel.posX += volX * secondsPassed;
 
-	let gravity = 500; // positive is down, and negative is up; to jump up a negaitive volY is needed
-	if (keys.ArrowUp && playerModel.volY > 0 && !(playerModel.posY + playerModel.volY * secondsPassed < 520)) {
-		playerModel.volY = -200;
-	}
-	playerModel.volY += secondsPassed * gravity;
-	if (playerModel.posY + playerModel.volY * secondsPassed < 520) {
-		playerModel.posY += playerModel.volY * secondsPassed;
-	}
+	// let gravity = 500; // positive is down, and negative is up; to jump up a negaitive volY is needed
+	// if (keys.ArrowUp && playerModel.volY > 0 && !(playerModel.posY + playerModel.volY * secondsPassed < 520)) {
+	// 	playerModel.volY = -200;
+	// }
+	// playerModel.volY += secondsPassed * gravity;
+	// if (playerModel.posY + playerModel.volY * secondsPassed < 520) {
+	// 	playerModel.posY += playerModel.volY * secondsPassed;
+	// }
+
 }
