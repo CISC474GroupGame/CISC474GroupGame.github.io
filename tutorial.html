@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial page</title>
+    <style>
+        body{
+            background-color: 	 #b3b3b3;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        .thought {
+            display:flex;
+            background-color:#fff;
+            padding:20px;
+            border-radius:30px;
+            min-width:400px;
+            max-width:220px;
+            min-height:40px;
+            margin:auto;
+            position:relative;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+        }
+
+        .thought:before,
+        .thought:after {
+            content:"";
+            background-color:#fff;
+            border-radius:50%;
+            display:block;
+            position:absolute;
+            z-index:-1;
+        }
+        .thought:before {
+            width:44px;
+            height:44px;
+            top:80px;
+            left:-28px;
+            box-shadow:-50px 30px 0 -12px #fff;
+        }
+        .thought:after {
+            bottom:-10px;
+            right:26px;
+            width:30px;
+            height:30px;
+            box-shadow:40px -34px 0 0 #fff,
+            -208px -6px 0 -2px #fff,
+            -24px 17px 0 -6px #fff,
+            -5px 25px 0 -10px #fff;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="thought" style="font-size:30px"><b>Welcome to Tutorial Page!!!</b></div>
+
+    <img src="./images/charactor.gif" alt="image01" width="200" height="200">
+
+    <h2>Elements Introduction</h2>
+    <table border="3"  class="center">
+        <tr>
+            <th>
+                Character Type
+            </th>
+            <th>
+                Character Name
+            </th>
+            <th>
+                Character Description
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <img src="./images/charactor.gif" height=150px>
+            </td>
+            <td>
+                Litter dragon
+            </td>
+            <td>
+                Player's character
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <img src="./images/coin.png" height=150px>
+            </td>
+            <td>
+                Coin
+            </td>
+            <td>
+                You need to collect all coins to pass the section
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <img src="./images/monster.png" height=150px>
+            </td>
+            <td>
+                Ghost
+            </td>
+            <td>
+                Ghost will kill the little dragon when they collide
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <img src="./images/updateTool.png" height=150px>
+            </td>
+            <td>
+                Orb
+            </td>
+            <td>
+                Litte Dragon will obtain different skills when it obtains orbs
+                Red: ####  Blue:#### Yellow:####
+            </td>
+
+        </tr>
+    </table>
+
+    <h2>Control Introduction</h2>
+
+    <table border="3"  class="center">
+        <tr>
+            <th>
+                Keyboard Button
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Function
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <img src="./images/keybordLR.png" height=150px>
+            </td>
+            <td>
+                Left Arrow & Right Arrow
+            </td>
+            <td>
+                Move Left or Move Right
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <img src="./images/keyboardUP.png" height=150px>
+            </td>
+            <td>
+                Up Arrow
+            </td>
+            <td>
+                Jump
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <img src="./images/keyboardSpace.png" height=150px>
+            </td>
+            <td>
+                Space
+            </td>
+            <td>
+                Attack
+            </td>
+
+        </tr>
+
+    </table>
+
+
+</body>
+</html>
