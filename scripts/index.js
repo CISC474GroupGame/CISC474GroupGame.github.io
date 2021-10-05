@@ -75,13 +75,13 @@ let detectPlayerToPlatformCollision = function(levelData){
 	}
 }
 
-let testGravity = function(){
-	console.log(playerModel.isColliding)
-	if(!playerModel.isColliding){
-		playerModel.posY = playerModel.posY + 1;
-		// console.log("gravity being called")
-	}
-}
+// let testGravity = function(){
+// 	console.log(playerModel.isColliding)
+// 	if(!playerModel.isColliding){
+// 		playerModel.posY = playerModel.posY + 1;
+// 		// console.log("gravity being called")
+// 	}
+// }
 
 let gameLoop = function (timestamp) {
 	/*
