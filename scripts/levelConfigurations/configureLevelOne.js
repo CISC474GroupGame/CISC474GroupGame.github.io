@@ -6,17 +6,17 @@ let loadLevelOne = function(){
 
     //platform specs
     let platformOnePosX = 0;
-    let platformOnePosY = 700;
+    let platformOnePosY = 500;
     let platformOneWidth = 500;
     let platformOneHeight = 100;
     let platformTwoPosX = 1000;
-    let platformTwoPosY = 700;
+    let platformTwoPosY = 500;
     let platformTwoWidth = 500;
     let platformTwoHeight = 100;
     //player specs
     let playerPosX = 0;
     let playerPosY = 200;
-    let playerHeight = 50;
+    let playerHeight = platformOneHeight+50;
     let playerWidth = 50;
     let playerVolX = 0;
     let playerVolY = 0;
@@ -55,5 +55,10 @@ let loadLevelOne = function(){
     console.log(document.getElementById('levelOneBasicPlatformOne').style.width)
     console.log(platformOne.width)
     // console.log(document.getElementById('levelOneBasicPlatformOne').style.width)
-    return playerModel;
+
+    let levelData = {
+        playerModel: playerModel,
+        platforms: [platformOne, platformTwo],
+    }
+    return levelData;
 }

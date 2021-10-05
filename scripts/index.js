@@ -3,7 +3,8 @@ let playerAvatar;
 let playerModel;
 
 let init = function () {
-	playerModel = loadLevelOne();
+	levelOneData = loadLevelOne();
+	playerModel = levelOneData.playerModel;
 	gameCanvas = document.getElementById("gameCanvas");
 	playerAvatar = document.getElementById("playerAvatar");
 	window.requestAnimationFrame(gameLoop);
@@ -48,6 +49,24 @@ function trackKeys(keys) {
 }
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
+let buildPlatformTable = function(){
+
+}
+
+let detectPlayerToPlatformCollision = function(levelData){
+	let playerModel = levelData.playerModel;
+	levelData.platforms.forEach(platform => {
+		let playerFloor = playerModel.posY + (playerModel.height / 2);
+		let platformCeiling = platform.posY - (platform.height / 2);
+
+		if(playerFloor >= platformCeiling){
+			console.log("collision")
+			return true;
+		}
+	});
+	return false;
+}
+
 let gameLoop = function (timestamp) {
 	/*
 	* this function manages the frames and all timing
@@ -68,9 +87,16 @@ let draw = function () {
 	*/
 	playerAvatar.style.left = playerModel.posX + "px";
 	playerAvatar.style.top = playerModel.posY + "px";
+	// console.log(playerModel.posY)
 }
 
 let update = function (secondsPassed, keys) {
+
+	if(!detectPlayerToPlatformCollision(levelOneData)){
+		//gravity()
+	}
+	//make table of all coordinates of all platoforms and have collision function check against all platforms
+
 	let volX = 0;
 	if (keys.ArrowLeft) {
 		volX -= movingSpeed;
@@ -82,7 +108,6 @@ let update = function (secondsPassed, keys) {
 		// playerAvatar.style.webkit.transform = 'scaleX(1)';
 		playerAvatar.style.transform = 'scaleX(1)';
 	}
-
 
 	playerModel.volX = volX;
 	// playerModel.speedY = speedY;
