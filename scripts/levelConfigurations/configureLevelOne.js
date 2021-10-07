@@ -15,7 +15,7 @@ let loadLevelOne = function(){
     let platformTwoHeight = 100;
     //player specs
     let playerPosX = 0;
-    let playerPosY = 200;
+    let playerPosY = platformOnePosY - 500;
     let playerHeight = platformOneHeight+50;
     let playerWidth = 50;
     let playerVolX = 0;

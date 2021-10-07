@@ -62,14 +62,10 @@ let detectPlayerToPlatformCollision = function(levelData){
 		// console.log('PLAYER FLOOR: ', playerFloor)
 		// console.log('PLATFORM CEILING: ', platformCeiling)
 		if(playerFloor >= platformCeiling && playerModel.posX+playerModel.width > platform.posX && playerModel.posX+playerModel.width<(platform.posX+platform.width)){
-			console.log("collision");
 			playerModel.isColliding = true;
 			break;
 		}
 		else{
-			console.log(playerModel.posX);
-			console.log(platform.posX);
-			console.log(platform.posX+platform.width);
 			playerModel.isColliding = false;
 		}
 	}
@@ -108,6 +104,8 @@ let draw = function () {
 
 let update = function (secondsPassed, keys) {
 
+	console.log(playerModel.posY)
+
 	detectPlayerToPlatformCollision(levelOneData);
 	// testGravity();
 	//make table of all coordinates of all platoforms and have collision function check against all platforms
@@ -130,12 +128,12 @@ let update = function (secondsPassed, keys) {
 	playerModel.posX += volX * secondsPassed;
 
 	let gravity = 500; // positive is down, and negative is up; to jump up a negaitive volY is needed
-	console.log(playerModel.volY)
+	// console.log(playerModel.volY)
 	if (keys.ArrowUp && playerModel.volY >= 0 && playerModel.isColliding) {
 		playerModel.volY = -800;
 		playerModel.isColliding = false;
 	}
-	console.log(playerModel.volY)
+	// console.log(playerModel.volY)
 	if (!playerModel.isColliding) {
 		playerModel.volY += secondsPassed * gravity;
 		playerModel.posY += playerModel.volY * secondsPassed;
