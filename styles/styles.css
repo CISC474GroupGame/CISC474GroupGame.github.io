@@ -29,7 +29,6 @@ body {
   background: black;
   position: absolute;
   z-index: 2;
-  border: solid red 1px;
 }
 
 .hidden {

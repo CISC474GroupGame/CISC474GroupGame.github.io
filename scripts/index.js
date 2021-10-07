@@ -127,7 +127,7 @@ let update = function (secondsPassed, keys) {
 	// console.log(volX);
 	playerModel.posX += volX * secondsPassed;
 
-	let gravity = 500; // positive is down, and negative is up; to jump up a negaitive volY is needed
+	let gravity = 700; // positive is down, and negative is up; to jump up a negaitive volY is needed
 	// console.log(playerModel.volY)
 	if (keys.ArrowUp && playerModel.volY >= 0 && playerModel.isColliding) {
 		playerModel.volY = -800;
