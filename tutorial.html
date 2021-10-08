@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <title>Tutorial page</title>
     <style>
-        body{
-            background-color: 	 #b3b3b3;
-        }
-
         h1{
             text-align: center;
         }
@@ -16,11 +12,26 @@
             text-align: center;
         }
 
+        p{
+            text-align: center;
+        }
+
         .center {
             margin-left: auto;
             margin-right: auto;
         }
 
+
+        body {
+            background-color:#888888;
+
+            flex-flow:row wrap;
+            justify-content:center;
+            margin:0;
+            height:100vh;
+
+            padding:0 10rem;
+        }
 
         .thought {
             display:flex;
@@ -47,30 +58,47 @@
             z-index:-1;
         }
         .thought:before {
-            width:44px;
+            width:47px;
             height:44px;
             top:80px;
             left:-28px;
             box-shadow:-50px 30px 0 -12px #fff;
         }
+
         .thought:after {
-            bottom:-10px;
+            bottom:-20px;
             right:26px;
             width:30px;
             height:30px;
-            box-shadow:40px -34px 0 0 #fff,
+            box-shadow:80px -34px 0 0 #fff,
             -208px -6px 0 -2px #fff,
             -24px 17px 0 -6px #fff,
             -5px 25px 0 -10px #fff;
 
         }
 
+        img{
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        video {
+            margin-left: auto;
+            margin-right: auto;
+            display: block
+        }
+
     </style>
 </head>
 <body>
+
+
     <div class="thought" style="font-size:30px"><b>Welcome to Tutorial Page!!!</b></div>
 
-    <img src="./images/charactor.gif" alt="image01" width="200" height="200">
+
+
+    <img src="./images/charactor.gif" alt="image01"  width="200" height="200">
 
     <h2>Elements Introduction</h2>
     <table border="3"  class="center">
@@ -188,6 +216,13 @@
         </tr>
 
     </table>
+
+    <h2>Introduction Video</h2>
+    <p>Dude, don't forget to add src for this video</p>
+    <center><iframe width="560" height="315"
+                    src="https://www.youtube.com" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+gyroscope; picture-in-picture" allowfullscreen></iframe></iframe></center>
 
 
 </body>
