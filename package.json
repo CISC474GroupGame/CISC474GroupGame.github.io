@@ -1,0 +1,9 @@
+{
+  "name": "CISC474-backend-REST-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:JinhengZ/CISC474_Group2_FInalProject.git",
+  "author": "JD <43763092+jdw1023@users.noreply.github.com>",
+  "license": "UNLICENSED",
+  "private": true
+}
