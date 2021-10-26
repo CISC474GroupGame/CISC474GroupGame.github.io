@@ -19,7 +19,7 @@ body {
   height: 50px;
   position: absolute;
   top: 0;
-  background-image: url("./images/charactor.gif");
+  background-image: url("images/charactor.gif");
   background-size: cover;
   /* background: red; */
   z-index: 2;
