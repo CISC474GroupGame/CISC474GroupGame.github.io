@@ -9,7 +9,7 @@ body {
   height: 100%;
   position: absolute;
   background-image: url();
-  background: lightblue;
+  background: linear-gradient(#80bca3, #b6d8c0);
   z-index: 1;
 }
 
