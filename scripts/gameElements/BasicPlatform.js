@@ -1,10 +1,6 @@
-class BasicPlatform{ //seems redundent now but may add more properties later
+class BasicPlatform extends PlatformObject{
     constructor(context, x, y, width, height){
-        this.context = context;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        super(context, x, y, width, height);
     }
 
     draw(){

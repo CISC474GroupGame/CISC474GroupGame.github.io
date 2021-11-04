@@ -1,4 +1,4 @@
-class GameObject {
+class CharacterObject {
     constructor(context, x, y, vx, vy){
         this.context = context;
         this.x = x;

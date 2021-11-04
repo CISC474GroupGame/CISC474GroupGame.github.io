@@ -24,10 +24,4 @@ class levelOne {
         return levelData;
     }
 
-    initialDraw = function() {
-        this.levelData.platforms.forEach(platform => {
-            platform.draw();
-        })
-    }
-
 }
