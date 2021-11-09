@@ -179,3 +179,28 @@ body {
         width: 40px;
     }
 }
+
+#firebaseui-auth-container{
+    position:absolute;
+    top:45%;
+    right:8%;
+
+    z-index:2;
+}
+
+#logout{
+    position:absolute;
+    top:10%;
+    right:8%;
+    width:75px;
+    height:25px;
+    z-index:2;
+}
+
+#username{
+    position:absolute;
+    top:5%;
+    right:8%;
+
+    z-index:2;
+}
