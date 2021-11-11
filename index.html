@@ -22,30 +22,35 @@
 	<div class= "page-wrapper">
 		<nav class="navbar navbar-expand navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
-			<a class="navbar-brand" href="#">CISC474 Group 2 Game</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link active" href="javascript:showPage('#gameCanvas');">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="javascript:showPage('#tutorial');">Tutorial</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="javascript:showPage('#about');">About</a>
-				</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="javascript:showPage('#login');">Login</a>
-					</li>
-				</ul>
-			</div>
+				<a class="navbar-brand" href="#">CISC474 Group 2 Game</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:showPage('#start');">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="javascript:showPage('#gameCanvas');">Game</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:showPage('#tutorial');">Tutorial</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:showPage('#about');">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript:showPage('#login');">Login</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</nav>
-		<div class='subpage' id="gameCanvas">
+		<div class='subpage' id="start">
+			<iframe src="start.html" width="100%" height="100%" style="display:block;" ></iframe>
+		</div>
+		<div class='hidden subpage' id="gameCanvas">
 			<!-- <p>gameCanvas123</p> -->
 		</div>
 		<div class='hidden subpage' id="tutorial">
