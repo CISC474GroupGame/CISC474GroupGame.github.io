@@ -3,7 +3,7 @@ class Player extends CharacterObject{
 		super(context, x, y, vx, vy);
 		this.width = 50;
 		this.height = 50;
-        this.gravity = 100;
+        this.gravity = 0.1;
         this.jumping = true;
 	}
 	
@@ -15,9 +15,9 @@ class Player extends CharacterObject{
 
 	update(secondsPassed, keys){
         // let friction = 0.7;
-        let movingSpeed = 300;
-        let vx = 0;
-        let vy = 0;
+        let movingSpeed = 0.01;
+        let vx = this.vx;
+        let vy = this.vy;
         if (keys.ArrowLeft) {
             vx -= movingSpeed;
         }
@@ -26,7 +26,7 @@ class Player extends CharacterObject{
         }
         if(keys.ArrowUp){
             if(this.jumping == false){
-                vy += 2000;
+                vy += 1;
                 this.jumping = true;
             }
             // vy += movingSpeed;
@@ -43,6 +43,8 @@ class Player extends CharacterObject{
         //if the player is in the air, apply gravity
         if(this.jumping == true){
             vy -= this.gravity;
+        }else{
+            vy=0;
         }
 
         //indicate player is not in the air after collision
@@ -51,9 +53,9 @@ class Player extends CharacterObject{
         }
 
         this.vx = vx;
-        this.x += this.vx * secondsPassed;
+        this.x += this.vx;
         this.vy = vy;
-        this.y -= this.vy * secondsPassed;
+        this.y -= this.vy;
 
 
         // if (keys.ArrowUp && playerModel.volY >= 0) {
