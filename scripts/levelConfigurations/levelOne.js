@@ -4,10 +4,10 @@ class levelOne {
         this.canvas = canvas;
         this.context = context;
 
-        let playerModel = new Player(this.context, this.canvas.width / 2, 500, 0, 0);
+        let playerModel = new Player(this.context, 100, 200, 0, 0);
         let platforms = [];
         let allGameObjects = [];
-        let platformOne = new BasicPlatform(this.context, 0, 500, 500, 50); //context, x, y, width, height
+        let platformOne = new BasicPlatform(this.context, 0, 600, 500, 50); //context, x, y, width, height
         let platformTwo = new BasicPlatform(this.context, 700, 700, 500, 50);
         platforms.push(platformOne, platformTwo);
         allGameObjects.push(playerModel, platformOne, platformTwo);
