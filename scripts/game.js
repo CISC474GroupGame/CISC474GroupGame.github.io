@@ -92,6 +92,7 @@ let update = function() {
         }
     }
 
+
     //stop player from moving if they become grounded
     if(player.grounded){
         player.vy = 0;
@@ -105,6 +106,18 @@ let update = function() {
     context.fill();
     context.fillStyle = '#0099b0';
     context.fillRect(player.x, player.y, player.width, player.height);
+
+
+    //render endpoint and check collision with player
+    context.save();
+    context.fillStyle = levelData.endpoint.color;
+    context.fillRect(levelData.endpoint.x, levelData.endpoint.y, levelData.endpoint.width, levelData.endpoint.height);
+    context.restore();
+    let collisionEndpoint = collisionCheck(player, levelData.endpoint);
+    if(collisionEndpoint){
+        console.log("endpoint reached");
+        respawn();
+    }
 
 
     requestAnimationFrame(update);

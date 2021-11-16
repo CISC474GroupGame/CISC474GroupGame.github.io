@@ -18,10 +18,13 @@ function loadLevelOne(canvas){
     let plat5 = new BasicPlatform(700, 550, 200, 10);
     let plat6 = new BasicPlatform(850, 450, 100, 10);
 
+    let endpoint = new Endpoint(plat2.x+plat2.width-50, plat2.y-plat2.height-50, 50, 100);
+
     platforms.push(leftWall, rightWall, plat1, plat2, plat3, plat4, plat5, plat6);
     levelData = {
         player: player,
         platforms: platforms,
+        endpoint: endpoint,
     }
     return levelData;
 }
