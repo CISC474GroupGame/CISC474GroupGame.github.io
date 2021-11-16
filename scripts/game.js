@@ -41,6 +41,18 @@ let gameLoop = function (timestamp) {
 		gameObjects[i].draw();
 	}
 
+	for(let i = 0; i < currentLevel.levelData.platforms.length; i++){
+		let collisionDirection = collisionCheck(playerModel, currentLevel.levelData.platforms);
+		if (collisionDirection === "left" || collisionDirection === "right") {
+            playerModel.velX = 0;
+            playerModel.jumping = false;
+        } else if (collisionDirection === "bottom") {
+            playerModel.grounded = true;
+            playerModel.jumping = false;
+        } else if (collisionDirection === "top") {
+            playerModel.velY *= -1;
+        }
+	}
 	detectCollision()
 
 	window.requestAnimationFrame(gameLoop);
@@ -103,6 +115,36 @@ let detectCollision = function(){
 		}
 	}
 
+}
+
+let collisionCheck = function(obj1, obj2){
+	let vectorX = (obj1.x + (obj1.width / 2)) - (obj2.x + (obj2.width / 2));
+	let vectorY = (obj1.y + (obj1.height / 2)) - (obj2.y + (obj2.height / 2));
+	let hWidths = (obj1.width / 2) + (obj2.width / 2);
+	let hHeights = (obj1.height / 2) + (obj2.height / 2);
+	let collisionDirection = null;
+	if (Math.abs(vectorX) < hWidths && Math.abs(vectorY) < hHeights) {
+		let oX = hWidths - Math.abs(vectorX);
+		let oY = hHeights - Math.abs(vectorY);
+        if (oX >= oY) {
+            if (vectorY > 0) {
+                collisionDirection = "top";
+                obj1.y += oY;
+            } else {
+                collisionDirection = "bottom";
+                obj1.y -= oY;
+            }
+        } else {
+            if (vX > 0) {
+                collisionDirection = "left";
+                obj1.x += oX;
+            } else {
+                collisionDirection = "right";
+                obj1.x -= oX;
+            }
+        }
+	}
+	return collisionDirection;
 }
 
 let trackKeys = function(keys){

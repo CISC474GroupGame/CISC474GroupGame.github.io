@@ -3,8 +3,11 @@ class Player extends CharacterObject{
 		super(context, x, y, vx, vy);
 		this.width = 50;
 		this.height = 50;
-        this.gravity = 0.1;
-        this.jumping = true;
+        this.gravity = 0.4;
+        this.friction = 0.8;
+        this.speed = 5;
+        this.jumping = false;
+        this.grounded = false;
 	}
 	
     draw(){
@@ -57,7 +60,43 @@ class Player extends CharacterObject{
         this.vy = vy;
         this.y -= this.vy;
 
+        // ========== logic from example codepen ==========
+        if(keys.ArrowUp){
+            if(!this.jumping && this.grounded){
+                this.jumping = true;
+                this.grounded = false;
+                this.vy = -this.speed * 2.5; //may need to make player speed positive here
+            }
+        }
+        if(keys.ArrowLeft){
+            if(this.vx > -this.speed){
+                this.vx = this.vx - 1;
+            }
+        }
+        if(keys.ArrowRight){
+            if(this.vx < this.speed){
+                this.vx = this.vx + 1;
+            }
+        }
+        this.vx *= this.friction;
+        this.vy += this.gravity;
 
+        //this section may need to get refactored into draw somehow
+        this.context.clearRect(0, 0, width, height);
+        this.context.beginPath();
+
+        this.grounded = false;
+
+        //other world rendering goes here
+
+        if(this.grounded){
+            this.velY = 0;
+        }
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // ===== old stuff ======
         // if (keys.ArrowUp && playerModel.volY >= 0) {
         //     playerModel.volY = -800;
         //     playerModel.isColliding = false;
