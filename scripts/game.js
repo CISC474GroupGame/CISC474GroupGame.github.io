@@ -29,6 +29,7 @@ let init = function(){
     levelData = loadLevelOne(canvas);
     player = levelData.player;
     playerSpawnState = Object.assign({}, levelData.player);
+    console.log(levelData.coins);
     update();
 }
 window.onload = init;
@@ -78,9 +79,9 @@ let update = function() {
     //render platforms and check collision with player
     for(let i = 0; i < levelData.platforms.length; i++){
         let currentPlatform = levelData.platforms[i];
-        context.fillStyle = '#000000';
+        context.fillStyle = currentPlatform.color;
         context.rect(currentPlatform.x, currentPlatform.y, currentPlatform.width, currentPlatform.height);
-        let collisionDirection = collisionCheck(player, currentPlatform);
+        let collisionDirection = platformCollisionCheck(player, currentPlatform);
         if (collisionDirection === "left" || collisionDirection === "right") {
             player.vx = 0;
             player.jumping = false;
@@ -107,13 +108,25 @@ let update = function() {
     context.fillStyle = '#0099b0';
     context.fillRect(player.x, player.y, player.width, player.height);
 
+    //render coins and check collision with player
+    for(let i = 0; i < levelData.coins.length; i++){
+        let currentCoin = levelData.coins[i];
+        let coinImage = new Image();
+        coinImage.src = currentCoin.image;
+        coinImage.onload = function(){
+            // context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(coinImage, currentCoin.x, currentCoin.y, currentCoin.width, currentCoin.height);
+        };
+        console.log(coinImage)
+    }
+
 
     //render endpoint and check collision with player
     context.save();
     context.fillStyle = levelData.endpoint.color;
     context.fillRect(levelData.endpoint.x, levelData.endpoint.y, levelData.endpoint.width, levelData.endpoint.height);
     context.restore();
-    let collisionEndpoint = collisionCheck(player, levelData.endpoint);
+    let collisionEndpoint = endpointCollisionCheck(player, levelData.endpoint);
     if(collisionEndpoint){
         console.log("endpoint reached");
         respawn();
@@ -123,8 +136,8 @@ let update = function() {
     requestAnimationFrame(update);
 }
 
-//function for detecting collision between two given objects
-let collisionCheck = function(obj1, obj2){
+//function for detecting collision between player and platforms
+let platformCollisionCheck = function(obj1, obj2){
 	let vectorX = (obj1.x + (obj1.width / 2)) - (obj2.x + (obj2.width / 2));
 	let vectorY = (obj1.y + (obj1.height / 2)) - (obj2.y + (obj2.height / 2));
 	let hWidths = (obj1.width / 2) + (obj2.width / 2);
@@ -152,6 +165,19 @@ let collisionCheck = function(obj1, obj2){
         }
 	}
 	return collisionDirection;
+}
+
+//function for detecting collision between player and endpoint
+let endpointCollisionCheck = function(obj1, obj2){
+    let vectorX = (obj1.x + (obj1.width / 2)) - (obj2.x + (obj2.width / 2));
+	let vectorY = (obj1.y + (obj1.height / 2)) - (obj2.y + (obj2.height / 2));
+	let hWidths = (obj1.width / 2) + (obj2.width / 2);
+	let hHeights = (obj1.height / 2) + (obj2.height / 2);
+	let collision = null;
+    if (Math.abs(vectorX) < hWidths && Math.abs(vectorY) < hHeights) {
+        collision = true;
+    }
+    return collision;
 }
 
 //respawns the player
