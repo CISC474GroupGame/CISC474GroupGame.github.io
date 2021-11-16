@@ -34,6 +34,37 @@ h1{
     line-height: 80px;
 }
 
+#splitPage{
+    display: flex;
+}
+
+.split-child{
+    flex: 1;
+}
+.btn-container{
+    position: relative;
+    height: 200px;
+}
+
+.buttons{
+    margin: 0;
+    position: relative;
+}
+
+.ng-btn, .help-btn, .contact-btn{
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 40px;
+    padding: 20px;
+    border: none;
+}
+
+.ng-btn:hover, .help-btn:hover, .contact-btn:hover{
+    background-color: #aaaaaa;
+    cursor: pointer;
+}
+
 /*.side-bar{*/
 /*    width: 1px;*/
 /*    height: 100vh;*/
@@ -60,6 +91,7 @@ h1{
 /*    top:50%;*/
 /*    transform: translateY(-50%);*/
 /*}*/
+
 
 .stars img{
     width:50px;
