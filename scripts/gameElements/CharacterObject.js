@@ -1,6 +1,5 @@
 class CharacterObject {
-    constructor(context, x, y, vx, vy){
-        this.context = context;
+    constructor(x, y, vx, vy){
         this.x = x;
         this.y = y;
         this.vx = vx;

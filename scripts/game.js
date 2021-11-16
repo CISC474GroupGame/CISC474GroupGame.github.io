@@ -26,7 +26,7 @@ let init = function(){
     context = canvas.getContext("2d");
     window.addEventListener("resize", resizeCanvas, false);
     resizeCanvas();
-    levelData = loadLevelOne(canvas, context);
+    levelData = loadLevelOne(canvas);
     player = levelData.player;
     playerSpawnState = Object.assign({}, levelData.player);
     update();
@@ -43,7 +43,11 @@ let resizeCanvas = function () {
 //can modulize this and break it down into other functions to be cleaner
 let update = function() {
 
-    fallCheck();
+
+    //if player falls outside of the screen, respawns
+    if(player.y > canvas.height + 500){
+        respawn();
+    }
 
     //player movement
     if(arrowKeys.ArrowUp){
@@ -137,10 +141,8 @@ let collisionCheck = function(obj1, obj2){
 	return collisionDirection;
 }
 
-//if player falls out of the screen, respawns
-let fallCheck = function(){
-    if(player.y > canvas.height + 500){
-        player = levelData.player = playerSpawnState;
-        playerSpawnState = Object.assign({}, levelData.player);
-    }
+//respawns the player
+let respawn = function(){
+    player = levelData.player = playerSpawnState;
+    playerSpawnState = Object.assign({}, levelData.player);
 }

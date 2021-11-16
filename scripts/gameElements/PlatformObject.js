@@ -1,6 +1,5 @@
 class PlatformObject {
-    constructor(context, x, y, width, height){
-        this.context = context;
+    constructor(x, y, width, height){
         this.x = x;
         this.y = y;
         this.width = width;
