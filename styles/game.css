@@ -8,47 +8,60 @@ body {
   display: block;
 }
 
-#gameCanvas {
-  /* width: 100%;
-  height: 100%; */
+#canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#game-canvas {
   position: absolute;
   background-image: url();
   background: linear-gradient(#80bca3, #b6d8c0);
   z-index: 1;
 }
 
-/* https://arks.itch.io/dino-characters */
-#playerAvatar {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  top: 0;
-  background-image: url("./../images/charactor.gif");
-  background-size: cover;
-  /* background: red; */
-  z-index: 2;
-}
-
-.platform {
-  background: black;
+.btn-group {
+  height: 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   z-index: 2;
+  left: 2%;
+  top: 2%;
 }
 
-.hidden {
-  display: none;
+.btn {
+  font-size: 18px;
+  font-family: Arial;
+  font-weight: bold;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 2px solid transparent;
+  color: #333;
+  /* background-color: #fff; */
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #333;
+  border-radius: 5%;
 }
 
-html,
-body,
-iframe {
-  height: 100%;
-}
-
-iframe {
-  display: block; /* iframes are inline by default */
-  background: #000;
-  border: none; /* Reset default border */
-  height: 100vh; /* Viewport-relative units */
-  width: 100vw;
+.btn:hover {
+  text-decoration: none;
+  color: #333;
+  background-color: #0099b0;
+  border-color: #333;
 }

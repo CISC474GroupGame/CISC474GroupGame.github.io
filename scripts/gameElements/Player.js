@@ -1,6 +1,8 @@
 class Player extends CharacterObject{
 	constructor(x, y, vx, vy) {
 		super(x, y, vx, vy);
+
+        //physics stuff
 		this.width = 50;
 		this.height = 50;
         this.gravity = 0.4;
@@ -8,5 +10,9 @@ class Player extends CharacterObject{
         this.speed = 5;
         this.jumping = false;
         this.grounded = false;
+
+        //game stuff
+        this.color = '#0099b0';
+        this.coinCount = 0;
 	}
 }
