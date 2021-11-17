@@ -49,6 +49,7 @@ h1{
 .buttons{
     margin: 0;
     position: relative;
+   ;
 }
 
 .ng-btn, .help-btn, .contact-btn{
@@ -58,6 +59,7 @@ h1{
     font-size: 40px;
     padding: 20px;
     border: none;
+    border-radius: 20px
 }
 
 .ng-btn:hover, .help-btn:hover, .contact-btn:hover{
