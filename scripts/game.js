@@ -30,6 +30,11 @@ let gameInit = function(){
 
 }
 
+//keeping track of current level - (there may be a better way to do this)
+let LEVEL_INDEX = 0;
+let level_array = [loadLevelZero, loadLevelOne]
+
+
 //initialize the game when the window loads
 let canvas, context, currentLevel, player, playerSpawnState;
 let init = function(){
@@ -37,10 +42,9 @@ let init = function(){
     context = canvas.getContext("2d");
     window.addEventListener("resize", resizeCanvas, false);
     resizeCanvas();
-    levelData = loadFlatLevel(canvas); //should make levels classes so we can have a currentLevelObject
-    // levelData = loadFlatLevel(canvas);
-    player = levelData.player;
-    playerSpawnState = Object.assign({}, levelData.player);
+    currentLevel = level_array[LEVEL_INDEX](canvas);
+    player = currentLevel.player;
+    playerSpawnState = Object.assign({}, currentLevel.player);
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
         resetLevel();
@@ -55,22 +59,33 @@ let resizeCanvas = function () {
     canvas.height = window.innerHeight;
 }
 
-//function to reset the level -- slows game after a few resets needs to be optimized
+//reset the level -- slows game after a few resets needs to be optimized
 let resetLevel = function(){
     context.clearRect(0, 0, canvas.width, canvas.height);
     arrowKeys = null;
     arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
-    levelData = null;
-    levelData = loadFlatLevel(canvas);
-    player = levelData.player;
-    playerSpawnState = Object.assign({}, levelData.player);
+    currentLevel = null;
+    currentLevel = level_array[LEVEL_INDEX](canvas);
+    player = currentLevel.player;
+    playerSpawnState = Object.assign({}, currentLevel.player);
+}
+
+//called when a level is completed, clears the current data and loads the next level in
+let loadNextLevel = function(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    arrowKeys = null;
+    arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
+    currentLevel = null;
+    LEVEL_INDEX++;
+    currentLevel = level_array[LEVEL_INDEX](canvas);
+    player = currentLevel.player;
+    playerSpawnState = Object.assign({}, currentLevel.player);
 }
 
 
 //main driver function for the app (gets called every frame)
 //can modulize this and break it down into other functions to be cleaner
 let update = function() {
-
 
     //if player falls outside of the screen, respawns
     if(player.y > canvas.height + 500){
@@ -104,8 +119,8 @@ let update = function() {
     player.grounded = false;
 
     //render platforms and check collision with player
-    for(let i = 0; i < levelData.platforms.length; i++){
-        let currentPlatform = levelData.platforms[i];
+    for(let i = 0; i < currentLevel.platforms.length; i++){
+        let currentPlatform = currentLevel.platforms[i];
         context.fillStyle = currentPlatform.color;
         context.rect(currentPlatform.x, currentPlatform.y, currentPlatform.width, currentPlatform.height);
         let collisionDirection = platformCollisionCheck(player, currentPlatform);
@@ -136,12 +151,12 @@ let update = function() {
     context.fillRect(player.x, player.y, player.width, player.height);
 
     //render coins and check collision with player
-    if(levelData.coins){
-        for(let i = 0; i < levelData.coins.length; i++){
+    if(currentLevel.coins){
+        for(let i = 0; i < currentLevel.coins.length; i++){
 
             //drawing each coin
             context.save();
-            let currentCoin = levelData.coins[i];
+            let currentCoin = currentLevel.coins[i];
             currentCoin.drawCoin(context);
             context.restore();
 
@@ -149,7 +164,7 @@ let update = function() {
             if(platformCollisionCheck(player, currentCoin) !== null){
                 if(i > -1){
                     player.coinCount++;
-                    levelData.coins.splice(i, 1);
+                    currentLevel.coins.splice(i, 1);
                 }
             }
         }
@@ -159,26 +174,25 @@ let update = function() {
     context.save();
     context.font = '25px Arial';
     context.fillStyle = '#000000';
-    context.fillText("Coins: " + player.coinCount + "/" + levelData.requiredCoins, canvas.width - canvas.width/10, canvas.height/15);
+    context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width - canvas.width/10, canvas.height/15);
 
 
     //render endpoint and check collision with player
-    if(levelData.endpoint){
+    if(currentLevel.endpoint){
         context.save();
-        context.fillStyle = levelData.endpoint.color;
-        context.fillRect(levelData.endpoint.x, levelData.endpoint.y, levelData.endpoint.width, levelData.endpoint.height);
+        context.fillStyle = currentLevel.endpoint.color;
+        context.fillRect(currentLevel.endpoint.x, currentLevel.endpoint.y, currentLevel.endpoint.width, currentLevel.endpoint.height);
         context.restore();
-        let collisionEndpoint = endpointCollisionCheck(player, levelData.endpoint);
+        let collisionEndpoint = endpointCollisionCheck(player, currentLevel.endpoint);
         if(collisionEndpoint){
             //check clear condition
-            if(player.coinCount === levelData.requiredCoins){
+            if(player.coinCount === currentLevel.coinsCount){
                 alert("You Win!");
-                resetLevel();
+                loadNextLevel();
             }
             // respawn();
         }
     }
-
     requestAnimationFrame(update);
 }
 
@@ -229,7 +243,7 @@ let endpointCollisionCheck = function(obj1, obj2){
 //respawns the player
 let respawn = function(){
     let currentCoins = player.coinCount;
-    player = levelData.player = playerSpawnState;
-    playerSpawnState = Object.assign({}, levelData.player);
+    player = currentLevel.player = playerSpawnState;
+    playerSpawnState = Object.assign({}, currentLevel.player);
     player.coinCount = currentCoins
 }

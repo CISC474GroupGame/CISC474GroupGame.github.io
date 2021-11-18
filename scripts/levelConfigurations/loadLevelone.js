@@ -8,7 +8,7 @@ function loadLevelOne(canvas){
     let enemies = [];
     let coins = [];
     let endpoint;
-    let requiredCoins;
+    let coinsCount;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
     let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
@@ -26,7 +26,7 @@ function loadLevelOne(canvas){
 
     //endpoint
     endpoint = new Endpoint(plat2.x+plat2.width-50, plat2.y-plat2.height-50, 50, 100);
-    requiredCoins = coins.length;
+    coinsCount = coins.length;
 
     //coins
     let coin1 = new Coin(600, 300);
@@ -43,7 +43,7 @@ function loadLevelOne(canvas){
         platforms: platforms,
         endpoint: endpoint,
         coins: coins,
-        requiredCoins: requiredCoins,
+        coinsCount: coinsCount,
     }
     return levelData;
 }
