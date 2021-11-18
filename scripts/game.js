@@ -32,7 +32,7 @@ let init = function(){
     playerSpawnState = Object.assign({}, levelData.player);
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
-        resetLevel();
+        resetLevel;
     });
     update();
 }
@@ -46,7 +46,8 @@ let resizeCanvas = function () {
 
 //function to reset the level -- slows game after a few resets needs to be optimized
 let resetLevel = function(){
-    
+    arrowKeys = null;
+    arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
     levelData = null;
     levelData = loadFlatLevel(canvas);
     player = levelData.player;
