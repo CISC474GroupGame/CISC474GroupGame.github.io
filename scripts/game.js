@@ -19,6 +19,17 @@ let trackKeys = function(keys){
 }
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
+//initialize high level stuff
+let windowInit = function(){
+    window.addEventListener("resize", resizeCanvas, false);
+    resizeCanvas();
+}
+
+//initialize game specific stuff
+let gameInit = function(){
+
+}
+
 //initialize the game when the window loads
 let canvas, context, currentLevel, player, playerSpawnState;
 let init = function(){
@@ -32,7 +43,7 @@ let init = function(){
     playerSpawnState = Object.assign({}, levelData.player);
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
-        resetLevel;
+        resetLevel();
     });
     update();
 }
@@ -46,6 +57,7 @@ let resizeCanvas = function () {
 
 //function to reset the level -- slows game after a few resets needs to be optimized
 let resetLevel = function(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
     arrowKeys = null;
     arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
     levelData = null;
@@ -158,7 +170,7 @@ let update = function() {
         context.restore();
         let collisionEndpoint = endpointCollisionCheck(player, levelData.endpoint);
         if(collisionEndpoint){
-            console.log("endpoint reached");
+            //check clear condition
             if(player.coinCount === levelData.requiredCoins){
                 alert("You Win!");
                 resetLevel();
@@ -168,7 +180,6 @@ let update = function() {
     }
 
     requestAnimationFrame(update);
-    // console.log(context)
 }
 
 //function for detecting collision between player and platforms
