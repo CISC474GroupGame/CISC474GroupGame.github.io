@@ -170,6 +170,12 @@ let update = function() {
         }
     }
 
+    //render level counter
+    context.save();
+    context.font = '25px Arial';
+    context.fillStyle = '#000000';
+    context.fillText("Level: " + (LEVEL_INDEX+1), canvas.width - (2*canvas.width/10), canvas.height/15);
+
     //render coin counter
     context.save();
     context.font = '25px Arial';
