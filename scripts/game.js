@@ -20,17 +20,16 @@ let trackKeys = function(keys){
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 //initialize the game when the window loads
-let canvas, context, currentLevel, player, playerSpawnState, requiredCoins;
+let canvas, context, currentLevel, player, playerSpawnState;
 let init = function(){
     canvas = document.getElementById('game-canvas');
     context = canvas.getContext("2d");
     window.addEventListener("resize", resizeCanvas, false);
     resizeCanvas();
-    // levelData = loadLevelOne(canvas);
-    levelData = loadFlatLevel(canvas);
+    levelData = loadFlatLevel(canvas); //should make levels classes so we can have a currentLevelObject
+    // levelData = loadFlatLevel(canvas);
     player = levelData.player;
     playerSpawnState = Object.assign({}, levelData.player);
-    requiredCoins = levelData.coins.length;
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
         resetLevel();
@@ -47,11 +46,11 @@ let resizeCanvas = function () {
 
 //function to reset the level -- slows game after a few resets needs to be optimized
 let resetLevel = function(){
+    
     levelData = null;
     levelData = loadFlatLevel(canvas);
     player = levelData.player;
     playerSpawnState = Object.assign({}, levelData.player);
-    requiredCoins = levelData.coins.length;
 }
 
 
@@ -147,7 +146,7 @@ let update = function() {
     context.save();
     context.font = '25px Arial';
     context.fillStyle = '#000000';
-    context.fillText("Coins: " + player.coinCount + "/" + requiredCoins, canvas.width - canvas.width/10, canvas.height/15);
+    context.fillText("Coins: " + player.coinCount + "/" + levelData.requiredCoins, canvas.width - canvas.width/10, canvas.height/15);
 
 
     //render endpoint and check collision with player
@@ -159,7 +158,11 @@ let update = function() {
         let collisionEndpoint = endpointCollisionCheck(player, levelData.endpoint);
         if(collisionEndpoint){
             console.log("endpoint reached");
-            respawn();
+            if(player.coinCount === levelData.requiredCoins){
+                alert("You Win!");
+                resetLevel();
+            }
+            // respawn();
         }
     }
 

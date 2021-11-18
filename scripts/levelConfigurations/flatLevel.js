@@ -1,9 +1,12 @@
 function loadFlatLevel(canvas) {
+    //each of things should be exported in levelData
     let player = new Player(75, canvas.height/2, 0, 0);
     let platforms = [];
     let powerups = [];
     let enemies = [];
     let coins = [];
+    let endpoint;
+    let requiredCoins;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
     let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
@@ -21,13 +24,15 @@ function loadFlatLevel(canvas) {
     let coin4 = new Coin(4 * fifthOfWidth, canvas.height-100);
     coins.push(coin1, coin2, coin3, coin4);
 
-    let endpoint = new Endpoint((4*fifthOfWidth)+(0.5*fifthOfWidth), canvas.height-150, 50, 100);
+    endpoint = new Endpoint((4*fifthOfWidth)+(0.5*fifthOfWidth), canvas.height-150, 50, 100);
+    requiredCoins = coins.length;
 
     let levelData = {
         player: player,
         platforms: platforms,
         coins: coins,
         endpoint: endpoint,
+        requiredCoins: requiredCoins,
     }
 
     return levelData;
