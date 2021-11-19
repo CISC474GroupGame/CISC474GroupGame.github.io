@@ -18,6 +18,7 @@ body {
   position: absolute;
   background-image: url();
   background: linear-gradient(#80bca3, #b6d8c0);
+  /* background: linear-gradient(#33ccff, #99ccff); */
   z-index: 1;
 }
 

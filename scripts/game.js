@@ -86,9 +86,11 @@ let loadNextLevel = function(){
 //main driver function for the app (gets called every frame)
 //can modulize this and break it down into other functions to be cleaner
 let update = function() {
+    console.log(playerSpawnState)
 
     //if player falls outside of the screen, respawns
     if(player.y > canvas.height + 500){
+        console.log('respawn');
         respawn();
     }
 
@@ -249,7 +251,7 @@ let endpointCollisionCheck = function(obj1, obj2){
 //respawns the player
 let respawn = function(){
     let currentCoins = player.coinCount;
-    player = currentLevel.player = playerSpawnState;
-    playerSpawnState = Object.assign({}, currentLevel.player);
+    player = playerSpawnState;
+    playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
 }

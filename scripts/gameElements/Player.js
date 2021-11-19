@@ -12,7 +12,7 @@ class Player extends CharacterObject{
         this.grounded = false;
 
         //game stuff
-        this.color = '#0099b0';
+        this.color = '#808080';
         this.coinCount = 0;
 	}
 }

@@ -4,6 +4,7 @@ class Endpoint{
         this.y = y,
         this.width = width,
         this.height = height,
-        this.color = "#ff6666"
+        // this.color = "#ff6666"
+        this.color = '#00ff99';
     }
 }
