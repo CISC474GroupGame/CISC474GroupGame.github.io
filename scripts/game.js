@@ -86,7 +86,6 @@ let loadNextLevel = function(){
 //main driver function for the app (gets called every frame)
 //can modulize this and break it down into other functions to be cleaner
 let update = function() {
-    console.log(playerSpawnState)
 
     //if player falls outside of the screen, respawns
     if(player.y > canvas.height + 500){
@@ -177,12 +176,14 @@ let update = function() {
     context.font = '25px Arial';
     context.fillStyle = '#000000';
     context.fillText("Level: " + (LEVEL_INDEX+1), canvas.width - (2*canvas.width/10), canvas.height/15);
+    context.restore();
 
     //render coin counter
     context.save();
     context.font = '25px Arial';
     context.fillStyle = '#000000';
     context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width - canvas.width/10, canvas.height/15);
+    context.restore();
 
 
     //render endpoint and check collision with player
