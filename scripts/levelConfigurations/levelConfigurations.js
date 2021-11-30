@@ -75,13 +75,43 @@ function loadLevelOne(canvas){
     //create level instance and return it
     let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount);
     return theLevel;
+}
 
-    // levelData = {
-    //     player: player,
-    //     platforms: platforms,
-    //     endpoint: endpoint,
-    //     coins: coins,
-    //     coinsCount: coinsCount,
-    // }
-    // return levelData;
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+function loadRandomLevel(canvas){
+    //class attributes 
+    let player = new Player(random(0,canvas.width), random(0,canvas.height), 0, 0);
+    let platforms = [];
+    let powerups = [];
+    let enemies = [];
+    let coins = [];
+    let endpoint;
+    let coinsCount;
+
+    //invisible walls on the sides to keep player contained -- make these invisible later
+    let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
+    let rightWall = new BasicPlatform(canvas.width - 10, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
+
+    let platCount = random(1,11);
+    for(i = 0; i <= platCount; i++){
+        let platform = new BasicPlatform(random(0,canvas.width),random(0,canvas.height),random(50,500),random(10,200),DEFAULT_PLATFORM_COLOR);
+        platforms.push(platform);
+    }
+    platforms.push(leftWall,rightWall);
+
+    //game endpoint
+    endpoint = new Endpoint(random(0,canvas.width), random(0,canvas.height), 50, 100);
+
+    coinsCount = random(1,11);
+    for(i = 0; i <= coinsCount; i++){
+        let coin = new Coin(random(0,canvas.width),random(0,canvas.height));
+        coins.push(coin);
+    }
+
+    //create level instance and return it
+    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount);
+    return theLevel;
 }
