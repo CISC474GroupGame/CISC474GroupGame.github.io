@@ -1,0 +1,68 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+
+#canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#game-canvas {
+  position: absolute;
+  background-image: url();
+  background: linear-gradient(#80bca3, #b6d8c0);
+  /* background: linear-gradient(#33ccff, #99ccff); */
+  z-index: 1;
+}
+
+.btn-group {
+  height: 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 2;
+  left: 2%;
+  top: 2%;
+}
+
+.btn {
+  font-size: 18px;
+  font-family: Arial;
+  font-weight: bold;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 2px solid transparent;
+  color: #333;
+  /* background-color: #fff; */
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #333;
+  border-radius: 5%;
+}
+
+.btn:hover {
+  text-decoration: none;
+  color: #333;
+  background-color: #0099b0;
+  border-color: #333;
+}

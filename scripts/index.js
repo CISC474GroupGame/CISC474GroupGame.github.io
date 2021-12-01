@@ -50,10 +50,6 @@ function trackKeys(keys) {
 }
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
-let buildPlatformTable = function(){
-	
-}
-
 let detectPlayerToPlatformCollision = function(levelData){
 	let playerModel = levelData.playerModel;
 	for (let platform of levelData.platforms){
@@ -68,6 +64,17 @@ let detectPlayerToPlatformCollision = function(levelData){
 		else{
 			playerModel.isColliding = false;
 		}
+	}
+}
+
+let respawnPlayer = function(levelData){
+	levelData.playerModel.posX = levelData.playerStartPos.x;
+	levelData.playerModel.posY = levelData.playerStartPos.y;
+}
+
+let detectDeathByFalling = function(levelData){
+	if(levelData.playerModel.posY >= 5000){
+		respawnPlayer(levelData)
 	}
 }
 
@@ -106,7 +113,10 @@ let update = function (secondsPassed, keys) {
 
 	console.log(playerModel.posY)
 
+
+
 	detectPlayerToPlatformCollision(levelOneData);
+	detectDeathByFalling(levelOneData);
 	// testGravity();
 	//make table of all coordinates of all platoforms and have collision function check against all platforms
 
@@ -127,7 +137,7 @@ let update = function (secondsPassed, keys) {
 	// console.log(volX);
 	playerModel.posX += volX * secondsPassed;
 
-	let gravity = 700; // positive is down, and negative is up; to jump up a negaitive volY is needed
+	let gravity = 2000; // positive is down, and negative is up; to jump up a negaitive volY is needed
 	// console.log(playerModel.volY)
 	if (keys.ArrowUp && playerModel.volY >= 0 && playerModel.isColliding) {
 		playerModel.volY = -800;
