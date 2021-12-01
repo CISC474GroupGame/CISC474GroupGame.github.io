@@ -7,7 +7,7 @@ window.onload = function(){
     // context.fillRect(100, 100, 100, 100);
 
     let img = new Image();
-    img.src="./images/coin.png";
+    img.src="./../images/coin.png";
     img.onload = function(){
         context.drawImage(img, 100, 100, 100, 100);
     }
