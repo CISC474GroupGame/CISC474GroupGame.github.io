@@ -19,24 +19,13 @@ let trackKeys = function(keys){
 }
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
-//initialize high level stuff
-let windowInit = function(){
-    window.addEventListener("resize", resizeCanvas, false);
-    resizeCanvas();
-}
-
-//initialize game specific stuff
-let gameInit = function(){
-
-}
-
 //keeping track of current level - (there may be a better way to do this)
 let LEVEL_INDEX = 0;
 let level_array = [loadLevelZero, loadLevelOne, loadRandomLevel];
 
 
 //initialize the game when the window loads
-let canvas, context, currentLevel, player, playerSpawnState;
+let canvas, context, currentLevel, player, playerSpawnState, timer;
 let init = function(){
     canvas = document.getElementById('game-canvas');
     context = canvas.getContext("2d");
@@ -45,6 +34,7 @@ let init = function(){
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
+    timer = 300;
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
         resetLevel();
@@ -82,11 +72,10 @@ let loadNextLevel = function(){
     playerSpawnState = Object.assign({}, currentLevel.player);
 }
 
-let timer = 0;
 //function for ticking the timer
 let incrementTimer = function(){
     console.log('incrementTimer being called');
-    timer = timer + 1;
+    timer--;
 }
 
 setInterval(incrementTimer, 1000);
