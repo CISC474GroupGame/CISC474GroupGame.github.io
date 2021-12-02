@@ -74,7 +74,6 @@ let loadNextLevel = function(){
 
 //function for ticking the timer
 let incrementTimer = function(){
-    console.log('incrementTimer being called');
     timer--;
 }
 
@@ -206,7 +205,7 @@ let update = function() {
             // respawn();
         }
     }
-    requestAnimationFrame(update);
+    // requestAnimationFrame(update);
 }
 
 //function for detecting collision between player and platforms
@@ -260,3 +259,5 @@ let respawn = function(){
     playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
 }
+
+setInterval(update, 16);
