@@ -183,11 +183,13 @@ let update = function() {
     context.restore();
 
     //render timer
-    context.save();
-    context.font = '25px Arial';
-    context.fillStyle = '#000000';
-    context.fillText("Time: " + timer, canvas.width - canvas.width/10, 3*canvas.height/15);
-    context.restore();
+    if(timer >= 0){
+        context.save();
+        context.font = '25px Arial';
+        context.fillStyle = '#000000';
+        context.fillText("Time: " + timer, canvas.width - canvas.width/10, 3*canvas.height/15);
+        context.restore();
+    }
 
 
     //render endpoint and check collision with player
@@ -206,7 +208,16 @@ let update = function() {
             // respawn();
         }
     }
-    requestAnimationFrame(update);
+    
+    //check if timer expired
+    if(timer < 0){
+        alert("Game over!\nYou ran out of time.\nYou will now be returned to the main menu.");
+        window.location = './../index.html';
+    }
+    else{
+        requestAnimationFrame(update);
+    }
+
 }
 
 //function for detecting collision between player and platforms
@@ -259,4 +270,11 @@ let respawn = function(){
     player = playerSpawnState;
     playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
+    timer = timer - 5;
+}
+
+//handle the time running out
+let timeExpired = function(){
+    alert("Game over! You ran out of time!\nYou will now be returned to the main menu.");
+    window.location = './../index.html';
 }
