@@ -82,6 +82,15 @@ let loadNextLevel = function(){
     playerSpawnState = Object.assign({}, currentLevel.player);
 }
 
+let timer = 0;
+//function for ticking the timer
+let incrementTimer = function(){
+    console.log('incrementTimer being called');
+    timer = timer + 1;
+}
+
+setInterval(incrementTimer, 1000);
+
 
 //main driver function for the app (gets called every frame)
 //can modulize this and break it down into other functions to be cleaner
@@ -89,7 +98,6 @@ let update = function() {
 
     //if player falls outside of the screen, respawns
     if(player.y > canvas.height + 500){
-        console.log('respawn');
         respawn();
     }
 
@@ -123,7 +131,7 @@ let update = function() {
     for(let i = 0; i < currentLevel.platforms.length; i++){
         let currentPlatform = currentLevel.platforms[i];
         context.fillStyle = currentPlatform.color;
-        context.rect(currentPlatform.x, currentPlatform.y, currentPlatform.width, currentPlatform.height);
+        context.fillRect(currentPlatform.x, currentPlatform.y, currentPlatform.width, currentPlatform.height);
         let collisionDirection = platformCollisionCheck(player, currentPlatform);
         if (collisionDirection === "left" || collisionDirection === "right") {
             player.vx = 0;
@@ -175,14 +183,21 @@ let update = function() {
     context.save();
     context.font = '25px Arial';
     context.fillStyle = '#000000';
-    context.fillText("Level: " + (LEVEL_INDEX+1), canvas.width - (2*canvas.width/10), canvas.height/15);
+    context.fillText("Level: " + (LEVEL_INDEX+1), canvas.width - canvas.width/10, canvas.height/15);
     context.restore();
 
     //render coin counter
     context.save();
     context.font = '25px Arial';
     context.fillStyle = '#000000';
-    context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width - canvas.width/10, canvas.height/15);
+    context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width - canvas.width/10, 2*canvas.height/15);
+    context.restore();
+
+    //render timer
+    context.save();
+    context.font = '25px Arial';
+    context.fillStyle = '#000000';
+    context.fillText("Time: " + timer, canvas.width - canvas.width/10, 3*canvas.height/15);
     context.restore();
 
 

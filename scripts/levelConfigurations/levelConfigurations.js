@@ -1,8 +1,13 @@
 let DEFAULT_PLATFORM_COLOR = "#000000";
+let red = "#ff5050";
 
 function loadLevelZero(canvas) {
+
+    //variable to use to help make levels fit the size of the screen
+    let fifthOfWidth = canvas.width / 5;
+
     //class attributes
-    let player = new Player(75, canvas.height/2, 0, 0);
+    let player = new Player(fifthOfWidth/2, canvas.height/2, 0, 0);
     let platforms = [];
     let powerups = [];
     let enemies = [];
@@ -20,7 +25,6 @@ function loadLevelZero(canvas) {
     platforms.push(leftWall, rightWall, plat1, plat2);
 
     //coins
-    let fifthOfWidth = canvas.width / 5;
     let coin1 = new Coin(fifthOfWidth, canvas.height-100);
     let coin2 = new Coin(2 * fifthOfWidth, canvas.height-100);
     let coin3 = new Coin(3 * fifthOfWidth, canvas.height-100);
@@ -37,8 +41,13 @@ function loadLevelZero(canvas) {
 }
 
 function loadLevelOne(canvas){
+
+    //variables to help make levels fit the size of the screen
+    let fifthOfWidth = canvas.width / 5;
+    let fifthOfHeight = canvas.height / 5;
+
     //class attributes 
-    let player = new Player(100, 200, 0, 0);
+    let player = new Player(fifthOfWidth, canvas.height/2-fifthOfHeight, 0, 0);
     let platforms = [];
     let powerups = [];
     let enemies = [];
@@ -51,7 +60,7 @@ function loadLevelOne(canvas){
     let rightWall = new BasicPlatform(canvas.width - 10, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
 
     //regular platforms
-    let plat1 = new BasicPlatform(0, 600, 500, 50, DEFAULT_PLATFORM_COLOR);
+    let plat1 = new BasicPlatform(0, fifthOfWidth*2, 500, 50, DEFAULT_PLATFORM_COLOR);
     let plat2 = new BasicPlatform(700, 700, 500, 50, DEFAULT_PLATFORM_COLOR);
     let plat3 = new BasicPlatform(100, 450, 500, 20, DEFAULT_PLATFORM_COLOR);
     let plat4 = new BasicPlatform(700, 350, 10, 200, DEFAULT_PLATFORM_COLOR);
