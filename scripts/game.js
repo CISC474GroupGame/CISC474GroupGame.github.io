@@ -21,7 +21,7 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 //keeping track of current level - (there may be a better way to do this)
 let LEVEL_INDEX = 0;
-let level_array = [loadLevelZero, loadLevelOne, loadRandomLevel];
+let level_array = [loadLevelZero, loadLevelOne];
 
 
 //initialize the game when the window loads
@@ -62,11 +62,14 @@ let resetLevel = function(){
 
 //called when a level is completed, clears the current data and loads the next level in
 let loadNextLevel = function(){
+    LEVEL_INDEX++;
+    if(LEVEL_INDEX >= level_array.length){
+        endGame();
+    }
     context.clearRect(0, 0, canvas.width, canvas.height);
     arrowKeys = null;
     arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
     currentLevel = null;
-    LEVEL_INDEX++;
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
@@ -74,7 +77,6 @@ let loadNextLevel = function(){
 
 //function for ticking the timer
 let incrementTimer = function(){
-    console.log('incrementTimer being called');
     timer--;
 }
 
@@ -202,7 +204,7 @@ let update = function() {
         if(collisionEndpoint){
             //check clear condition
             if(player.coinCount === currentLevel.coinsCount){
-                alert("You Win!");
+                // alert("You Win!");
                 loadNextLevel();
             }
             // respawn();
@@ -270,11 +272,18 @@ let respawn = function(){
     player = playerSpawnState;
     playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
-    timer = timer - 5;
+    timer = timer - 5; //if I want to indicate visually by highlighting the timer red when you lose time, I can make a timer class if necessary
 }
 
 //handle the time running out
 let timeExpired = function(){
     alert("Game over! You ran out of time!\nYou will now be returned to the main menu.");
     window.location = './../index.html';
+}
+
+//function is called when the user completes the game
+let endGame = function(){
+    alert("You beat the game in " + (300 - timer) + " seconds!\nYou will now be returned to the main menu.");
+    window.location = './../index.html';
+    //put api stuff here
 }
