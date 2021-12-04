@@ -212,3 +212,44 @@ html {
     width:105%;
 
 }
+
+.btn-group{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.btn {
+    font-size: 40px;
+    font-family: Arial;
+    font-weight: bold;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 2px solid transparent;
+    color: #333;
+    /* background-color: #fff; */
+    background-color: rgba(0, 0, 0, 0);
+    border-color: #333;
+    border-radius: 5%;
+}
+
+.btn:hover {
+    text-decoration: none;
+    color: #333;
+    background-color: #0099b0;
+    border-color: #333;
+}
