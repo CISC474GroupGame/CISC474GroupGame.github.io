@@ -14,6 +14,7 @@ function loadLevelZero(canvas) {
     let coins = [];
     let endpoint;
     let coinsCount;
+    let key;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
     let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
@@ -32,11 +33,14 @@ function loadLevelZero(canvas) {
     coins.push(coin1, coin2, coin3, coin4);
     coinsCount = coins.length;
 
+    //key to unlock endpoint
+    key = new Key(canvas.width*0.5, canvas.height*0.60);
+
     //game endpoint
     endpoint = new Endpoint((4*fifthOfWidth)+(0.5*fifthOfWidth), canvas.height-150, 50, 100);
 
     //create level instance and return it
-    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount);
+    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount, key);
     return theLevel
 }
 
@@ -54,6 +58,7 @@ function loadLevelOne(canvas){
     let coins = [];
     let endpoint;
     let coinsCount;
+    let key;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
     let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
@@ -67,6 +72,9 @@ function loadLevelOne(canvas){
     let plat5 = new BasicPlatform(700, 550, 200, 10, DEFAULT_PLATFORM_COLOR);
     let plat6 = new BasicPlatform(850, 450, 100, 10, DEFAULT_PLATFORM_COLOR);
     platforms.push(leftWall, rightWall, plat1, plat2, plat3, plat4, plat5, plat6);
+
+    //key
+    key = new Key(canvas.width*0.25, canvas.height*0.75);
 
     //game endpoint
     endpoint = new Endpoint(plat2.x+plat2.width-50, plat2.y-plat2.height-50, 50, 100);
@@ -82,7 +90,7 @@ function loadLevelOne(canvas){
     coinsCount = coins.length;
 
     //create level instance and return it
-    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount);
+    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount, key);
     return theLevel;
 }
 
@@ -99,11 +107,13 @@ function loadRandomLevel(canvas){
     let coins = [];
     let endpoint;
     let coinsCount;
+    let key;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
     let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
     let rightWall = new BasicPlatform(canvas.width - 10, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
 
+    //platforms
     let platCount = random(1,11);
     for(i = 0; i <= platCount; i++){
         let platform = new BasicPlatform(random(0,canvas.width),random(0,canvas.height),random(50,500),random(10,200),DEFAULT_PLATFORM_COLOR);
@@ -114,6 +124,7 @@ function loadRandomLevel(canvas){
     //game endpoint
     endpoint = new Endpoint(random(0,canvas.width), random(0,canvas.height), 50, 100);
 
+    //coins
     coinsCount = random(1,11);
     for(i = 0; i <= coinsCount; i++){
         let coin = new Coin(random(0,canvas.width),random(0,canvas.height));

@@ -73,6 +73,7 @@ let loadNextLevel = function(){
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
+    console.log(currentLevel);
 }
 
 //setting up the timer
@@ -130,7 +131,7 @@ let update = function() {
         let currentPlatform = currentLevel.platforms[i];
         context.fillStyle = currentPlatform.color;
         context.fillRect(currentPlatform.x, currentPlatform.y, currentPlatform.width, currentPlatform.height);
-        let collisionDirection = platformCollisionCheck(player, currentPlatform);
+        let collisionDirection = standardCollisionCheck(player, currentPlatform);
         if (collisionDirection === "left" || collisionDirection === "right") {
             player.vx = 0;
             player.jumping = false;
@@ -168,12 +169,28 @@ let update = function() {
             context.restore();
 
             //detecting collision with coins
-            if(platformCollisionCheck(player, currentCoin) !== null){
+            if(standardCollisionCheck(player, currentCoin) !== null){
                 if(i > -1){
                     player.coinCount++;
                     currentLevel.coins.splice(i, 1);
                 }
             }
+        }
+    }
+
+    //render key and check collision with player
+    if(currentLevel.key){
+
+        //draw key
+        context.save();
+        currentLevel.key.drawKey(context);
+        context.restore();
+
+        //detecting collision
+        if(standardCollisionCheck(player, currentLevel.key) !== null){
+            currentLevel.endpoint.hasKey = true;
+            currentLevel.endpoint.color = '#00ff99';
+            currentLevel.key = null;
         }
     }
 
@@ -210,8 +227,11 @@ let update = function() {
         let collisionEndpoint = endpointCollisionCheck(player, currentLevel.endpoint);
         if(collisionEndpoint){
             //check clear condition
-            if(player.coinCount === currentLevel.coinsCount){
-                // alert("You Win!");
+            // if(player.coinCount === currentLevel.coinsCount){
+            //     // alert("You Win!");
+            //     loadNextLevel();
+            // }
+            if(currentLevel.endpoint.hasKey){
                 loadNextLevel();
             }
             // respawn();
@@ -231,7 +251,7 @@ let update = function() {
 }
 
 //function for detecting collision between player and platforms
-let platformCollisionCheck = function(obj1, obj2){
+let standardCollisionCheck = function(obj1, obj2){
 	let vectorX = (obj1.x + (obj1.width / 2)) - (obj2.x + (obj2.width / 2));
 	let vectorY = (obj1.y + (obj1.height / 2)) - (obj2.y + (obj2.height / 2));
 	let hWidths = (obj1.width / 2) + (obj2.width / 2);
@@ -280,13 +300,22 @@ let respawn = function(){
     player = playerSpawnState;
     playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
+    resetKey();
     // timer = timer - 5; //if I want to indicate visually by highlighting the timer red when you lose time, I can make a timer class if necessary
 }
 
-//handle the time running out
+//handle the time running out -- this isn't needed unless we do reverse time
 let timeExpired = function(){
     alert("Game over! You ran out of time!\nYou will now be returned to the main menu.");
     window.location = './../index.html';
+}
+
+//handles replacing the key and relocking the endpoint when the player dies
+let resetKey = function(){
+    let originalKey = level_array[LEVEL_INDEX](canvas).key;
+    currentLevel.key = originalKey;
+    currentLevel.endpoint.color = '#ff5050';
+    currentLevel.endpoint.hasKey = false;
 }
 
 //function is called when the user completes the game
