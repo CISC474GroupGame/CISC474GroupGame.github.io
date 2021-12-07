@@ -284,6 +284,19 @@ let timeExpired = function(){
 //function is called when the user completes the game
 let endGame = function(){
     alert("You beat the game in " + (300 - timer) + " seconds!\nYou will now be returned to the main menu.");
-    window.location = './../index.html';
+    // window.location = './../index.html';
     //put api stuff here
+    if(auth.currentUser != null){
+        let data = {'user': auth.currentUser,'score': (300 - timer), 'coins': player.coinCount};
+        console.log(data);
+        fetch('http://localhost:8001/api/v1/').then(function(response){
+            response.json().then(function(data){
+                console.log(data);
+            });
+        });
+    }else{
+        console.log("user not logged in");
+        confirm("You are not logged in.\n");
+        window.location = './index.html';
+    }
 }

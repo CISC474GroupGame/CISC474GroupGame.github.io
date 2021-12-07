@@ -52,10 +52,12 @@ let uiConfig = {
 var app = firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-// The start method will wait until the DOM is loaded.
-ui.start('#firebaseui-auth-container', uiConfig);
+if($('#firebaseui-auth-container').length > 0) {
+	// Initialize the FirebaseUI Widget using Firebase.
+	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+	// The start method will wait until the DOM is loaded.
+	ui.start('#firebaseui-auth-container', uiConfig);
+}
 
 auth.onAuthStateChanged((user) => {
 	if (user) {
