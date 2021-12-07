@@ -25,7 +25,7 @@ let level_array = [loadLevelZero, loadLevelOne];
 
 
 //initialize the game when the window loads
-let canvas, context, currentLevel, player, playerSpawnState, timer;
+let canvas, context, currentLevel, player, playerSpawnState, timer, elapsedTime;
 let init = function(){
     canvas = document.getElementById('game-canvas');
     context = canvas.getContext("2d");
@@ -75,12 +75,19 @@ let loadNextLevel = function(){
     playerSpawnState = Object.assign({}, currentLevel.player);
 }
 
-//function for ticking the timer
-let incrementTimer = function(){
-    timer--;
-}
+//setting up the timer
+let startTime = Date.now();
+let interval = setInterval( ()=> {
+    elapsedTime = Date.now() - startTime;
+    document.getElementById("timer").innerHTML = "Time: " + (elapsedTime / 1000).toFixed(3);
+}, 100);
 
-setInterval(incrementTimer, 1000);
+// //function for ticking the timer
+// let incrementTimer = function(){
+//     timer--;
+// }
+
+// setInterval(incrementTimer, 1000);
 
 
 //main driver function for the app (gets called every frame)
@@ -174,24 +181,24 @@ let update = function() {
     context.save();
     context.font = '25px Arial';
     context.fillStyle = '#000000';
-    context.fillText("Level: " + (LEVEL_INDEX+1), canvas.width - canvas.width/10, canvas.height/15);
+    context.fillText("Level: " + (LEVEL_INDEX+1), canvas.width*0.88, canvas.height/15);
     context.restore();
 
     //render coin counter
     context.save();
     context.font = '25px Arial';
     context.fillStyle = '#000000';
-    context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width - canvas.width/10, 2*canvas.height/15);
+    context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width*0.88 , 3*canvas.height/15);
     context.restore();
 
-    //render timer
-    if(timer >= 0){
-        context.save();
-        context.font = '25px Arial';
-        context.fillStyle = '#000000';
-        context.fillText("Time: " + timer, canvas.width - canvas.width/10, 3*canvas.height/15);
-        context.restore();
-    }
+    // //render timer
+    // if(timer >= 0){
+    //     context.save();
+    //     context.font = '25px Arial';
+    //     context.fillStyle = '#000000';
+    //     context.fillText("Time: " + timer, canvas.width - canvas.width/10, 4*canvas.height/15);
+    //     context.restore();
+    // }
 
 
     //render endpoint and check collision with player
@@ -211,14 +218,15 @@ let update = function() {
         }
     }
     
-    //check if timer expired
-    if(timer < 0){
-        alert("Game over!\nYou ran out of time.\nYou will now be returned to the main menu.");
-        window.location = './../index.html';
-    }
-    else{
-        requestAnimationFrame(update);
-    }
+    // //check if timer expired
+    // if(timer < 0){
+    //     alert("Game over!\nYou ran out of time.\nYou will now be returned to the main menu.");
+    //     window.location = './../index.html';
+    // }
+    // else{
+    //     requestAnimationFrame(update);
+    // }
+    requestAnimationFrame(update);
 
 }
 
@@ -272,7 +280,7 @@ let respawn = function(){
     player = playerSpawnState;
     playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
-    timer = timer - 5; //if I want to indicate visually by highlighting the timer red when you lose time, I can make a timer class if necessary
+    // timer = timer - 5; //if I want to indicate visually by highlighting the timer red when you lose time, I can make a timer class if necessary
 }
 
 //handle the time running out
@@ -283,7 +291,8 @@ let timeExpired = function(){
 
 //function is called when the user completes the game
 let endGame = function(){
-    alert("You beat the game in " + (300 - timer) + " seconds!\nYou will now be returned to the main menu.");
+    alert("You beat the game in " + (elapsedTime / 1000).toFixed(3) + " seconds!\nYou will now be returned to the main menu.");
     window.location = './../index.html';
-    //put api stuff here
+    //put api call here
+    //send the time to the backend
 }

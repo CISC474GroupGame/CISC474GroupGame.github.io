@@ -66,3 +66,14 @@ body {
   background-color: #0099b0;
   border-color: #333;
 }
+
+#timer {
+  font-size: 25px;
+  font-family: Arial;
+  color: black;
+  z-index: 2;
+  display: inline-block;
+  left: 88%;
+  top: 10%;
+  position: absolute;
+}
