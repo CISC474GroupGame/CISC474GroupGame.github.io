@@ -13,6 +13,7 @@
     <script src="./../scripts/gameElements/Endpoint.js"></script>
     <script src="./../scripts/gameElements/Coin.js"></script>
     <script src="./../scripts/gameElements/Key.js"></script>
+    <script src="./../scripts/gameElements/PlayerStats.js"></script>
     <script src="./../scripts/levelConfigurations/LevelClass.js"></script>
     <!-- <script src="scripts/levelConfigurations/flatLevel.js"></script> -->
     <script src="./../scripts/levelConfigurations/levelConfigurations.js"></script>
@@ -27,6 +28,20 @@
             <button class="btn" id="reset-btn">Reset Level</button>
         </div>
         <span id="timer"></span>
+        <div id="endgame-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Congratulations you win!</h1>
+                </div>
+                <div class="modal-body">
+                    <p id='modal-message'></p>
+                    <div class="modal-btn-group">
+                        <a class="btn" id="modal-leaderboard-btn">Leaderboard</a>
+                        <a class="btn" id="modal-menu-btn" href="./../index.html">Return to menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

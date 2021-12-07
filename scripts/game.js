@@ -21,11 +21,11 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 //keeping track of current level - (there may be a better way to do this)
 let LEVEL_INDEX = 0;
-let level_array = [loadLevelZero, loadLevelOne];
+let level_array = [loadLevelZero];
 
 
 //initialize the game when the window loads
-let canvas, context, currentLevel, player, playerSpawnState, timer, elapsedTime;
+let canvas, context, currentLevel, player, playerSpawnState, timer, elapsedTime, playerStats;
 let init = function(){
     canvas = document.getElementById('game-canvas');
     context = canvas.getContext("2d");
@@ -34,7 +34,8 @@ let init = function(){
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
-    timer = 300;
+    // timer = 300;
+    playerStats = new PlayerStats();
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
         resetLevel();
@@ -58,10 +59,12 @@ let resetLevel = function(){
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
+    playerStats.resets = playerStats.resets + 1;
 }
 
 //called when a level is completed, clears the current data and loads the next level in
 let loadNextLevel = function(){
+    playerStats.coins = playerStats.coins + player.coinCount;
     LEVEL_INDEX++;
     if(LEVEL_INDEX >= level_array.length){
         endGame();
@@ -73,7 +76,6 @@ let loadNextLevel = function(){
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
-    console.log(currentLevel);
 }
 
 //setting up the timer
@@ -106,6 +108,7 @@ let update = function() {
             player.jumping = true;
             player.grounded = false;
             player.vy = -player.speed * 2.5;
+            playerStats.jumps = playerStats.jumps + 1;
         }
     }
     if(arrowKeys.ArrowLeft){
@@ -152,6 +155,7 @@ let update = function() {
     //move actual player position based on velocity
     player.x += player.vx;
     player.y += player.vy;
+    playerStats.distance = Math.floor(playerStats.distance + player.vx);
 
     //canvas animation updating
     context.fill();
@@ -301,6 +305,7 @@ let respawn = function(){
     playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
     resetKey();
+    playerStats.deaths = playerStats.deaths + 1;
     // timer = timer - 5; //if I want to indicate visually by highlighting the timer red when you lose time, I can make a timer class if necessary
 }
 
@@ -320,8 +325,21 @@ let resetKey = function(){
 
 //function is called when the user completes the game
 let endGame = function(){
-    alert("You beat the game in " + (elapsedTime / 1000).toFixed(3) + " seconds!\nYou will now be returned to the main menu.");
-    window.location = './../index.html';
+    let totalTime = (elapsedTime / 1000).toFixed(3);
+    playerStats.time = totalTime;
+    clearInterval(interval);
+    renderModal(totalTime);
+    // alert("You beat the game in " + totalTime + " seconds!\nYou will now be returned to the main menu.\n" + JSON.stringify(playerStats));
+    // window.location = './../index.html';
     //put api call here
     //send the time to the backend
+}
+
+//endgame modal handling
+let renderModal = function(totalTime){
+    let modal = document.getElementById('endgame-modal');
+    modal.style.display = 'block';
+    document.getElementById('modal-message').innerText = "You finished the game in " + totalTime + " seconds!";
+    document.getElementById("timer").style.display = "hidden";
+    document.querySelector('btn-group').style.display = "hidden";
 }
