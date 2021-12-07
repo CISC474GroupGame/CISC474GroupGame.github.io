@@ -1,0 +1,31 @@
+{
+  "name": "CISC474-backend-REST-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:JinhengZ/CISC474_Group2_FInalProject.git",
+  "author": "JD <43763092+jdw1023@users.noreply.github.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node index.js",
+    "dev": "nodemon index.ts"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.12",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-bearer-token": "^2.4.0",
+    "firebase": "^9.4.0",
+    "firebase-admin": "^10.0.0",
+    "nodemon": "^2.0.14"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "eslint": "^8.1.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
