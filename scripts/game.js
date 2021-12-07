@@ -21,7 +21,7 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 //keeping track of current level - (there may be a better way to do this)
 let LEVEL_INDEX = 0;
-let level_array = [loadLevelZero];
+let level_array = [loadLevelZero, loadLevelOne];
 
 
 //initialize the game when the window loads
