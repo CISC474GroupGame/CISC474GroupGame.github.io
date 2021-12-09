@@ -19,29 +19,38 @@ let trackKeys = function(keys){
 }
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
-//keeping track of current level - (there may be a better way to do this)
+//keeping track of current level
 let LEVEL_INDEX = 0;
-let level_array = [loadLevelZero, loadLevelZero, loadLevelZero];
+let level_array = [loadLevelZero, loadLevelZero];
 
 
-//initialize the game when the window loads
+//initialize variables used throughout program
 let canvas, context, currentLevel, player, playerSpawnState, elapsedTime, playerStats, interval;
 let localDeaths = 0;
 let levelMaxTime = 60;
+
+//initialize everything to setup the game - called when window loads
 let init = function(){
+
+    //setup canvas stuff
     canvas = document.getElementById('game-canvas');
     context = canvas.getContext("2d");
     window.addEventListener("resize", resizeCanvas, false);
     resizeCanvas();
+
+    //setup player and game data
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
     playerStats = new PlayerStats();
     localDeaths = 0;
+
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
         resetLevel();
     });
+
+    //start game
     startTimer();
     update();
 }
@@ -53,7 +62,7 @@ let resizeCanvas = function () {
     canvas.height = window.innerHeight;
 }
 
-//reset the level -- slows game after a few resets needs to be optimized
+//resets the level
 let resetLevel = function(){
     context.clearRect(0, 0, canvas.width, canvas.height);
     arrowKeys = null;
@@ -68,22 +77,33 @@ let resetLevel = function(){
 
 //called when a level is completed, clears the current data and loads the next level in
 let loadNextLevel = function(){
+
+    //log player stats from pervious level
     playerStats.coins = playerStats.coins + player.coinCount;
     playerStats.deaths = playerStats.deaths + localDeaths;
     playerStats.time = playerStats.time + elapsedTime;
-    console.log(playerStats.score)
+    
+    //increment level index and check if game is complete
     LEVEL_INDEX++;
     if(LEVEL_INDEX >= level_array.length){
         endGame();
     }
+
+    //reset canvas and key bindings so player doesn't move after winning
     context.clearRect(0, 0, canvas.width, canvas.height);
     arrowKeys = null;
     arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
+
+    //move to next level
     currentLevel = null;
     currentLevel = level_array[LEVEL_INDEX](canvas);
+
+    //reset player model
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
     localDeaths = 0;
+
+    //start level
     update();
     startTimer();
 }
@@ -314,15 +334,11 @@ let startTimer = function(){
 
 //function is called when the user completes the game
 let endGame = function(){
-    // let totalTime = (elapsedTime / 1000).toFixed(3);
     let totalTime = (playerStats.time / 1000).toFixed(3);
-    // playerStats.time = totalTime;
     clearInterval(interval);
     renderEndModal(totalTime);
-    // alert("You beat the game in " + totalTime + " seconds!\nYou will now be returned to the main menu.\n" + JSON.stringify(playerStats));
-    // window.location = './../index.html';
-    //put api call here
-    //send the time to the backend
+    //put api calls here
+    //send the playerstats to the backend
 }
 
 //endgame modal handling
@@ -331,29 +347,26 @@ let renderEndModal = function(totalTime){
     modal.style.display = 'block';
     document.getElementById('modal-message').innerText = "You finished the game in " + totalTime + " seconds!\nTotal score: " + playerStats.score;
     document.getElementById("timer").style.display = "hidden";
-    // document.querySelector('btn-group').style.display = "hidden";
 }
 
 //between level modal handling
 let renderLevelModal = function(){
 
-    let timeBonusPerSecond = 10;
+    let timeBonusPerSecond = 10; //can be changed to affect how much a player gets for beating the game fast
 
+    //calculates the score for the level
     let coinPoints = player.coinCount*100;
     let timeBonus = Math.round(Math.max(0, levelMaxTime-(elapsedTime / 1000).toFixed(3)) * timeBonusPerSecond);
     let deathPenalty = localDeaths*50;
     let totalPoints = coinPoints + timeBonus - deathPenalty;
     playerStats.score = playerStats.score + totalPoints;
 
+    //render modal for displaying score info
     let modal = document.getElementById('level-modal');
     document.getElementById('level-modal-coins').innerText = "Coins Collected: " + player.coinCount + " = " + coinPoints + " points";
     document.getElementById('level-modal-time').innerText = "Time Bonus: " + timeBonus + " points";
     document.getElementById('level-modal-deaths').innerText = "Deaths: " + localDeaths + " = -" + deathPenalty + " points";
     document.getElementById('level-modal-total').innerText = "Total Points: " + totalPoints;
-    // document.getElementById('level-modal-restart-btn').onclick = () => {
-    //     modal.style.display = 'none';
-    //     resetLevel();
-    // }
     document.getElementById('level-modal-next-btn').onclick = () => {
         modal.style.display = 'none';
         loadNextLevel();

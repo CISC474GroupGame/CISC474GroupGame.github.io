@@ -2,8 +2,8 @@ class Key { //can make a super class for this and coin called collectables
     constructor(x, y){
         this.x = x;
         this.y = y;
-        this.width = 30;
-        this.height = 30;
+        this.width = 35;
+        this.height = 35;
         this.color = '#00ff99';
     }
 
