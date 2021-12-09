@@ -21,11 +21,13 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 //keeping track of current level - (there may be a better way to do this)
 let LEVEL_INDEX = 0;
-let level_array = [loadLevelZero, loadLevelOne];
+let level_array = [loadLevelZero, loadLevelZero, loadLevelZero];
 
 
 //initialize the game when the window loads
-let canvas, context, currentLevel, player, playerSpawnState, timer, elapsedTime, playerStats;
+let canvas, context, currentLevel, player, playerSpawnState, elapsedTime, playerStats, interval;
+let localDeaths = 0;
+let levelMaxTime = 60;
 let init = function(){
     canvas = document.getElementById('game-canvas');
     context = canvas.getContext("2d");
@@ -34,12 +36,13 @@ let init = function(){
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
-    // timer = 300;
     playerStats = new PlayerStats();
+    localDeaths = 0;
     let resetButton = document.getElementById("reset-btn");
     resetButton.addEventListener('click', () => {
         resetLevel();
     });
+    startTimer();
     update();
 }
 window.onload = init;
@@ -60,11 +63,15 @@ let resetLevel = function(){
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
     playerStats.resets = playerStats.resets + 1;
+    localDeaths = 0;
 }
 
 //called when a level is completed, clears the current data and loads the next level in
 let loadNextLevel = function(){
     playerStats.coins = playerStats.coins + player.coinCount;
+    playerStats.deaths = playerStats.deaths + localDeaths;
+    playerStats.time = playerStats.time + elapsedTime;
+    console.log(playerStats.score)
     LEVEL_INDEX++;
     if(LEVEL_INDEX >= level_array.length){
         endGame();
@@ -76,26 +83,16 @@ let loadNextLevel = function(){
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
     playerSpawnState = Object.assign({}, currentLevel.player);
+    localDeaths = 0;
+    update();
+    startTimer();
 }
-
-//setting up the timer
-let startTime = Date.now();
-let interval = setInterval( ()=> {
-    elapsedTime = Date.now() - startTime;
-    document.getElementById("timer").innerHTML = "Time: " + (elapsedTime / 1000).toFixed(3);
-}, 100);
-
-// //function for ticking the timer
-// let incrementTimer = function(){
-//     timer--;
-// }
-
-// setInterval(incrementTimer, 1000);
-
 
 //main driver function for the app (gets called every frame)
 //can modulize this and break it down into other functions to be cleaner
 let update = function() {
+
+    console.log(playerStats.score)
 
     //if player falls outside of the screen, respawns
     if(player.y > canvas.height + 500){
@@ -212,16 +209,6 @@ let update = function() {
     context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width*0.88 , 3*canvas.height/15);
     context.restore();
 
-    // //render timer
-    // if(timer >= 0){
-    //     context.save();
-    //     context.font = '25px Arial';
-    //     context.fillStyle = '#000000';
-    //     context.fillText("Time: " + timer, canvas.width - canvas.width/10, 4*canvas.height/15);
-    //     context.restore();
-    // }
-
-
     //render endpoint and check collision with player
     if(currentLevel.endpoint){
         context.save();
@@ -231,26 +218,20 @@ let update = function() {
         let collisionEndpoint = endpointCollisionCheck(player, currentLevel.endpoint);
         if(collisionEndpoint){
             //check clear condition
-            // if(player.coinCount === currentLevel.coinsCount){
-            //     // alert("You Win!");
-            //     loadNextLevel();
-            // }
             if(currentLevel.endpoint.hasKey){
-                loadNextLevel();
+                if(LEVEL_INDEX < level_array.length){
+                    clearInterval(interval);
+                    renderLevelModal();
+                }
+                // loadNextLevel();
             }
-            // respawn();
+        }
+        else{
+            requestAnimationFrame(update);
         }
     }
     
-    // //check if timer expired
-    // if(timer < 0){
-    //     alert("Game over!\nYou ran out of time.\nYou will now be returned to the main menu.");
-    //     window.location = './../index.html';
-    // }
-    // else{
-    //     requestAnimationFrame(update);
-    // }
-    requestAnimationFrame(update);
+    // requestAnimationFrame(update);
 
 }
 
@@ -305,8 +286,7 @@ let respawn = function(){
     playerSpawnState = Object.assign({}, player);
     player.coinCount = currentCoins
     resetKey();
-    playerStats.deaths = playerStats.deaths + 1;
-    // timer = timer - 5; //if I want to indicate visually by highlighting the timer red when you lose time, I can make a timer class if necessary
+    localDeaths += 1;
 }
 
 //handle the time running out -- this isn't needed unless we do reverse time
@@ -323,12 +303,22 @@ let resetKey = function(){
     currentLevel.endpoint.hasKey = false;
 }
 
+//starts the level timer
+let startTimer = function(){
+    let startTime = Date.now();
+    interval = setInterval( ()=> {
+        elapsedTime = Date.now() - startTime;
+        document.getElementById("timer").innerHTML = "Time: " + (elapsedTime / 1000).toFixed(3);
+    }, 100);
+}
+
 //function is called when the user completes the game
 let endGame = function(){
-    let totalTime = (elapsedTime / 1000).toFixed(3);
-    playerStats.time = totalTime;
+    // let totalTime = (elapsedTime / 1000).toFixed(3);
+    let totalTime = (playerStats.time / 1000).toFixed(3);
+    // playerStats.time = totalTime;
     clearInterval(interval);
-    renderModal(totalTime);
+    renderEndModal(totalTime);
     // alert("You beat the game in " + totalTime + " seconds!\nYou will now be returned to the main menu.\n" + JSON.stringify(playerStats));
     // window.location = './../index.html';
     //put api call here
@@ -336,10 +326,37 @@ let endGame = function(){
 }
 
 //endgame modal handling
-let renderModal = function(totalTime){
+let renderEndModal = function(totalTime){
     let modal = document.getElementById('endgame-modal');
     modal.style.display = 'block';
-    document.getElementById('modal-message').innerText = "You finished the game in " + totalTime + " seconds!";
+    document.getElementById('modal-message').innerText = "You finished the game in " + totalTime + " seconds!\nTotal score: " + playerStats.score;
     document.getElementById("timer").style.display = "hidden";
-    document.querySelector('btn-group').style.display = "hidden";
+    // document.querySelector('btn-group').style.display = "hidden";
+}
+
+//between level modal handling
+let renderLevelModal = function(){
+
+    let timeBonusPerSecond = 10;
+
+    let coinPoints = player.coinCount*100;
+    let timeBonus = Math.round(Math.max(0, levelMaxTime-(elapsedTime / 1000).toFixed(3)) * timeBonusPerSecond);
+    let deathPenalty = localDeaths*50;
+    let totalPoints = coinPoints + timeBonus - deathPenalty;
+    playerStats.score = playerStats.score + totalPoints;
+
+    let modal = document.getElementById('level-modal');
+    document.getElementById('level-modal-coins').innerText = "Coins Collected: " + player.coinCount + " = " + coinPoints + " points";
+    document.getElementById('level-modal-time').innerText = "Time Bonus: " + timeBonus + " points";
+    document.getElementById('level-modal-deaths').innerText = "Deaths: " + localDeaths + " = -" + deathPenalty + " points";
+    document.getElementById('level-modal-total').innerText = "Total Points: " + totalPoints;
+    // document.getElementById('level-modal-restart-btn').onclick = () => {
+    //     modal.style.display = 'none';
+    //     resetLevel();
+    // }
+    document.getElementById('level-modal-next-btn').onclick = () => {
+        modal.style.display = 'none';
+        loadNextLevel();
+    }
+    modal.style.display = 'block';
 }

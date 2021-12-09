@@ -1,5 +1,4 @@
 class PlayerStats {
-    //this could be specific to one game or can be an aggregate of all games played
     constructor(){
         this._score = 0;
         this._time = 0;

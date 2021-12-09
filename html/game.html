@@ -28,6 +28,24 @@
             <button class="btn" id="reset-btn">Reset Level</button>
         </div>
         <span id="timer"></span>
+        <div id="level-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Level Complete</h1>
+                </div>
+                <div class="modal-body">
+                    <p>Score:</p>
+                    <p id="level-modal-coins"></p>
+                    <p id="level-modal-time"></p>
+                    <p id="level-modal-deaths"></p>
+                    <p id="level-modal-total"></p>
+                    <div class="modal-btn-group">
+                        <!-- <a class="btn" id="level-modal-restart-btn">Restart</a> -->
+                        <a class="btn" id="level-modal-next-btn">Next Level</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="endgame-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
