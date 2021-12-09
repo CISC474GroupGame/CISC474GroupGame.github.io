@@ -41,7 +41,14 @@ let init = function(){
     });
     update();
 }
-window.onload = init;
+let framecount = 0;
+let img = new Image();
+img.src = 'http://localhost:35729/images/charactor_spritesheet.png';
+img.onload = function() {
+//   init();
+    window.onload = init;
+};
+
 
 //makes canvas size responsive to screen size
 let resizeCanvas = function () {
@@ -81,7 +88,6 @@ let incrementTimer = function(){
 }
 
 setInterval(incrementTimer, 1000);
-
 
 //main driver function for the app (gets called every frame)
 //can modulize this and break it down into other functions to be cleaner
@@ -146,9 +152,14 @@ let update = function() {
     player.y += player.vy;
 
     //canvas animation updating
-    context.fill();
-    context.fillStyle = player.color;
-    context.fillRect(player.x, player.y, player.width, player.height);
+    // context.fill();
+    // context.fillStyle = player.color;
+    // context.fillRect(player.x, player.y, player.width, player.height);
+    context.drawImage(img, 24 * Math.floor(framecount/60), 0, 24, 24, player.x, player.y, player.width, player.height);
+    framecount+=1;
+    if(framecount>(60*6)){
+        framecount=0;
+    }
 
     //render coins and check collision with player
     if(currentLevel.coins){
@@ -286,10 +297,11 @@ let endGame = function(){
     alert("You beat the game in " + (300 - timer) + " seconds!\nYou will now be returned to the main menu.");
     // window.location = './../index.html';
     //put api stuff here
+    console.log(auth);
     if(auth.currentUser != null){
-        let data = {'user': auth.currentUser,'score': (300 - timer), 'coins': player.coinCount};
-        console.log(data);
-        fetch('http://localhost:8001/api/v1/').then(function(response){
+        // let data = {'user': auth.currentUser,'score': (300 - timer), 'coins': player.coinCount};
+        // console.log(data);
+        fetch('http://localhost:9001/api/score?token='+auth.currentUser.Aa+'&score='+(300 - timer)).then(function(response){
             response.json().then(function(data){
                 console.log(data);
             });
@@ -299,4 +311,4 @@ let endGame = function(){
         confirm("You are not logged in.\n");
         window.location = './index.html';
     }
-}
+};
