@@ -41,7 +41,9 @@ let init = function(){
     //setup player and game data
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
-    playerSpawnState = Object.assign({}, currentLevel.player);
+    // playerSpawnState = Object.assign({}, currentLevel.player);
+    playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(currentLevel.player)),currentLevel.player);
+    console.log(playerSpawnState)
     playerStats = new PlayerStats();
     localDeaths = 0;
 
@@ -70,7 +72,8 @@ let resetLevel = function(){
     currentLevel = null;
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
-    playerSpawnState = Object.assign({}, currentLevel.player);
+    // playerSpawnState = Object.assign({}, currentLevel.player);
+    playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(currentLevel.player)),currentLevel.player);
     playerStats.resets = playerStats.resets + 1;
     localDeaths = 0;
 }
@@ -87,32 +90,32 @@ let loadNextLevel = function(){
     LEVEL_INDEX++;
     if(LEVEL_INDEX >= level_array.length){
         endGame();
+    } else{
+
+        //reset canvas and key bindings so player doesn't move after winning
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        arrowKeys = null;
+        arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
+
+        //move to next level
+        currentLevel = null;
+        currentLevel = level_array[LEVEL_INDEX](canvas);
+
+        //reset player model
+        player = currentLevel.player;
+        // playerSpawnState = Object.assign({}, currentLevel.player);
+        playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(currentLevel.player)),currentLevel.player);
+        localDeaths = 0;
+
+        //start level
+        update();
+        startTimer();
     }
-
-    //reset canvas and key bindings so player doesn't move after winning
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    arrowKeys = null;
-    arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
-
-    //move to next level
-    currentLevel = null;
-    currentLevel = level_array[LEVEL_INDEX](canvas);
-
-    //reset player model
-    player = currentLevel.player;
-    playerSpawnState = Object.assign({}, currentLevel.player);
-    localDeaths = 0;
-
-    //start level
-    update();
-    startTimer();
 }
 
 //main driver function for the app (gets called every frame)
 //can modulize this and break it down into other functions to be cleaner
 let update = function() {
-
-    console.log(playerStats.score)
 
     //if player falls outside of the screen, respawns
     if(player.y > canvas.height + 500){
@@ -121,7 +124,7 @@ let update = function() {
 
     //player movement
     if(arrowKeys.ArrowUp){
-        if(!player.jumping && player.grounded){
+        if((!player.jumping && player.grounded) || player.powerup === "fly"){
             player.jumping = true;
             player.grounded = false;
             player.vy = -player.speed * 2.5;
@@ -138,6 +141,7 @@ let update = function() {
             player.vx = player.vx + 1;
         }
     }
+    //it breaks right here only after the player dies, so something is changing the player object to not have the same attributes
     player.vx *= player.friction;
     player.vy += player.gravity;
 
@@ -199,6 +203,26 @@ let update = function() {
         }
     }
 
+    //render powerups and check collision with player
+    if(currentLevel.powerups){
+        for(let i = 0; i < currentLevel.powerups.length; i++){
+
+            //draw each powerup
+            context.save();
+            let currentPowerup = currentLevel.powerups[i];
+            currentPowerup.drawPowerup(context);
+            context.restore();
+
+            //detecting collision with powerups
+            if(standardCollisionCheck(player, currentPowerup) !== null){
+                if(i > -1){
+                    player.powerup = currentPowerup.type;
+                    currentLevel.powerups.splice(i, 1);
+                }
+            }
+        }
+    }
+
     //render key and check collision with player
     if(currentLevel.key){
 
@@ -227,6 +251,13 @@ let update = function() {
     context.font = '25px Arial';
     context.fillStyle = '#000000';
     context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width*0.88 , 3*canvas.height/15);
+    context.restore();
+
+    //render powerup display -- this is temporary until we find a better way to indicate the current powerup
+    context.save();
+    context.font = '25px Arial';
+    context.fillStyle = '#000000';
+    context.fillText("Powerup: " + player.powerup, canvas.width*0.88, 4*canvas.height/15);
     context.restore();
 
     //render endpoint and check collision with player
@@ -301,12 +332,18 @@ let endpointCollisionCheck = function(obj1, obj2){
 
 //respawns the player
 let respawn = function(){
+    console.log(playerSpawnState);
+    console.log("RESPAWN HIT");
     let currentCoins = player.coinCount;
     player = playerSpawnState;
-    playerSpawnState = Object.assign({}, player);
-    player.coinCount = currentCoins
+    console.log("1")
+    console.log(player);
+    // playerSpawnState = Object.assign({}, player);
+    playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(player)),player);
+    player.coinCount = currentCoins;
     resetKey();
     localDeaths += 1;
+    resetPowerups();
 }
 
 //handle the time running out -- this isn't needed unless we do reverse time
@@ -323,6 +360,12 @@ let resetKey = function(){
     currentLevel.endpoint.hasKey = false;
 }
 
+//replaces powerups when the player dies
+let resetPowerups = function(){
+    let originalPowerups = level_array[LEVEL_INDEX](canvas).powerups;
+    currentLevel.powerups = originalPowerups;
+}
+
 //starts the level timer
 let startTimer = function(){
     let startTime = Date.now();
@@ -335,6 +378,7 @@ let startTimer = function(){
 //function is called when the user completes the game
 let endGame = function(){
     let totalTime = (playerStats.time / 1000).toFixed(3);
+    context.clearRect(0, 0, canvas.width, canvas.height);
     clearInterval(interval);
     renderEndModal(totalTime);
     //put api calls here
@@ -346,7 +390,8 @@ let renderEndModal = function(totalTime){
     let modal = document.getElementById('endgame-modal');
     modal.style.display = 'block';
     document.getElementById('modal-message').innerText = "You finished the game in " + totalTime + " seconds!\nTotal score: " + playerStats.score;
-    document.getElementById("timer").style.display = "hidden";
+    document.getElementById("timer").style.display = "none";
+    document.getElementById('control-btn-group').style.display = "none";
 }
 
 //between level modal handling

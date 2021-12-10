@@ -42,28 +42,28 @@ class Level {
         return this._key;
     }
     set canvas(value){
-        this._key = value;
+        this._canvas = value;
     }
     set player(value){
-        this._key = value;
+        this._player = value;
     }
     set platforms(value){
-        this._key = value;
+        this._platforms = value;
     }
     set powerups(value){
-        this._key = value;
+        this._powerups = value;
     }
     set enemies(value){
-        this._key = value;
+        this._enemies = value;
     }
     set coins(value){
-        this._key = value;
+        this._coins = value;
     }
     set endpoint(value){
-        this._key = value;
+        this._endpoint = value;
     }
     set coinsCount(value){
-        this._key = value;
+        this._coinsCount = value;
     }
     set key(value){
         this._key = value;
