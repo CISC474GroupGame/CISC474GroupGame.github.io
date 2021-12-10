@@ -156,6 +156,9 @@ let update = function() {
         context.fillStyle = currentPlatform.color;
         context.fillRect(currentPlatform.x, currentPlatform.y, currentPlatform.width, currentPlatform.height);
         let collisionDirection = standardCollisionCheck(player, currentPlatform);
+        if(collisionDirection && currentPlatform.type === 'kill'){
+            respawn();
+        }
         if (collisionDirection === "left" || collisionDirection === "right") {
             player.vx = 0;
             player.jumping = false;

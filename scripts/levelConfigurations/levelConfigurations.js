@@ -1,6 +1,3 @@
-let DEFAULT_PLATFORM_COLOR = "#000000";
-let red = "#ff5050";
-
 function loadLevelZero(canvas) {
 
     //variable to use to help make levels fit the size of the screen
@@ -17,13 +14,16 @@ function loadLevelZero(canvas) {
     let key;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
-    let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
-    let rightWall = new BasicPlatform(canvas.width - 10, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
+    let leftWall = new Platform(0, 0, 10, canvas.height);
+    let rightWall = new Platform(canvas.width - 10, 0, 10, canvas.height);
 
     //regular platforms
-    let plat1 = new BasicPlatform(0, canvas.height-50, canvas.width/2-100, 50);
-    let plat2 = new BasicPlatform(canvas.width/2+100, canvas.height-50, canvas.width/2, 50);
-    platforms.push(leftWall, rightWall, plat1, plat2);
+    let plat1 = new Platform(0, canvas.height-50, canvas.width/2-100, 50);
+    let plat2 = new Platform(canvas.width/2+100, canvas.height-50, canvas.width/2, 50);
+    let plat3 = new Platform(canvas.width/4, canvas.height*0.75, 200, 20);
+    let plat4 = new Platform(canvas.width/6, canvas.height*0.5, 200, 20);
+    let plat5 = new Platform(canvas.width/4, canvas.height*0.25, 200, 20, 'kill');
+    platforms.push(leftWall, rightWall, plat1, plat2, plat3, plat4, plat5);
 
     //coins
     let coin1 = new Coin(fifthOfWidth, canvas.height-100);
@@ -67,16 +67,16 @@ function loadLevelOne(canvas){
     let key;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
-    let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
-    let rightWall = new BasicPlatform(canvas.width - 10, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
+    let leftWall = new Platform(0, 0, 10, canvas.height);
+    let rightWall = new Platform(canvas.width - 10, 0, 10, canvas.height);
 
     //regular platforms
-    let plat1 = new BasicPlatform(0, fifthOfWidth*2, 500, 50, DEFAULT_PLATFORM_COLOR);
-    let plat2 = new BasicPlatform(700, 700, 500, 50, DEFAULT_PLATFORM_COLOR);
-    let plat3 = new BasicPlatform(100, 450, 500, 20, DEFAULT_PLATFORM_COLOR);
-    let plat4 = new BasicPlatform(700, 350, 10, 200, DEFAULT_PLATFORM_COLOR);
-    let plat5 = new BasicPlatform(700, 550, 200, 10, DEFAULT_PLATFORM_COLOR);
-    let plat6 = new BasicPlatform(850, 450, 100, 10, DEFAULT_PLATFORM_COLOR);
+    let plat1 = new Platform(0, fifthOfWidth*2, 500, 50);
+    let plat2 = new Platform(700, 700, 500, 50);
+    let plat3 = new Platform(100, 450, 500, 20);
+    let plat4 = new Platform(700, 350, 10, 200);
+    let plat5 = new Platform(700, 550, 200, 10);
+    let plat6 = new Platform(850, 450, 100, 10);
     platforms.push(leftWall, rightWall, plat1, plat2, plat3, plat4, plat5, plat6);
 
     //key
@@ -116,13 +116,13 @@ function loadRandomLevel(canvas){
     let key;
 
     //invisible walls on the sides to keep player contained -- make these invisible later
-    let leftWall = new BasicPlatform(0, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
-    let rightWall = new BasicPlatform(canvas.width - 10, 0, 10, canvas.height, DEFAULT_PLATFORM_COLOR);
+    let leftWall = new Platform(0, 0, 10, canvas.height);
+    let rightWall = new Platform(canvas.width - 10, 0, 10, canvas.height);
 
     //platforms
     let platCount = random(1,11);
     for(i = 0; i <= platCount; i++){
-        let platform = new BasicPlatform(random(0,canvas.width),random(0,canvas.height),random(50,500),random(10,200),DEFAULT_PLATFORM_COLOR);
+        let platform = new Platform(random(0,canvas.width),random(0,canvas.height),random(50,500),random(10,200));
         platforms.push(platform);
     }
     platforms.push(leftWall,rightWall);
