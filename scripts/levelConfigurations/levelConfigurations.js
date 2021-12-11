@@ -36,7 +36,7 @@ function loadLevelZero(canvas) {
     //powerups
     let pow1 = new Powerup(2*fifthOfWidth, canvas.height-100, "jump");
     let pow2 = new Powerup(3 * fifthOfWidth, canvas.height-100, "tiny");
-    let pow3 = new Powerup(fifthOfWidth, canvas.height-100, "fly");
+    let pow3 = new Powerup(fifthOfWidth, canvas.height-100, "invincible");
     powerups.push(pow1, pow2, pow3);
 
     //key to unlock endpoint

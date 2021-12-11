@@ -156,7 +156,7 @@ let update = function() {
         context.fillStyle = currentPlatform.color;
         context.fillRect(currentPlatform.x, currentPlatform.y, currentPlatform.width, currentPlatform.height);
         let collisionDirection = standardCollisionCheck(player, currentPlatform);
-        if(collisionDirection && currentPlatform.type === 'kill'){
+        if(collisionDirection && currentPlatform.type === 'kill' && player.powerup !== 'invincible'){
             respawn();
         }
         if (collisionDirection === "left" || collisionDirection === "right") {

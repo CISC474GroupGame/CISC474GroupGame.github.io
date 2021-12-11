@@ -1,5 +1,5 @@
 class Powerup {
-    //current powerup typs are 'jump', 'tiny', 'fly'
+    //current powerup typs are 'jump', 'tiny', 'fly', 'invincible'
     //the type should eventually become an enumeration
     constructor(x, y, type){
         this.x = x;
