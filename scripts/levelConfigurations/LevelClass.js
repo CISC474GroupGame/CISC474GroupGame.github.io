@@ -2,12 +2,11 @@
 
 class Level {
 
-    constructor(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount, key){
+    constructor(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key){
         this._canvas = canvas;
         this._player = player;
         this._platforms = platforms;
         this._powerups = powerups;
-        this._enemies = enemies;
         this._coins = coins;
         this._endpoint = endpoint;
         this._coinsCount = coinsCount;
@@ -25,9 +24,6 @@ class Level {
     }
     get powerups(){
         return this._powerups;
-    }
-    get enemies(){
-        return this._enemies;
     }
     get coins(){
         return this._coins;
@@ -52,9 +48,6 @@ class Level {
     }
     set powerups(value){
         this._powerups = value;
-    }
-    set enemies(value){
-        this._enemies = value;
     }
     set coins(value){
         this._coins = value;

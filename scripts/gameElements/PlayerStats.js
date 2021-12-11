@@ -50,4 +50,17 @@ class PlayerStats {
     set jumps(value) {
         this._jumps = value;
     }
+
+    getStatsJSON(){
+        let statsJson = {
+            score: this._score,
+            time: this._time,
+            resets: this._resets,
+            deaths: this._deaths,
+            coins: this._coins,
+            distance: this._distance,
+            jumps: this._jumps,
+        }
+        return statsJson;
+    }
 }

@@ -1,14 +1,11 @@
 class Player{
-	constructor(x, y, vx, vy) {
-		// super(x, y, vx, vy);
+	constructor(x, y, vx=0, vy=0) {
 
+        //physics stuff
         this._x = x;
         this._y = y;
         this._vx = vx;
         this._vy = vy;
-        this._isColliding = false;
-
-        //physics stuff
 		this._width = 50;
 		this._height = 50;
         this._gravity = 0.4;
@@ -47,7 +44,6 @@ class Player{
             default:
                 return this._width;
         }
-        return this._width;
     }
     get height(){
         switch(this._powerup){

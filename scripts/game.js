@@ -56,7 +56,16 @@ let init = function(){
     startTimer();
     update();
 }
+
+
+// let framecount = 0;
+// let img = new Image();
+// img.src = './../images/in-game-images/charactor_spritesheet.png';
+// img.onload = function() {
+//     window.onload = init;
+// }
 window.onload = init;
+
 
 //makes canvas size responsive to screen size
 let resizeCanvas = function () {
@@ -186,6 +195,12 @@ let update = function() {
     context.fillStyle = player.color;
     context.fillRect(player.x, player.y, player.width, player.height);
 
+    // context.drawImage(img, 24 * Math.floor(framecount/60), 0, 24, 24, player.x, player.y, player.width, player.height);
+    // framecount+=1;
+    // if(framecount>(60*6)){
+    //     framecount=0;
+    // }
+
     //render coins and check collision with player
     if(currentLevel.coins){
         for(let i = 0; i < currentLevel.coins.length; i++){
@@ -278,9 +293,10 @@ let update = function() {
                     renderLevelModal();
                 }
                 // loadNextLevel();
+            } else{
+                requestAnimationFrame(update);
             }
-        }
-        else{
+        } else{
             requestAnimationFrame(update);
         }
     }

@@ -4,10 +4,9 @@ function loadLevelZero(canvas) {
     let fifthOfWidth = canvas.width / 5;
 
     //class attributes
-    let player = new Player(fifthOfWidth/2, canvas.height/2, 0, 0);
+    let player = new Player(fifthOfWidth/2, canvas.height/2);
     let platforms = [];
     let powerups = [];
-    let enemies = [];
     let coins = [];
     let endpoint;
     let coinsCount;
@@ -46,7 +45,7 @@ function loadLevelZero(canvas) {
     endpoint = new Endpoint((4*fifthOfWidth)+(0.5*fifthOfWidth), canvas.height-150, 50, 100);
 
     //create level instance and return it
-    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount, key);
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
     return theLevel
 }
 
@@ -57,10 +56,9 @@ function loadLevelOne(canvas){
     let fifthOfHeight = canvas.height / 5;
 
     //class attributes 
-    let player = new Player(fifthOfWidth, canvas.height/2-fifthOfHeight, 0, 0);
+    let player = new Player(fifthOfWidth, canvas.height/2-fifthOfHeight);
     let platforms = [];
     let powerups = [];
-    let enemies = [];
     let coins = [];
     let endpoint;
     let coinsCount;
@@ -96,7 +94,7 @@ function loadLevelOne(canvas){
     coinsCount = coins.length;
 
     //create level instance and return it
-    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount, key);
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
     return theLevel;
 }
 
@@ -106,10 +104,9 @@ function random(min, max) {
 
 function loadRandomLevel(canvas){
     //class attributes 
-    let player = new Player(random(0,canvas.width), random(0,canvas.height), 0, 0);
+    let player = new Player(random(0,canvas.width), random(0,canvas.height));
     let platforms = [];
     let powerups = [];
-    let enemies = [];
     let coins = [];
     let endpoint;
     let coinsCount;
@@ -138,6 +135,6 @@ function loadRandomLevel(canvas){
     }
 
     //create level instance and return it
-    let theLevel = new Level(canvas, player, platforms, powerups, enemies, coins, endpoint, coinsCount);
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount);
     return theLevel;
 }
