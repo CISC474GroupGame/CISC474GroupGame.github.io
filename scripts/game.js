@@ -417,7 +417,7 @@ let renderLevelModal = function(){
     let coinPoints = player.coinCount*100;
     let timeBonus = Math.round(Math.max(0, levelMaxTime-(elapsedTime / 1000).toFixed(3)) * timeBonusPerSecond);
     let deathPenalty = localDeaths*-50;
-    let totalPoints = coinPoints + timeBonus - deathPenalty;
+    let totalPoints = coinPoints + timeBonus + deathPenalty;
     playerStats.score = playerStats.score + totalPoints;
 
     //render modal for displaying score info
