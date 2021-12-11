@@ -18,7 +18,10 @@ body {
   position: absolute;
   /*background-image: url();*/
   /* background: linear-gradient(#80bca3, #b6d8c0); */
-  background: linear-gradient(#33ccff, #99ccff);
+  /* background: linear-gradient(#33ccff, #99ccff); */
+  background-image: url("./../images/AUBackground.jpg");
+  background-size: cover;
+  background-position: center;
   z-index: 1;
 }
 
@@ -53,24 +56,27 @@ body {
   user-select: none;
   background-image: none;
   border: 2px solid transparent;
-  color: #333;
+  color: black;
   /* background-color: #fff; */
   background-color: rgba(0, 0, 0, 0);
+  background-color: #e6e6e6;
+
   border-color: #333;
   border-radius: 10%;
 }
 
 .btn:hover {
   text-decoration: none;
-  color: #333;
+  color: black;
   background-color: #e6e6e6;
+  background-color: #bfbfbf;
   border-color: #333;
 }
 
 #timer {
   font-size: 25px;
   font-family: Arial;
-  color: black;
+  color: white;
   z-index: 2;
   display: inline-block;
   left: 88%;
@@ -127,6 +133,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .modal-btn-group {
@@ -142,12 +149,24 @@ body {
   background-color: #e6f5ff;
 }
 
-.modal-btn-group a:hover {
+/* .modal-btn-group a:hover {
   background-color: #99d6ff;
-}
+} */
 
 #modal-message {
   color: black;
   font-size: 18px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+#level-modal-coins {
+  color: yellow;
+}
+
+#level-modal-time {
+  color: lightseagreen;
+}
+
+#level-modal-deaths {
+  color: lightcoral;
 }

@@ -21,7 +21,8 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 //keeping track of current level
 let LEVEL_INDEX = 0;
-let level_array = [loadLevelZero, loadLevelZero];
+//contains all of the levels the game will load in order
+let level_array = [loadLevelExample, loadLevelZero];
 
 
 //initialize variables used throughout program
@@ -43,7 +44,6 @@ let init = function(){
     player = currentLevel.player;
     // playerSpawnState = Object.assign({}, currentLevel.player);
     playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(currentLevel.player)),currentLevel.player);
-    console.log(playerSpawnState)
     playerStats = new PlayerStats();
     localDeaths = 0;
 
@@ -260,21 +260,21 @@ let update = function() {
     //render level counter
     context.save();
     context.font = '25px Arial';
-    context.fillStyle = '#000000';
+    context.fillStyle = '#FFFFFF';
     context.fillText("Level: " + (LEVEL_INDEX+1), canvas.width*0.88, canvas.height/15);
     context.restore();
 
     //render coin counter
     context.save();
     context.font = '25px Arial';
-    context.fillStyle = '#000000';
+    context.fillStyle = '#FFFFFF';
     context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width*0.88 , 3*canvas.height/15);
     context.restore();
 
     //render powerup display -- this is temporary until we find a better way to indicate the current powerup
     context.save();
     context.font = '25px Arial';
-    context.fillStyle = '#000000';
+    context.fillStyle = '#FFFFFF';
     context.fillText("Powerup: " + player.powerup, canvas.width*0.88, 4*canvas.height/15);
     context.restore();
 
@@ -351,13 +351,8 @@ let endpointCollisionCheck = function(obj1, obj2){
 
 //respawns the player
 let respawn = function(){
-    console.log(playerSpawnState);
-    console.log("RESPAWN HIT");
     let currentCoins = player.coinCount;
     player = playerSpawnState;
-    console.log("1")
-    console.log(player);
-    // playerSpawnState = Object.assign({}, player);
     playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(player)),player);
     player.coinCount = currentCoins;
     resetKey();
@@ -421,15 +416,15 @@ let renderLevelModal = function(){
     //calculates the score for the level
     let coinPoints = player.coinCount*100;
     let timeBonus = Math.round(Math.max(0, levelMaxTime-(elapsedTime / 1000).toFixed(3)) * timeBonusPerSecond);
-    let deathPenalty = localDeaths*50;
+    let deathPenalty = localDeaths*-50;
     let totalPoints = coinPoints + timeBonus - deathPenalty;
     playerStats.score = playerStats.score + totalPoints;
 
     //render modal for displaying score info
     let modal = document.getElementById('level-modal');
-    document.getElementById('level-modal-coins').innerText = "Coins Collected: " + player.coinCount + " = " + coinPoints + " points";
-    document.getElementById('level-modal-time').innerText = "Time Bonus: " + timeBonus + " points";
-    document.getElementById('level-modal-deaths').innerText = "Deaths: " + localDeaths + " = -" + deathPenalty + " points";
+    document.getElementById('level-modal-coins').innerText = "Coins Collected (" + player.coinCount + ") = " + coinPoints + " points";
+    document.getElementById('level-modal-time').innerText = "Time Bonus = " + timeBonus + " points";
+    document.getElementById('level-modal-deaths').innerText = "Deaths (" + localDeaths + ") = " + deathPenalty + " points";
     document.getElementById('level-modal-total').innerText = "Total Points: " + totalPoints;
     document.getElementById('level-modal-next-btn').onclick = () => {
         modal.style.display = 'none';

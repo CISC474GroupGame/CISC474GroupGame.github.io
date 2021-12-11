@@ -97,3 +97,30 @@ function loadLevelOne(canvas){
     let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
     return theLevel;
 }
+
+function loadLevelExample(canvas){
+
+    let width = canvas.width;
+    let height = canvas.height;
+
+    let player, platforms, powerups, coins, endpoint, coinsCount, key;
+
+    player = new Player(width/8, height/2);
+
+    platforms = []
+    let platform1 = new Platform(0, canvas.height-100, width/2, 50);
+    platforms.push(platform1);
+
+    powerups = []
+
+    coins = []
+
+    endpoint = new Endpoint(player.x + 500, platform1.y-100);
+
+    coinsCount = coins.length;
+
+    key = new Key(player.x + 250, platform1.y-70)
+
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel;
+}

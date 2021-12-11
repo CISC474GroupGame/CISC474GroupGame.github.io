@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>LogIn</title>
     <link rel="stylesheet" href="styles/login.css">
-
-   
 <!--&lt;!&ndash;add firebaseui&ndash;&gt;-->
 <!--    <link rel="manifest" href="manifest.json">-->
 <!--    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase.js"></script>-->
@@ -16,7 +13,6 @@
 <!--    <script src="dist/firebaseui.js"></script>-->
 <!--    <link type="text/css" rel="stylesheet" href="dist/firebaseui.css" />-->
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
         integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=='
         crossorigin='anonymous'></script>
@@ -28,93 +24,61 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
     <script src="scripts/firebase-init.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
+
 <body>
+    <div class="hero">
+        <h2 id="username" style="color:white"></h2>
+
+        <button id="logout">Log Out</button>
+
+        <img src="../images/charactor.gif" class="logo">
 
 
-
-<div class="hero">
-    <h2 id="username" style="color:white"></h2>
-
-    <button id="logout">Log Out</button>
-
-    <img src="../images/charactor.gif" class="logo">
-
-
-    <div class="flex-container">
-
-        <div class="flex-item-left">
-            <div class="split-child">
-                <div class="content">
-                    <small>Welcome to our</small>
-                    <h1>Rolling <br>Potato's Game</h1>
-                    <ul class="center">
-                        <li>Jinheng Zhang</li>
-                        <li>Collin Reich</li>
-                        <li>Jiandong Wang</li>
-                        <li>Dylan Kirk</li>
-                    </ul>
+        <div class="flex-container">
+            <div class="flex-item-left">
+                <div class="split-child">
+                    <div class="content">
+                        <small>Welcome to our</small>
+                        <h1>Rolling <br>Potato's Game</h1>
+                        <ul class="center">
+                            <li>Jinheng Zhang</li>
+                            <li>Collin Reich</li>
+                            <li>Jiandong Wang</li>
+                            <li>Dylan Kirk</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="flex-item-mid">
-            <div class="buttons">
-                <a id="ngButton" class="ng-btn" href="html/game.html">New Game</a>
-                <br><br>
-                <a id="helpButton" class="help-btn" href="html/tutorial.html">How to Play</a>
-                <br><br>
-                <a id="contactButton" class="contact-btn" href="html/aboutUs.html">About Us</a>
+            <div class="flex-item-mid">
+                <div class="buttons">
+                    <a id="ngButton" class="ng-btn" href="html/game.html">New Game</a>
+                    <br><br>
+                    <a id="helpButton" class="help-btn" href="html/tutorial.html">How to Play</a>
+                    <br><br>
+                    <a id="contactButton" class="contact-btn" href="html/aboutUs.html">About Us</a>
+                </div>
+            </div>
+            <div class="flex-item-right">
+                <div id='firebaseui-auth-container'>
+                    <!-- firebase auth -->
+                </div>
+            </div>
+            <div class="stars">
+                <img src="../images/stars.png">
+                <img src="../images/stars.png">
+                <img src="../images/stars.png">
+                <img src="../images/stars.png">
+                <img src="../images/stars.png">
+                <img src="../images/stars.png">
+                <img src="../images/stars.png">
             </div>
         </div>
 
-        <div class="flex-item-right">
-            <div id='firebaseui-auth-container'>
-                <!-- firebase auth -->
-            </div>
+        <div id="splitPage">
+            <div class="split-child"></div>
         </div>
-
-        <div class="stars">
-            <img src="../images/stars.png">
-            <img src="../images/stars.png">
-            <img src="../images/stars.png">
-            <img src="../images/stars.png">
-            <img src="../images/stars.png">
-            <img src="../images/stars.png">
-            <img src="../images/stars.png">
-        </div>
-
     </div>
-
-    <div id="splitPage">
-        <div class="split-child">
-<!--            <div class="content">-->
-<!--                <small>Welcome to our</small>-->
-<!--                <h1>Rolling <br>Potato's Game</h1>-->
-<!--                <ul class="center">-->
-<!--                    <li>Jinheng Zhang</li>-->
-<!--                    <li>Collin Reich</li>-->
-<!--                    <li>Jiandong Wang</li>-->
-<!--                    <li>Dylan Kirk</li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="split-child">-->
-<!--            <div class="buttons">-->
-<!--                <button id="ngButton" class="ng-btn">New Game</button>-->
-<!--                <br><br>-->
-<!--                <button id="helpButton" class="help-btn">How to Play</button>-->
-<!--                <br><br>-->
-<!--                <button id="contactButton" class="contact-btn">About Us</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-    </div>
-
-
-
 </body>
 
 </html>
