@@ -13,7 +13,8 @@ class Platform{
     get color(){
         switch(this.type){
             case 'kill':
-                return '#808080';
+                // return '#ff9933';
+                return '#ff5050';
                 break;
             default:
                 return this._color;

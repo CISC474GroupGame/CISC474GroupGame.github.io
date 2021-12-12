@@ -76,7 +76,24 @@ class Player{
         return this._grounded;
     }
     get color(){
-        return this._color;
+
+        switch(this._powerup){
+            case 'jump':
+                return '#9933ff';
+                break;
+            case 'tiny':
+                return '##ff99cc';
+                break;
+            case 'fly':
+                return '#66ccff';
+                break;
+            case 'invincible':
+                return '#ff5050';
+                break;
+            default:
+                return this._color;
+        }
+
     }
     get coinCount(){
         return this._coinCount;

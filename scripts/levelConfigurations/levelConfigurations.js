@@ -33,10 +33,11 @@ function loadLevelZero(canvas) {
     coinsCount = coins.length;
 
     //powerups
-    let pow1 = new Powerup(2*fifthOfWidth, canvas.height-100, "jump");
-    let pow2 = new Powerup(3 * fifthOfWidth, canvas.height-100, "tiny");
-    let pow3 = new Powerup(fifthOfWidth, canvas.height-100, "fly");
-    powerups.push(pow1, pow2, pow3);
+    let pow1 = new Powerup(fifthOfWidth, canvas.height-100, "invincible");
+    let pow2 = new Powerup(2 * fifthOfWidth, canvas.height-100, "jump");
+    let pow3 = new Powerup(3 *fifthOfWidth, canvas.height-100, "tiny");
+    let pow4 = new Powerup(4 * fifthOfWidth, canvas.height-100, "fly");
+    powerups.push(pow1, pow2, pow3, pow4);
 
     //key to unlock endpoint
     key = new Key(canvas.width*0.5, canvas.height*0.60);

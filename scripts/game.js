@@ -22,7 +22,7 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 //keeping track of current level
 let LEVEL_INDEX = 0;
 //contains all of the levels the game will load in order
-let level_array = [loadLevelExample, loadLevelZero];
+let level_array = [loadLevelExample, loadLevelZero, loadLevelOne];
 
 
 //initialize variables used throughout program
@@ -226,8 +226,8 @@ let update = function() {
         for(let i = 0; i < currentLevel.powerups.length; i++){
 
             //draw each powerup
-            context.save();
             let currentPowerup = currentLevel.powerups[i];
+            context.save();
             currentPowerup.drawPowerup(context);
             context.restore();
 
@@ -252,7 +252,7 @@ let update = function() {
         //detecting collision
         if(standardCollisionCheck(player, currentLevel.key) !== null){
             currentLevel.endpoint.hasKey = true;
-            currentLevel.endpoint.color = '#00ff99';
+            // currentLevel.endpoint.color = '#00ff99';
             currentLevel.key = null;
         }
     }
@@ -370,8 +370,8 @@ let timeExpired = function(){
 let resetKey = function(){
     let originalKey = level_array[LEVEL_INDEX](canvas).key;
     currentLevel.key = originalKey;
-    currentLevel.endpoint.color = '#ff5050';
     currentLevel.endpoint.hasKey = false;
+    // currentLevel.endpoint.color = '#ff5050';
 }
 
 //replaces powerups when the player dies
