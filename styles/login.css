@@ -54,7 +54,8 @@ h1 {
 
 .ng-btn,
 .help-btn,
-.contact-btn {
+.contact-btn,
+.stats-btn {
   text-align: center;
   display: inline-block;
   text-decoration: none;
@@ -68,7 +69,8 @@ h1 {
 
 .ng-btn:hover,
 .help-btn:hover,
-.contact-btn:hover {
+.contact-btn:hover,
+.stats-btn:hover {
   background-color: #aaaaaa;
   cursor: pointer;
 }
