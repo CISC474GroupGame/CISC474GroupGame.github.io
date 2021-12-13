@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolling Potato</title>
+    <link rel="stylesheet" href="/styles/game.css">
+    <script src="./../scripts/gameElements/Platform.js"></script>
+    <script src="./../scripts/gameElements/Player.js"></script>
+    <script src="./../scripts/gameElements/Endpoint.js"></script>
+    <script src="./../scripts/gameElements/Coin.js"></script>
+    <script src="./../scripts/gameElements/Key.js"></script>
+    <script src="./../scripts/gameElements/Powerup.js"></script>
+    <script src="./../scripts/api_client.js"></script>
+    <script src="./../scripts/PlayerStats.js"></script>
+    <script src="./../scripts/Sound.js"></script>
+    <script src="./../scripts/levelConfigurations/LevelClass.js"></script>
+    <script src="./../scripts/levelConfigurations/levelConfigurations.js"></script>
+    <script src="./../scripts/game.js"></script>
+
+    <!-- jquery -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+    integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=='
+    crossorigin='anonymous'></script>
+    
+    <!-- firebase -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/firebase/8.9.1/firebase.js'
+    integrity='sha512-wLI6M1/wOnh7Pt0Yl3FApZCXv/+GXozJSucELLDSb2W3CKdQsj7AfxKiSLRfvjjBkv8WUt+6kafynoxWg7NHeA=='
+    crossorigin='anonymous'></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
+    <script src="./../scripts/firebase-init.js"></script>
+</head>
+<body>
+    <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="control-btn-group" class="btn-group">
+            <a class="btn" id="menu-btn">Main Menu</a>
+            <a class="btn" id="reset-btn">Reset Level</a>
+        </div>
+        <span id="timer"></span>
+        <div id="level-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Level Complete!</h1>
+                </div>
+                <div class="modal-body">
+                    <h2>Score</h2>
+                    <p id="level-modal-coins"></p>
+                    <p id="level-modal-time"></p>
+                    <p id="level-modal-deaths"></p>
+                    <p id="level-modal-total"></p>
+                    <div class="modal-btn-group">
+                        <!-- <a class="btn" id="level-modal-restart-btn">Restart</a> -->
+                        <a class="btn" id="level-modal-next-btn">Next Level</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="endgame-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Congratulations you win!</h1>
+                </div>
+                <div class="modal-body">
+                    <p id='modal-message'></p>
+                    <div class="modal-btn-group">
+                        <a class="btn" id="modal-leaderboard-btn">Leaderboard</a>
+                        <a class="btn" id="modal-stats-btn">My Stats</a>
+                        <a class="btn" id="modal-menu-btn">Return to menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
