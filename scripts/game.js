@@ -22,7 +22,7 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 //keeping track of current level
 let LEVEL_INDEX = 0;
 //contains all of the levels the game will load in order
-let level_array = [collinLevelOne];
+let level_array = [collinLevelOne, collinLevelTwo];
 
 
 //initialize variables used throughout program
@@ -276,13 +276,6 @@ let update = function() {
     context.fillStyle = '#FFFFFF';
     context.fillText("Coins: " + player.coinCount + "/" + currentLevel.coinsCount, canvas.width*0.88 , 3*canvas.height/15);
     context.restore();
-
-    //render powerup display -- this is temporary until we find a better way to indicate the current powerup
-    // context.save();
-    // context.font = '25px Arial';
-    // context.fillStyle = '#FFFFFF';
-    // context.fillText("Powerup: " + player.powerup, canvas.width*0.88, 4*canvas.height/15);
-    // context.restore();
 
     //render endpoint and check collision with player
     if(currentLevel.endpoint){

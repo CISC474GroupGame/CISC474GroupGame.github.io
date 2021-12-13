@@ -8,8 +8,6 @@ class Sound {
                 break;
             case 'click':
                 this.src = './../audio/click.wav';
-                // console.log(this.sound.onended);
-                // this.endSound = this.sound.onended;
                 break;
             case 'jump':
                 this.src = './../audio/jump.ogg';

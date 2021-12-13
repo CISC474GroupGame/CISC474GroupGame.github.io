@@ -18,4 +18,11 @@ function load(){
     document.getElementById('total-coins').innerText = "Total Coins: " + statsObject.coins;
     document.getElementById('total-jumps').innerText = "Total Jumps: " + statsObject.jumps;
     document.getElementById('total-distance').innerText = "Distance Travelled: " + statsObject.distance;
+    document.getElementById('menu-btn').addEventListener('click', () => {
+        let clickSound = new Sound('click');
+        clickSound.play();
+        clickSound.sound.onended = () => {
+            window.location = './../index.html';
+        }
+    })
 }
