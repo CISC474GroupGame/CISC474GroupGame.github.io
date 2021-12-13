@@ -203,7 +203,7 @@ function JHLevelThree(canvas){
     let plat9 = new Platform(1050,500,35,20);
     platforms.push(leftWall, rightWall, plat1,plat2,plat3,plat4,plat5,plat6,plat7,plat8,plat9);
 
-    let pow2 = new Powerup(150, canvas.height-400, "jump");
+    let pow2 = new Powerup(150, plat1.y-100, "jump");
     let pow3 = new Powerup(4 *fifthOfWidth+100, canvas.height-150, "tiny");
     let pow4 = new Powerup(3 * fifthOfWidth, canvas.height-100, "fly");
 
@@ -312,7 +312,7 @@ function JHLevelOne(canvas){
 
     //regular platforms
     let plat1 = new Platform(0, canvas.height-50, canvas.width/4, 50);
-    let plat2 = new Platform(canvas.width/2+440, canvas.height-50, canvas.width/8 +10, 50);
+    let plat2 = new Platform(canvas.width/2+200, canvas.height-50, canvas.width/2, 50);
     let plat3 = new Platform(canvas.width/4+250,canvas.height-50, 250, 20, 'kill');
     platforms.push(leftWall, rightWall, plat1, plat2,plat3);
 
@@ -367,7 +367,7 @@ function loadLevelDylanOne(canvas){
     let coin4 = new Coin(1250,platform1.y -50);
     coins.push(coin1,coin2,coin3,coin4);
 
-    endpoint = new Endpoint(player.x + 1400, platform1.y-100);
+    endpoint = new Endpoint(platform2.x + 2*platform2.width, platform1.y-100);
 
     coinsCount = coins.length;
 
@@ -402,14 +402,14 @@ function loadLevelDylanTwo(canvas){
 
     coins = []
     let coin1 = new Coin(platform1.x + 400,platform1.y-40);
-    let coin2 = new Coin(platform2.x + 100,platform2.y-40);
+    // let coin2 = new Coin(platform2.x + 100,platform2.y-40);
     let coin3 = new Coin(platform3.x + 150,platform3.y-40);
     let coin4 = new Coin(450, 200);
     let coin5 = new Coin(800,250);
     let coin6 = new Coin(platform6.x + 75, platform6.y-40);
-    coins.push(coin1,coin2,coin3,coin4,coin5,coin6);
+    coins.push(coin1,coin3,coin4, coin5, coin6);
 
-    endpoint = new Endpoint(player.x + 1400, 300);
+    endpoint = new Endpoint(platform2.x + 50, platform2.y-100);
 
     coinsCount = coins.length;
 

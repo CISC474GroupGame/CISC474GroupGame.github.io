@@ -49,6 +49,7 @@ h1 {
 
 .buttons {
   margin: 0;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -213,6 +214,7 @@ body {
 }
 
 .flex-container {
+  margin-top: 40px;
   display: flex;
   flex-direction: row;
   font-size: 30px;
