@@ -24,7 +24,7 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 //keeping track of current level
 let LEVEL_INDEX = 0;
 //contains all of the levels the game will load in order
-let level_array = [collinLevelOne, JHLevelOne, loadLevelDylanOne, collinLevelTwo, loadLevelDylanTwo, JHLevelTwo, JHLevelThree, loadLevelDylanThree, collinLevelThree];
+let level_array = [collinLevelTwo];
 
 
 //initialize variables used throughout program
