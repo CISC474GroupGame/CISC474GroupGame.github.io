@@ -1,3 +1,5 @@
+// require 'api_client.js';
+
 //creating frames
 (function () {
     let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -389,24 +391,7 @@ let startTimer = function(){
     }, 100);
 }
 
-// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-  }
+
 
 
 //function is called when the user completes the game
@@ -420,6 +405,7 @@ let endGame = function(){
     // alert("You beat the game in " + (300 - timer) + " seconds!\nYou will now be returned to the main menu.");
     // window.location = './../index.html';
     // use 'user': auth.currentUser if want to log in user using post 
+    console.log(playerStats.time);
     if(confirm("Do you want to submit your score?")){
         if(auth.currentUser != null){
             let data = {'score': playerStats.score, 'time': playerStats.time, 'resets': playerStats.resets, 'deaths': playerStats.deaths, 'coins': playerStats.coins, 'distance': playerStats.distance, 'jumps': playerStats.jumps};
