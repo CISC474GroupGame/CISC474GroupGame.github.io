@@ -17,8 +17,14 @@ const defaultAuth = getAuth(defaultApp);
 const app = express();
 const db = getDatabase();
 
+
+const corsOptions = {
+	origin: '*',
+	optionsSuccessStatus: 200
+};
+
 app.use(express.json());
-app.use(cors())
+app.use(cors({credentials: true, origin: true}))
 
 app.use(function (req, res, next) {
 	console.log('Request: Timestamp:', new Date().toLocaleString(), ', URL (' + req.url + '), PATH (' + req.path + ').');
@@ -36,9 +42,16 @@ app.get("/user", async (req, res) => {
 	let result;
 	try{
 		result = await defaultAuth.verifyIdToken(token);
-		const userRef = db.ref(`user/{result.uid}`);
-		const userData = (await userRef.once('value')).val();
-		result.data = userData;
+		const userRef = db.ref(`/scoreboard`);
+		const userData = (await userRef.orderByChild('uid').equalTo(result.uid).once('value'));
+		// create ordered json array
+		const data: any[] = [];
+		userData.forEach(child => {
+			// console.log(child.key());
+			// console.log(child.val());
+			data.push(child.val());
+		});
+		result.data = data;
 		console.log(result);
 		result = (({ name, picture, user_id, email, email_verified, data }) => ({ name, picture, user_id, email, email_verified, data }))(result);
 		result = { failed: false, result: result };
@@ -53,7 +66,7 @@ app.get("/user", async (req, res) => {
 
 
 // post data for score
-app.post("/score", async (req, res) => {
+app.post("/scoreboard", async (req, res) => {
 	const token = String(req.query.token);
 	const score = String(req.query.score);
 	if(!token){
@@ -63,8 +76,8 @@ app.post("/score", async (req, res) => {
 	let result;
 	try{
 		result = await defaultAuth.verifyIdToken(token);
-		const userRef = db.ref(`user/{result.uid}`);
-		userRef.push({score: score, isguest: false});
+		const userRef = db.ref(`//`);
+		userRef.push({name: result['name'] || 'Guest', uid: result.uid, score: score, isguest: false, timestamp: new Date().toLocaleString()});
 		const userData = (await userRef.once('value')).val();
 		result.data = userData;
 		result = { failed: false, result: result };
@@ -77,31 +90,7 @@ app.post("/score", async (req, res) => {
 	res.end();
 });
 
-
-
-// post data for score
-app.post("/guest/score", async (req, res) => {
-	const score = parseInt(String(req.query.score));
-	const name = String(req.query.name);
-	console.log(score);
-	let result;
-	try{
-		if(isNaN(score)){
-			throw "score is not a number";
-		}
-		const userRef = db.ref(`user/`);
-		userRef.push({name:name, score: score, isguest: true});
-		result = { failed: false, result: "success" };
-	} catch(error){
-		console.log(error);
-		result = { failed: true, result: error };
-	}
-
-	res.json(result);
-	res.end();
-});
-
-app.get("/leaderboard", async (req, res) => {
+app.get("/scoreboard", async (req, res) => {
 	// const token = String(req.query.token);
 	// if(!token){
 	// 	res.json({ failed: true, result: "token needed."});
@@ -110,9 +99,18 @@ app.get("/leaderboard", async (req, res) => {
 	let result: {failed:boolean, result:any};
 	try{
 		// result = await defaultAuth.verifyIdToken(token);
-		const leaderboardRef = db.ref(`/leaderboard`);
-		const leaderboardData = (await leaderboardRef.once('value')).val();
-		const data = leaderboardData;
+		const leaderboardRef = db.ref(`/scoreboard`);
+		const leaderboardData = (await leaderboardRef.orderByChild('score').once('value'));
+		// create ordered json array
+		const data: any[] = [];
+		leaderboardData.forEach(child => {
+			// console.log(child.key());
+			// console.log(child.val());
+			data.push(child.val());
+		});
+		data.reverse(); // order by highest score first
+
+		// const data = leaderboardData;
 		result = { failed: false, result: data };
 	} catch(error){
 		console.log(error);
@@ -123,41 +121,41 @@ app.get("/leaderboard", async (req, res) => {
 	res.end();
 });
 
-function genRandomUserId(){
-	// return (Math.random() + 1).toString(36).substring(7);
-	return Math.random().toString(36).substring(2, 15);
-}
+// function genRandomUserId(){
+// 	// return (Math.random() + 1).toString(36).substring(7);
+// 	return Math.random().toString(36).substring(2, 15);
+// }
 
-app.put("/dev/gen", async (req, res) => {
-	let result: {failed:boolean, result:any};
-	try{
-		// result = await defaultAuth.verifyIdToken(token);
-		// const leaderboardRef = db.ref(`/leaderboard`);
-		for(let i = 0; i < 50; i++){
-			const userId = genRandomUserId();
-			const userRef = db.ref(`/leaderboard/${userId}`);
-			userRef.set({
-				name: "Test User " + i,
-				picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
-				user_id: userId,
-				score: Math.floor(Math.random() * 100),
-				date: new Date().toLocaleString()
-			});	
-		}
-		// leaderboardRef.push({user})
-	// 	// const leaderboardData = (await leaderboardRef.once('value')).val();
-	// 	// const data = leaderboardData;
-	// 	result = { failed: false, result: data };
-	// } catch(error){
-	// 	console.log(error);
-		result = { failed: false, result: "success?" };
-	} catch(error){
-		console.log(error);
-		result = { failed: true, result: error };
-	}
-	res.json(result);
-	res.end();
-});
+// app.put("/dev/gen", async (req, res) => {
+// 	let result: {failed:boolean, result:any};
+// 	try{
+// 		// result = await defaultAuth.verifyIdToken(token);
+// 		// const leaderboardRef = db.ref(`/leaderboard`);
+// 		for(let i = 0; i < 50; i++){
+// 			const userId = genRandomUserId();
+// 			const userRef = db.ref(`/scoreboard/${userId}`);
+// 			userRef.set({
+// 				name: "Test User " + i,
+// 				picture: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg",
+// 				user_id: userId,
+// 				score: Math.floor(Math.random() * 100),
+// 				date: new Date().toLocaleString()
+// 			});	
+// 		}
+// 		// leaderboardRef.push({user})
+// 	// 	// const leaderboardData = (await leaderboardRef.once('value')).val();
+// 	// 	// const data = leaderboardData;
+// 	// 	result = { failed: false, result: data };
+// 	// } catch(error){
+// 	// 	console.log(error);
+// 		result = { failed: false, result: "success?" };
+// 	} catch(error){
+// 		console.log(error);
+// 		result = { failed: true, result: error };
+// 	}
+// 	res.json(result);
+// 	res.end();
+// });
 
 app.listen(PORT);
 console.log("Server Started");

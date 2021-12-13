@@ -10,15 +10,10 @@
 	<body>
 		<!-- scoreboard table -->
 		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Scoreboard</h1>
-				</div>
-			</div>
 		</div>
 		<script>
 			// get scoreboard data from server
-			var scoreboard = fetch('/scoreboard')
+			var scoreboard = fetch('http://localhost:9001/scoreboard')
 				.then(function(response) {
 					return response.json();
 				})
@@ -29,11 +24,15 @@
 					table.innerHTML = '<thead><tr><th>Rank</th><th>Name</th><th>Score</th></tr></thead><tbody></tbody>';
 					
 					// add scoreboard data to table
-					for (var i = 0; i < data.length; i++) {
-						var row = table.tBodies[0].insertRow(i);
-						row.insertCell(0).innerHTML = i + 1;
-						row.insertCell(1).innerHTML = data[i].name;
-						row.insertCell(2).innerHTML = data[i].score;
+					console.log(data)
+					let index = 0;
+					let key;
+					for (key in data.result) {
+						var row = table.tBodies[0].insertRow(index);
+						row.insertCell(0).innerHTML = index+1;
+						row.insertCell(1).innerHTML = data.result[key].name;
+						row.insertCell(2).innerHTML = data.result[key].score;
+						index++;
 					}
 					
 					// add table to page
