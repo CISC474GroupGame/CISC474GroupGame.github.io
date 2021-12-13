@@ -1,5 +1,6 @@
 h1 {
   text-align: center;
+  text-decoration: underline;
 }
 
 h2 {
@@ -117,4 +118,10 @@ video {
   display: inline;
   position: relative;
   padding-right: 20px;
+}
+
+td {
+  text-align: center;
+  padding: 10px;
+  font-size: 22px;
 }
