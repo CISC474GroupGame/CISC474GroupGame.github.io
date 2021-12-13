@@ -14,7 +14,9 @@ npm install --global yarn
 yarn
 yarn run dev
 
-Go to localhost:<port number from python server>
+Go to localhost:(port number from python server)
+
+For the statistics and leaderboard to work, you will need GOOGLE_APPLICATION_CREDENTIALS. Please reach out to us if needed for these credentials.
 
 API Description:
 
