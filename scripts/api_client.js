@@ -46,3 +46,9 @@ function displayScoreboard(){
 					container.appendChild(table);
 				});
 }
+
+function getUserStats(){
+	return fetch('http://localhost:9001/user?token='+ auth.currentUser.Aa).then(function(response){
+        return response.json();
+    })
+}
