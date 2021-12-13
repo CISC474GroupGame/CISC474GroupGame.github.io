@@ -21,7 +21,7 @@
 					// create scoreboard table
 					var table = document.createElement('table');
 					table.className = 'table table-striped';
-					table.innerHTML = '<thead><tr><th>Rank</th><th>Name</th><th>Score</th></tr></thead><tbody></tbody>';
+					table.innerHTML = '<thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Date</th></tr></thead><tbody></tbody>';
 					
 					// add scoreboard data to table
 					console.log(data)
@@ -32,6 +32,7 @@
 						row.insertCell(0).innerHTML = index+1;
 						row.insertCell(1).innerHTML = data.result[key].name;
 						row.insertCell(2).innerHTML = data.result[key].score;
+						row.insertCell(3).innerHTML = data.result[key].timestamp;
 						index++;
 					}
 					
