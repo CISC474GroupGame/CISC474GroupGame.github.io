@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../styles/playerStats.css">
+    <title>Player Stats</title>
+    <script src="./../scripts/Sound.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/firebase/8.9.1/firebase.js'
+        integrity='sha512-wLI6M1/wOnh7Pt0Yl3FApZCXv/+GXozJSucELLDSb2W3CKdQsj7AfxKiSLRfvjjBkv8WUt+6kafynoxWg7NHeA=='
+        crossorigin='anonymous'></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
+    <script src="./../scripts/firebase-init.js"></script>
+        <script src="./../scripts/api_client.js"></script>
+        <script src="./../scripts/pageScripts/statsScript.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>All Time Statistics</h1>
+        <p>A collection of your stats across all your games played</p>
+        <p>Be sure to login to see your stats</p>
+    </div>
+    <div class="main-content-wrapper">
+        <div class="high-score-wrapper">
+            <p id="highscore"></p>
+        </div>
+        <div class="stats-container">
+            <div class="stats-left-wrapper">
+                <p id="total-time"></p>
+                <p id="total-resets"></p>
+                <p id="total-deaths"></p>
+            </div>
+            <div class="stats-right-wrapper">
+                <p id="total-coins"></p>
+                <p id="total-jumps"></p>
+                <p id="total-distance"></p>
+            </div>
+        </div>
+        <a id="menu-btn" class="btn">Back to main menu</a>
+    </div>
+    <script>firebase.auth().onAuthStateChanged(user => load(user))</script>
+</body>
+</html>
