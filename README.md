@@ -1,8 +1,8 @@
 # CISC474_Group2_FinalProject
 
-In client directory:
-Make sure python 3 or newer is installed: https://www.python.org/downloads/
-Enter command:
+In client directory:<br>
+Make sure python 3 or newer is installed: https://www.python.org/downloads/ <br>
+Enter command: <br>
 ```
 python -m http.server
 ```
