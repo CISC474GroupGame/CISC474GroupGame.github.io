@@ -22,7 +22,7 @@ let trackKeys = function(keys){
 let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 
 //keeping track of current level
-let LEVEL_INDEX = 3;
+let LEVEL_INDEX = 0;
 //contains all of the levels the game will load in order
 let level_array = [collinLevelOne,JHLevelOne,JHLevelTwo,JHLevelThree];
 
