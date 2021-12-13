@@ -24,6 +24,12 @@ function load() {
             window.location = 'html/playerStats.html';
         }
     });
+    document.getElementById("leaderboardButton").addEventListener('click', () => {
+        clickSound.play();
+        clickSound.sound.onended = () => {
+            window.location = 'html/leaderboard.html';
+        }
+    });
 }
 
 
