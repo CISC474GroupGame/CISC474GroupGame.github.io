@@ -21,7 +21,7 @@
 					// create scoreboard table
 					var table = document.createElement('table');
 					table.className = 'table table-striped';
-					table.innerHTML = '<thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Time</th><th>Date</th><th>Coins</th><th>Guest</th><th>Deaths</th><th>Jumps</th><th>Resets</th></tr></thead><tbody></tbody>';
+					table.innerHTML = '<thead><tr><th>Rank</th><th>Name</th><th>Score</th><th>Time</th><th>Date</th><th>Coins</th><th>Deaths</th><th>Jumps</th><th>Resets</th></tr></thead><tbody></tbody>';
 					
 					// add scoreboard data to table
 					console.log(data)
@@ -33,9 +33,8 @@
 						row.insertCell(1).innerHTML = data.result[key].name;
 						row.insertCell(2).innerHTML = data.result[key].score;
 						row.insertCell(3).innerHTML = data.result[key].time / 1000; // convert milliseconds to seconds
-						row.insertCell(4).innerHTML = data.result[key].timestamp;
+						row.insertCell(4).innerHTML = new Date(data.result[key].timestamp);
 						row.insertCell(5).innerHTML = data.result[key].coins;
-						row.insertCell(6).innerHTML = data.result[key].isguest;
 						row.insertCell(7).innerHTML = data.result[key].deaths;
 						row.insertCell(8).innerHTML = data.result[key].jumps;
 						row.insertCell(9).innerHTML = data.result[key].resets;
