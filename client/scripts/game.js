@@ -481,6 +481,9 @@ let initClickListeners = function(){
     });
     document.getElementById("modal-leaderboard-btn").addEventListener('click', () => {
         clickSound.play();
+        clickSound.sound.onended = () => {
+            window.location = './../leaderboard.html';
+        }
     });
     document.getElementById("modal-menu-btn").addEventListener('click', () => {
         clickSound.play();
