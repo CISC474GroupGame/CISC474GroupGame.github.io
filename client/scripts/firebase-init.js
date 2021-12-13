@@ -61,13 +61,13 @@ if($('#firebaseui-auth-container').length > 0) {
 
 auth.onAuthStateChanged((user) => {
 	if (user) {
-		console.log('------------');
-		console.log(user);
+		// console.log('------------');
+		// console.log(user);
 		$('#username').text(user.displayName);
 		$('#firebaseui-auth-container').hide();
 		$("#logout").show();
 	} else{
-		console.log('------------');
+		// console.log('------------');
 		$('#username').text("");
 		$('#firebaseui-auth-container').show();
 		$("#logout").hide();
