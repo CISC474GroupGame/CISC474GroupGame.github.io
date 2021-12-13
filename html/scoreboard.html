@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Scoreboard</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css' integrity='sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==' crossorigin='anonymous'/>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js' integrity='sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg==' crossorigin='anonymous'></script>
+	</head>
+	<body>
+		<!-- scoreboard table -->
+		<div class="container">
+		</div>
+		<script>
+			// get scoreboard data from server
+			var scoreboard = fetch('http://localhost:9001/scoreboard')
+				.then(function(response) {
+					return response.json();
+				})
+				.then(function(data) {
+					// create scoreboard table
+					var table = document.createElement('table');
+					table.className = 'table table-striped';
+					table.innerHTML = '<thead><tr><th>Rank</th><th>Name</th><th>Score</th></tr></thead><tbody></tbody>';
+					
+					// add scoreboard data to table
+					console.log(data)
+					let index = 0;
+					let key;
+					for (key in data.result) {
+						var row = table.tBodies[0].insertRow(index);
+						row.insertCell(0).innerHTML = index+1;
+						row.insertCell(1).innerHTML = data.result[key].name;
+						row.insertCell(2).innerHTML = data.result[key].score;
+						index++;
+					}
+					
+					// add table to page
+					var container = document.getElementsByClassName('container')[0];
+					container.appendChild(table);
+				});
+		</script>
+	</body>
+</html>

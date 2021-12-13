@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Test</title>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js' integrity='sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==' crossorigin='anonymous'></script>
+	<script>
+		const API_SERVER = "http://localhost:9001";
+
+		function genuser(){
+			$.ajax({
+				url: API_SERVER + "/dev/gen",
+				type: "PUT",
+				data: "",
+				success: function(data){
+					console.log("success");
+				}
+			});
+		}
+		function clearuser(){
+
+		}
+
+		function refreshTable(){
+			$.ajax({
+				url: API_SERVER + "/leaderboard",
+				type: 'GET',
+				success: function(data){
+					// array.forEach(element => {
+						
+					// });
+					console.log(data);
+					$.each(data.result,(item)=>{
+						$('#leaderboard').append(`<tr><td>${data.result[item].name}</td><td>${data.result[item].date}</td><td>${data.result[item].score}</td></tr>`);
+					});
+				}
+			});
+		}
+
+	</script>
+
+</head>
+
+<body>
+	<p id="demo"></p>
+	<div id="devtools">
+		<button onclick="genuser()">gen leaderboard</button>
+		<button onclick="clearuser()">clear leaderboard</button>
+		<button onclick="refreshTable()">refresh leaderboard</button>
+	</div>
+	<table id="leaderboard">
+		<thead>
+			<tr>
+				<th>User</th>
+				<!-- TODO per map leaderboard? -->
+				<!-- <th>Map</th>  -->
+				<!-- <th>Time to Complete level</th> -->
+				<th>Date</th>
+				<th>Score</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	<script>
+		var x = document.getElementById("demo").innerHTML = "Hello World!";
+		// document.getElementById("leaderboard").innerHTML = "Loading Leaderboard";
+		// fetch('./user/')
+	</script>
+</body>
+
+</html>
