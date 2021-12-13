@@ -78,7 +78,7 @@ app.post("/scoreboard", async (req, res) => {
 	let result = {}
 	try{
 		const userRef = db.ref(`/scoreboard`);
-		const userData = {name: verification['name'], uid: verification['uid'], isguest: isguest, timestamp: new Date().toLocaleString(), ...data, user: ''};
+		const userData = {name: verification['name'], uid: verification['uid'], isguest: isguest, timestamp: Date.now(), ...data, user: ''};
 		console.log(userData);
 		userRef.push(userData);
 		// const userData = (await userRef.once('value')).val();
