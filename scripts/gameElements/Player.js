@@ -15,7 +15,7 @@ class Player{
         this._grounded = false;
 
         //game stuff
-        this._color = '#808080';
+        this._color = '#FFFFFF';
         this._coinCount = 0;
         this._powerup = 'none';
 	}
@@ -82,7 +82,7 @@ class Player{
                 return '#9933ff';
                 break;
             case 'tiny':
-                return '##ff99cc';
+                return '#ff99cc';
                 break;
             case 'fly':
                 return '#66ccff';

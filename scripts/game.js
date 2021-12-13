@@ -22,7 +22,7 @@ let arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]);
 //keeping track of current level
 let LEVEL_INDEX = 0;
 //contains all of the levels the game will load in order
-let level_array = [loadLevelExample, loadLevelZero, loadLevelOne];
+let level_array = [collinLevelOne];
 
 
 //initialize variables used throughout program
@@ -42,15 +42,15 @@ let init = function(){
     //setup player and game data
     currentLevel = level_array[LEVEL_INDEX](canvas);
     player = currentLevel.player;
-    // playerSpawnState = Object.assign({}, currentLevel.player);
     playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(currentLevel.player)),currentLevel.player);
     playerStats = new PlayerStats();
     localDeaths = 0;
 
-    let resetButton = document.getElementById("reset-btn");
-    resetButton.addEventListener('click', () => {
-        resetLevel();
-    });
+    //initialize click listeners
+    initClickListeners()
+
+    //initialize sounds
+    initSound();
 
     //start game
     startTimer();
@@ -85,6 +85,8 @@ let resetLevel = function(){
     playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(currentLevel.player)),currentLevel.player);
     playerStats.resets = playerStats.resets + 1;
     localDeaths = 0;
+    clearInterval(interval);
+    startTimer();
 }
 
 //called when a level is completed, clears the current data and loads the next level in
@@ -134,6 +136,7 @@ let update = function() {
     //player movement
     if(arrowKeys.ArrowUp){
         if((!player.jumping && player.grounded) || player.powerup === "fly"){
+            jumpSound.play();
             player.jumping = true;
             player.grounded = false;
             player.vy = -player.speed * 2.5;
@@ -214,6 +217,7 @@ let update = function() {
             //detecting collision with coins
             if(standardCollisionCheck(player, currentCoin) !== null){
                 if(i > -1){
+                    coinSound.play();
                     player.coinCount++;
                     currentLevel.coins.splice(i, 1);
                 }
@@ -234,6 +238,7 @@ let update = function() {
             //detecting collision with powerups
             if(standardCollisionCheck(player, currentPowerup) !== null){
                 if(i > -1){
+                    powerupSound.play();
                     player.powerup = currentPowerup.type;
                     currentLevel.powerups.splice(i, 1);
                 }
@@ -251,6 +256,7 @@ let update = function() {
 
         //detecting collision
         if(standardCollisionCheck(player, currentLevel.key) !== null){
+            keySound.play();
             currentLevel.endpoint.hasKey = true;
             // currentLevel.endpoint.color = '#00ff99';
             currentLevel.key = null;
@@ -272,11 +278,11 @@ let update = function() {
     context.restore();
 
     //render powerup display -- this is temporary until we find a better way to indicate the current powerup
-    context.save();
-    context.font = '25px Arial';
-    context.fillStyle = '#FFFFFF';
-    context.fillText("Powerup: " + player.powerup, canvas.width*0.88, 4*canvas.height/15);
-    context.restore();
+    // context.save();
+    // context.font = '25px Arial';
+    // context.fillStyle = '#FFFFFF';
+    // context.fillText("Powerup: " + player.powerup, canvas.width*0.88, 4*canvas.height/15);
+    // context.restore();
 
     //render endpoint and check collision with player
     if(currentLevel.endpoint){
@@ -289,6 +295,7 @@ let update = function() {
             //check clear condition
             if(currentLevel.endpoint.hasKey){
                 if(LEVEL_INDEX < level_array.length){
+                    winSound.play();
                     clearInterval(interval);
                     renderLevelModal();
                 }
@@ -351,6 +358,7 @@ let endpointCollisionCheck = function(obj1, obj2){
 
 //respawns the player
 let respawn = function(){
+    deathSound.play();
     let currentCoins = player.coinCount;
     player = playerSpawnState;
     playerSpawnState = Object.assign(Object.create(Object.getPrototypeOf(player)),player);
@@ -431,4 +439,48 @@ let renderLevelModal = function(){
         loadNextLevel();
     }
     modal.style.display = 'block';
+}
+
+//creates all of the sounds to be used throughout the game
+let coinSound, powerupSound, jumpSound, keySound, clickSound, deathSound, winSound;
+let initSound = function(){
+    coinSound = new Sound('coin');
+    powerupSound = new Sound('powerup');
+    jumpSound = new Sound('jump');
+    keySound = new Sound('key');
+    clickSound = new Sound('click');
+    deathSound = new Sound('die');
+    winSound = new Sound('win');
+}
+
+//sets all click listeners for the various buttons
+let initClickListeners = function(){
+    document.getElementById("reset-btn").addEventListener('click', () => {
+        clickSound.play();
+        resetLevel();
+    });
+    document.getElementById("menu-btn").addEventListener('click', () => {
+        clickSound.play();
+        clickSound.sound.onended = () => {
+            window.location = './../index.html';
+        }
+    });
+    document.getElementById("modal-leaderboard-btn").addEventListener('click', () => {
+        clickSound.play();
+    });
+    document.getElementById("modal-menu-btn").addEventListener('click', () => {
+        clickSound.play();
+        clickSound.sound.onended = () => {
+            window.location = './../index.html';
+        }
+    });
+    document.getElementById("level-modal-next-btn").addEventListener('click', () => {
+        clickSound.play();
+    });
+    document.getElementById("modal-stats-btn").addEventListener('click', () => {
+        clickSound.play();
+        clickSound.sound.onended = () => {
+            window.location = './../html/playerStats.html';
+        }
+    });
 }
