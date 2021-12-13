@@ -214,3 +214,175 @@ function collinLevelThree() {
     let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
     return theLevel;
 }
+
+
+function JHLevelThree(canvas){
+
+    //variables to help make levels fit the size of the screen
+    let fifthOfWidth = canvas.width / 5;
+    let fifthOfHeight = canvas.height / 5;
+
+    //class attributes
+    let player = new Player(fifthOfWidth-250, canvas.height/2-fifthOfHeight);
+    let platforms = [];
+    let powerups = [];
+    let coins = [];
+    let endpoint;
+    let coinsCount;
+    let key;
+
+    //invisible walls on the sides to keep player contained -- make these invisible later
+    let leftWall = new Platform(0, 0, 10, canvas.height);
+    let rightWall = new Platform(canvas.width - 10, 0, 10, canvas.height);
+
+    //regular platforms
+
+    let plat1 = new Platform(0, fifthOfWidth*2, 150, 50);
+    let plat2 = new Platform(1100, 225, 50, 50);
+    let plat3 = new Platform(550, canvas.height-100, 100, 50);
+    let plat4 = new Platform(1050,0,20,600);
+    let plat5 = new Platform(1150,0,20,600);
+    let plat6 = new Platform(1050,300,35,20);
+    let plat7 = new Platform(1125,400,35,20);
+    let plat8 = new Platform(canvas.width-400,canvas.height-50,300,20);
+    let plat9 = new Platform(1050,500,35,20);
+    platforms.push(leftWall, rightWall, plat1,plat2,plat3,plat4,plat5,plat6,plat7,plat8,plat9);
+
+    let pow2 = new Powerup(150, canvas.height-400, "jump");
+    let pow3 = new Powerup(4 *fifthOfWidth+100, canvas.height-150, "tiny");
+    let pow4 = new Powerup(3 * fifthOfWidth, canvas.height-100, "fly");
+
+    powerups.push(pow2,pow3,pow4);
+    //key
+    key = new Key(canvas.width*0.25, canvas.height*0.75);
+
+    //game endpoint
+    endpoint = new Endpoint(plat2.x+plat2.width-50, plat2.y-plat2.height-50, 50, 100);
+
+    //coins
+    let coin1 = new Coin(600, 300);
+    let coin2 = new Coin(600, 100);
+    let coin3 = new Coin(550, 250);
+    let coin4 = new Coin(650, 250);
+    let coin5 = new Coin(500,200);
+    let coin6 = new Coin(700,200);
+    let coin7 = new Coin(450,150);
+    let coin8 = new Coin(750,150);
+    let coin9 = new Coin(450,100);
+    let coin10 = new Coin(750,100);
+    let coin11 = new Coin(500,50);
+    let coin12 = new Coin(700,50);
+    let coin13 = new Coin(550,70);
+    let coin14 = new Coin(650,70);
+
+    coins.push(coin1,coin2,coin3,coin4,coin5,coin6,coin7,coin8,coin9,coin10,coin11,coin12,coin13,coin14);
+    coinsCount = coins.length;
+
+    //create level instance and return it
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel;
+}
+
+function JHLevelTwo(canvas){
+    //variable to use to help make levels fit the size of the screen
+    let fifthOfWidth = canvas.width / 5;
+
+    //class attributes
+    let player = new Player(fifthOfWidth/2, canvas.height/2);
+    let platforms = [];
+    let powerups = [];
+    let coins = [];
+    let endpoint;
+    let coinsCount;
+    let key;
+
+    //invisible walls on the sides to keep player contained -- make these invisible later
+    let leftWall = new Platform(0, 0, 10, canvas.height);
+    let rightWall = new Platform(canvas.width - 10, 0, 10, canvas.height);
+
+    //regular platforms
+    let plat1 = new Platform(0, canvas.height-50, canvas.width/2-100, 50);
+    let plat2 = new Platform(canvas.width/2+440, canvas.height-50, canvas.width/8 +10, 50);
+    let plat3 = new Platform(canvas.width/6-125, canvas.height*0.75, 50, 20);
+    let plat4 = new Platform(canvas.width/6, canvas.height*0.5, 50, 20);
+    let plat5 = new Platform(canvas.width/4, canvas.height*0.25, 200, 20, 'kill');
+    let plat6 = new Platform(canvas.width/4+400, canvas.height*0.25-100, 200, 20, 'kill');
+    platforms.push(leftWall, rightWall, plat1, plat2,plat3,plat4,plat5,plat6);
+
+    //coins
+    let coin1 = new Coin(3*fifthOfWidth+100, canvas.height-150);
+    let coin2 = new Coin(3*fifthOfWidth+150, canvas.height-200);
+    let coin3 = new Coin(3*fifthOfWidth+100, canvas.height-200);
+    let coin4 = new Coin(3*fifthOfWidth+150, canvas.height-150);
+
+    let coin5 = new Coin(canvas.width/4, canvas.height*0.25-25);
+    let coin6 = new Coin(canvas.width/4+420, canvas.height*0.25-120);
+    coins.push(coin1, coin2, coin3, coin4,coin5,coin6);
+    coinsCount = coins.length;
+
+    //powerups
+    let pow1 = new Powerup(fifthOfWidth, canvas.height-100, "invincible");
+    let pow2 = new Powerup(2 * fifthOfWidth, canvas.height-100, "jump");
+    let pow3 = new Powerup(3 *fifthOfWidth+270, canvas.height-200, "tiny");
+
+    powerups.push(pow1, pow2, pow3);
+
+    //key to unlock endpoint
+    key = new Key(canvas.width*0.5, canvas.height*0.60);
+
+    //game endpoint
+    endpoint = new Endpoint((4*fifthOfWidth)+(0.5*fifthOfWidth), canvas.height-150, 50, 100);
+
+    //create level instance and return it
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel
+}
+
+function JHLevelOne(canvas){
+    //variable to use to help make levels fit the size of the screen
+    let fifthOfWidth = canvas.width / 5;
+
+    //class attributes
+    let player = new Player(fifthOfWidth/2, canvas.height/2);
+    let platforms = [];
+    let powerups = [];
+    let coins = [];
+    let endpoint;
+    let coinsCount;
+    let key;
+
+    //invisible walls on the sides to keep player contained -- make these invisible later
+    let leftWall = new Platform(0, 0, 10, canvas.height);
+    let rightWall = new Platform(canvas.width - 10, 0, 10, canvas.height);
+
+    //regular platforms
+    let plat1 = new Platform(0, canvas.height-50, canvas.width/4, 50);
+    let plat2 = new Platform(canvas.width/2+440, canvas.height-50, canvas.width/8 +10, 50);
+    let plat3 = new Platform(canvas.width/4+250,canvas.height-50, 250, 20, 'kill');
+    platforms.push(leftWall, rightWall, plat1, plat2,plat3);
+
+    //coins
+    let coin1 = new Coin(3*fifthOfWidth, canvas.height-150);
+    let coin2 = new Coin(3*fifthOfWidth-100, canvas.height-200);
+    let coin3 = new Coin(3*fifthOfWidth-50, canvas.height-200);
+    let coin4 = new Coin(3*fifthOfWidth+50, canvas.height-150);
+
+    coins.push(coin1, coin2, coin3, coin4);
+    coinsCount = coins.length;
+
+    //powerups
+    let pow1 = new Powerup(fifthOfWidth, canvas.height-100, "invincible");
+
+
+    powerups.push(pow1);
+
+    //key to unlock endpoint
+    key = new Key(canvas.width*0.5, canvas.height*0.60);
+
+    //game endpoint
+    endpoint = new Endpoint((4*fifthOfWidth)+(0.5*fifthOfWidth), canvas.height-150, 50, 100);
+
+    //create level instance and return it
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel;
+}
