@@ -467,3 +467,42 @@ function loadLevelDylanThree(canvas){
     let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
     return theLevel;
 }
+
+
+function JDLevelOne(canvas){
+
+    let width = canvas.width;
+    let height = canvas.height;
+
+    let player, platforms, powerups, coins, endpoint, coinsCount, key;
+
+    player = new Player(width/8, (height*7)/8);
+
+    platforms = []
+    let platform1 = new Platform(0, canvas.height-10, width, 100);
+    for(let i = 5; i < 10; i++){
+        platforms.push(new Platform(canvas.width/20 * i, canvas.height-80, 20, 40, 'kill'))
+    }
+    for(let i = 10; i < 15; i++){
+        platforms.push(new Platform(canvas.width/20 * i + 50, canvas.height-(80*(i-10)), 20, 30, 'kill'))
+    }
+    platforms.push(platform1);
+
+    powerups = []
+    let pow1 = new Powerup(915,platform1.y -50, 'invincible');
+    powerups.push(pow1);
+
+    coins = []
+    let coin1 = new Coin(650,platform1.y -50);
+    let coin2 = new Coin(1250,platform1.y -50);
+    coins.push(coin1,coin2);
+
+    endpoint = new Endpoint(player.x + 1400, platform1.y-100);
+
+    coinsCount = coins.length;
+
+    key = new Key(canvas.width-50, canvas.height-100)
+
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel;
+}
