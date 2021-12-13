@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LogIn</title>
+    <title>Home</title>
     <link rel="stylesheet" href="styles/login.css">
 <!--&lt;!&ndash;add firebaseui&ndash;&gt;-->
 <!--    <link rel="manifest" href="manifest.json">-->
@@ -22,6 +22,8 @@
         crossorigin='anonymous'></script>
     <script src="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.js"></script>
     <script src="./scripts/api_client.js"></script>
+    <script src="/scripts/Sound.js"></script>
+    <script src="scripts/pageScripts/homeScript.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -52,13 +54,13 @@
             </div>
             <div class="flex-item-mid">
                 <div class="buttons">
-                    <a id="ngButton" class="ng-btn" href="html/game.html">New Game</a>
+                    <a id="ngButton" class="btn">New Game</a>
                     <br><br>
-                    <a id="helpButton" class="help-btn" href="html/tutorial.html">How to Play</a>
+                    <a id="helpButton" class="btn">How to Play</a>
                     <br><br>
-                    <a id="contactButton" class="contact-btn" href="html/aboutUs.html">About Us</a>
+                    <a id="contactButton" class="btn">About Us</a>
                     <br><br>
-                    <a id="statsButton" class="stats-btn" href="html/playerStats.html">User Stats</a>
+                    <a id="statsButton" class="btn">My Stats</a>
                 </div>
             </div>
             <div class="flex-item-right">

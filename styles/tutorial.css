@@ -1,146 +1,127 @@
-h1{
-    text-align: center;
+h1 {
+  text-align: center;
+  text-decoration: underline;
 }
 
-h2{
-    text-align: center;
+h2 {
+  text-align: center;
 }
 
-p{
-    text-align: center;
+p {
+  text-align: center;
 }
 
 .center {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-
 body {
-    background-color: #777d96;
+  background-color: #777d96;
 
-    flex-flow:row wrap;
-    justify-content:center;
-    margin:0;
-    height:100vh;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
 
-    padding:0 10rem;
+  padding: 0 10rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .thought {
-    display:flex;
-    background-color:#fff;
-    padding:20px;
-    border-radius:30px;
-    min-width:400px;
-    max-width:220px;
-    min-height:40px;
-    margin:auto;
-    position:relative;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+  display: flex;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 30px;
+  min-width: 400px;
+  max-width: 220px;
+  min-height: 40px;
+  margin: auto;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .thought:before,
 .thought:after {
-    content:"";
-    background-color:#fff;
-    border-radius:50%;
-    display:block;
-    position:absolute;
-    z-index:-1;
+  content: "";
+  background-color: #fff;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  z-index: -1;
 }
 .thought:before {
-    width:47px;
-    height:44px;
-    top:80px;
-    left:-28px;
-    box-shadow:-50px 30px 0 -12px #fff;
+  width: 47px;
+  height: 44px;
+  top: 80px;
+  left: -28px;
+  box-shadow: -50px 30px 0 -12px #fff;
 }
 
 .thought:after {
-    bottom:-20px;
-    right:26px;
-    width:30px;
-    height:30px;
-    box-shadow:80px -34px 0 0 #fff,
-    -208px -6px 0 -2px #fff,
-    -24px 17px 0 -6px #fff,
-    -5px 25px 0 -10px #fff;
-
+  bottom: -20px;
+  right: 26px;
+  width: 30px;
+  height: 30px;
+  box-shadow: 80px -34px 0 0 #fff, -208px -6px 0 -2px #fff,
+    -24px 17px 0 -6px #fff, -5px 25px 0 -10px #fff;
 }
 
-img{
-    position: relative;
-    width: 150px;
-    height: 150px;
+img {
+  position: relative;
+  width: 150px;
+  height: 150px;
 }
 
 video {
-    margin-left: auto;
-    margin-right: auto;
-    display: block
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
-
-.btn-group{
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    text-align: center;
+.btn-group {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
 }
 
 .btn {
-    font-size: 40px;
-    font-family: Arial;
-    font-weight: bold;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 2px solid transparent;
-    color: #333;
-    /* background-color: #fff; */
-    background-color: rgba(0, 0, 0, 0);
-    border-color: #333;
-    border-radius: 5%;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 40px;
+  padding: 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  color: black;
 }
 
 .btn:hover {
-    text-decoration: none;
-    color: #333;
-    background-color: #0099b0;
-    border-color: #333;
+  background-color: #aaaaaa;
+  cursor: pointer;
 }
 
-
-
-#title
-{
-    text-align:center;
+#title {
+  text-align: center;
 }
-#titleElement1{
-    display:inline;
-    position: relative;
-    padding-left: 20px;
+#titleElement1 {
+  display: inline;
+  position: relative;
+  padding-left: 20px;
 }
 
-#titleElement2
-{
-    display:inline;
-    position: relative;
-    padding-right: 20px;
+#titleElement2 {
+  display: inline;
+  position: relative;
+  padding-right: 20px;
+}
 
+td {
+  text-align: center;
+  padding: 10px;
+  font-size: 22px;
 }

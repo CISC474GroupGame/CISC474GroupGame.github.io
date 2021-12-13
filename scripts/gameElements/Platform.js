@@ -1,6 +1,6 @@
 class Platform{
     //two types: 'basic' and 'kill'
-    constructor(x, y, width, height, type="basic", color="#000000"){
+    constructor(x, y, width, height, type="basic", color="#989898"){
         this.x = x;
         this.y = y;
         this.width = width;

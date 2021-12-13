@@ -14,6 +14,7 @@
     <script src="./../scripts/gameElements/Powerup.js"></script>
     <script src="./../scripts/api_client.js"></script>
     <script src="./../scripts/PlayerStats.js"></script>
+    <script src="./../scripts/Sound.js"></script>
     <script src="./../scripts/levelConfigurations/LevelClass.js"></script>
     <script src="./../scripts/levelConfigurations/levelConfigurations.js"></script>
     <script src="./../scripts/game.js"></script>
@@ -35,8 +36,8 @@
     <div id="canvas-container">
         <canvas id="game-canvas"></canvas>
         <div id="control-btn-group" class="btn-group">
-            <a class="btn" id="menu-btn" href="./../index.html">Main Menu</a>
-            <button class="btn" id="reset-btn">Reset Level</button>
+            <a class="btn" id="menu-btn">Main Menu</a>
+            <a class="btn" id="reset-btn">Reset Level</a>
         </div>
         <span id="timer"></span>
         <div id="level-modal" class="modal">
@@ -65,8 +66,9 @@
                 <div class="modal-body">
                     <p id='modal-message'></p>
                     <div class="modal-btn-group">
-                        <a class="btn" id="modal-leaderboard-btn" href="./scoreboard.html">Leaderboard</a>
-                        <a class="btn" id="modal-menu-btn" href="./../index.html">Return to menu</a>
+                        <a class="btn" id="modal-leaderboard-btn">Leaderboard</a>
+                        <a class="btn" id="modal-stats-btn">My Stats</a>
+                        <a class="btn" id="modal-menu-btn">Return to menu</a>
                     </div>
                 </div>
             </div>
