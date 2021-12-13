@@ -489,12 +489,14 @@ function JDLevelOne(canvas){
     platforms.push(platform1);
 
     powerups = []
-    let pow1 = new Powerup(915,platform1.y -50, 'invincible');
+    let pow1 = new Powerup(canvas.width/2, canvas.height-100, 'invincible');
     powerups.push(pow1);
-
     coins = []
-    let coin1 = new Coin(650,platform1.y -50);
-    let coin2 = new Coin(1250,platform1.y -50);
+    let coin1 = new Coin(canvas.width/2, canvas.height-100);
+    for(let i = 0; i < 5; i++){
+        coins.push(new Coin(canvas.width/10*i, canvas.height-100))
+    }
+    let coin2 = new Coin(canvas.width/4, canvas.height-100);
     coins.push(coin1,coin2);
 
     endpoint = new Endpoint(player.x + 1400, platform1.y-100);
