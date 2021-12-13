@@ -386,3 +386,129 @@ function JHLevelOne(canvas){
     let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
     return theLevel;
 }
+
+function loadLevelDylanOne(canvas){
+
+    let width = canvas.width;
+    let height = canvas.height;
+
+    let player, platforms, powerups, coins, endpoint, coinsCount, key;
+
+    player = new Player(width/8, height/2);
+
+    platforms = []
+    let platform1 = new Platform(0, canvas.height-100, width, 100);
+    let platform2 = new Platform(canvas.width/3 + 150, canvas.height-250, 250, 25, 'kill')
+    platforms.push(platform1, platform2);
+
+    powerups = []
+    let pow1 = new Powerup(915,platform1.y -50, 'invincible');
+    powerups.push(pow1);
+
+    coins = []
+    let coin1 = new Coin(platform2.x +50,platform2.y-50);
+    let coin2 = new Coin(platform2.x +200,platform2.y-50);
+    let coin3 = new Coin(650,platform1.y -50);
+    let coin4 = new Coin(1250,platform1.y -50);
+    coins.push(coin1,coin2,coin3,coin4);
+
+    endpoint = new Endpoint(player.x + 1400, platform1.y-100);
+
+    coinsCount = coins.length;
+
+    key = new Key(platform2.x + 110, platform2.y-70)
+
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel;
+}
+
+function loadLevelDylanTwo(canvas){
+
+    let width = canvas.width;
+    let height = canvas.height;
+
+    let player, platforms, powerups, coins, endpoint, coinsCount, key;
+
+    player = new Player(width/8, height/2);
+
+    platforms = []
+    let platform1 = new Platform(0, height-100, 500, 50);
+    let platform2 = new Platform(1400, 400, 300, 50);
+    let platform3 = new Platform(650, height-250, 200, 50);
+    let platform4 = new Platform(300, height-425, 300, 50);
+    let platform5 = new Platform(850, 400, 150, 50, 'kill');
+    let platform6 = new Platform(1125, 400, 150, 50);
+    platforms.push(platform1, platform2, platform3, platform4, platform5, platform6);
+
+    powerups = []
+    let pow1 = new Powerup(450,platform4.y-60,'jump');
+    let pow2 = new Powerup(700, 200, 'invincible');
+    powerups.push(pow1,pow2);
+
+    coins = []
+    let coin1 = new Coin(platform1.x + 400,platform1.y-40);
+    let coin2 = new Coin(platform2.x + 100,platform2.y-40);
+    let coin3 = new Coin(platform3.x + 150,platform3.y-40);
+    let coin4 = new Coin(450, 200);
+    let coin5 = new Coin(800,250);
+    let coin6 = new Coin(platform6.x + 75, platform6.y-40);
+    coins.push(coin1,coin2,coin3,coin4,coin5,coin6);
+
+    endpoint = new Endpoint(player.x + 1400, 300);
+
+    coinsCount = coins.length;
+
+    key = new Key(platform5.x +60, platform5.y-50)
+
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel;
+}
+
+function loadLevelDylanThree(canvas){
+
+    let width = canvas.width;
+    let height = canvas.height;
+
+    let player, platforms, powerups, coins, endpoint, coinsCount, key;
+
+    player = new Player(width/8, height/2);
+
+    platforms = []
+    let platform1 = new Platform(0, canvas.height-100, 365, 100);
+    let platform2 = new Platform(175,200,15,575,'kill');
+    let platform3 = new Platform(350,200,15,641,'kill');
+    let platform4 = new Platform(175,550,50,15,'kill');
+    let platform5 = new Platform(300,700,50,15,'kill');
+    let platform6 = new Platform(275,350,75,15,'kill');
+    let platform7 = new Platform(0,0,190,200);
+    let platform8 = new Platform(700,450,350,15);
+    let platform9 = new Platform(400,height-150,190,15);
+    let platform10 = new Platform(500,0,15,575);
+    let platform11 = new Platform(1200,200,100,1000,'kill');
+    let platform12 = new Platform(player.x + 1400, platform1.y,50,15);
+
+    platforms.push(platform1,platform2,platform3,platform4,platform5,platform6,platform7,platform9,platform10,platform8,platform11,platform12);
+    
+
+    powerups = []
+    let pow1 = new Powerup(80, platform1.y-60, 'fly');
+    let pow2 = new Powerup(275, 200, 'jump'); 
+    powerups.push(pow1,pow2);
+
+    coins = []
+    let coin1 = new Coin(80,250);
+    let coin2 = new Coin(platform8.x + 100,platform8.y-50);
+    let coin3 = new Coin(platform8.x + 250,platform8.y-50);
+    let coin4 = new Coin(platform11.x + 250,250);
+    let coin5 = new Coin(platform11.x + 350,550);
+    coins.push(coin1,coin2,coin3,coin4,coin5);
+
+    endpoint = new Endpoint(player.x + 1400, platform1.y-100);
+
+    coinsCount = coins.length;
+
+    key = new Key(platform11.x + 35, platform11.y -150);
+
+    let theLevel = new Level(canvas, player, platforms, powerups, coins, endpoint, coinsCount, key);
+    return theLevel;
+}
