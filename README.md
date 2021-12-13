@@ -1,4 +1,4 @@
-# CISC474_Group2_FInalProject
+# CISC474_Group2_FinalProject
 
 Charactor avatar: https://arks.itch.io/dino-characters </br>
 https://edermunizz.itch.io/free-pixel-art-hill </br>
