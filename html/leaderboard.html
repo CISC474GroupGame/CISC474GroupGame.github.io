@@ -5,11 +5,17 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css' integrity='sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==' crossorigin='anonymous'/>
+		<link rel='stylesheet' href='./../styles/leaderboard.css'>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js' integrity='sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg==' crossorigin='anonymous'></script>
+		<script src="./../scripts/Sound.js"></script>
+		<script src="./../scripts/pageScripts/leaderboard.js"></script>
 	</head>
 	<body>
 		<!-- scoreboard table -->
 		<div class="container">
+		</div>
+		<div class='btn-container'>
+			<a id="menu-btn" class="btn">Return to menu</a>
 		</div>
 		<script>
 			// get scoreboard data from server
@@ -33,11 +39,11 @@
 						row.insertCell(1).innerHTML = data.result[key].name;
 						row.insertCell(2).innerHTML = data.result[key].score;
 						row.insertCell(3).innerHTML = data.result[key].time / 1000; // convert milliseconds to seconds
-						row.insertCell(4).innerHTML = new Date(data.result[key].timestamp);
+						row.insertCell(4).innerHTML = new Date(data.result[key].timestamp).toLocaleString();
 						row.insertCell(5).innerHTML = data.result[key].coins;
-						row.insertCell(7).innerHTML = data.result[key].deaths;
-						row.insertCell(8).innerHTML = data.result[key].jumps;
-						row.insertCell(9).innerHTML = data.result[key].resets;
+						row.insertCell(6).innerHTML = data.result[key].deaths;
+						row.insertCell(7).innerHTML = data.result[key].jumps;
+						row.insertCell(8).innerHTML = data.result[key].resets;
 						index++;
 					}
 					
