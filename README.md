@@ -24,4 +24,4 @@ For the statistics and leaderboard to work, you will need GOOGLE_APPLICATION_CRE
 
 API Description:<br>
 
-Github Page: https://jinhengz.github.io/CISC474_Group2_FInalProject/ </br>
+Github Page: https://cisc474groupgame.github.io/ </br>
