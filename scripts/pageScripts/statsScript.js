@@ -1,6 +1,13 @@
 // window.onload = load;
 
 async function load(user){
+    document.getElementById('menu-btn').addEventListener('click', () => {
+        let clickSound = new Sound('click');
+        clickSound.play();
+        clickSound.sound.onended = () => {
+            window.location = './../index.html';
+        }
+    })
     let statsObject = { //this will be populated from the API endpoint and default to 0
         highscore: 0,
         time: 0,
@@ -35,12 +42,5 @@ async function load(user){
         document.getElementById('total-coins').innerText = "Total Coins: " + statsObject.coins;
         document.getElementById('total-jumps').innerText = "Total Jumps: " + statsObject.jumps;
         document.getElementById('total-distance').innerText = "Distance Travelled: " + statsObject.distance + " pixels";
-        document.getElementById('menu-btn').addEventListener('click', () => {
-            let clickSound = new Sound('click');
-            clickSound.play();
-            clickSound.sound.onended = () => {
-                window.location = './../index.html';
-            }
-        })
     });
 }
