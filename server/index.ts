@@ -69,7 +69,7 @@ app.post("/scoreboard", async (req, res) => {
 	let verification;
 	if(!token || token == 'undefined'){
 		isguest = true;
-		verification = {'name': 'Guest', 'picture': '', 'uid': '', 'email': '', 'email_verified': false};
+		verification = {'name': req.body.name, 'picture': '', 'uid': '', 'email': '', 'email_verified': false};
 	}else{
 		console.log(token);
 		verification = await defaultAuth.verifyIdToken(token);
