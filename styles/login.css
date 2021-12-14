@@ -31,9 +31,31 @@
 }
 
 h1 {
+  animation: color-change 5s infinite;
   font-size: 80px;
   margin: 10px 0 30px;
   line-height: 80px;
+}
+
+@keyframes color-change {
+  0% {
+    color: #ffffff;
+  }
+  20% {
+    color: #66ccff;
+  }
+  40% {
+    color: #ff99cc;
+  }
+  60% {
+    color: #ff5050;
+  }
+  80% {
+    color: #9933ff;
+  }
+  100% {
+    color: #ffffff;
+  }
 }
 
 #splitPage {
