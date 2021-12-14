@@ -413,9 +413,9 @@ let endGame = function(){
             console.log(data);
             postData('http://localhost:9001/scoreboard?token='+auth.currentUser.Aa, data);
         }else{
-            let data = {'score': playerStats.score, 'time': playerStats.time, 'resets': playerStats.resets, 'deaths': playerStats.deaths, 'coins': playerStats.coins, 'distance': playerStats.distance, 'jumps': playerStats.jumps};
-                let guest_name = prompt("Guest, please enter your name\n");
-                postData('http://localhost:9001/scoreboard', data);
+            let guest_name = prompt("Guest, please enter your name\n");
+            let data = {name: guest_name, 'score': playerStats.score, 'time': playerStats.time, 'resets': playerStats.resets, 'deaths': playerStats.deaths, 'coins': playerStats.coins, 'distance': playerStats.distance, 'jumps': playerStats.jumps};
+            postData('http://localhost:9001/scoreboard', data);
         }
     }
     // window.location = '../index.html';
