@@ -482,7 +482,7 @@ let initClickListeners = function(){
     document.getElementById("modal-leaderboard-btn").addEventListener('click', () => {
         clickSound.play();
         clickSound.sound.onended = () => {
-            window.location = './../leaderboard.html';
+            window.location = './leaderboard.html';
         }
     });
     document.getElementById("modal-menu-btn").addEventListener('click', () => {
@@ -497,7 +497,7 @@ let initClickListeners = function(){
     document.getElementById("modal-stats-btn").addEventListener('click', () => {
         clickSound.play();
         clickSound.sound.onended = () => {
-            window.location = './../html/playerStats.html';
+            window.location = './playerStats.html';
         }
     });
 }
