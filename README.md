@@ -29,4 +29,123 @@ For the statistics and leaderboard to work, you will need GOOGLE_APPLICATION_CRE
 
 API Description:<br>
 
-Github Page: https://cisc474groupgame.github.io/ </br>
+GET http://server:port/user?token={token}
+get personal stats
+* parameter
+  * Token: required token from firebase
+* response
+
+```json
+{
+  "failed": false,
+  "result": {
+    "name": "<REDACTED>",
+    "picture": "<REDACTED>",
+    "user_id": "<REDACTED>",
+    "email": "<REDACTED>",
+    "email_verified": true,
+    "data": [
+      {
+        "coins": 1,
+        "deaths": 0,
+        "distance": 805,
+        "isguest": false,
+        "jumps": 0,
+        "name": "JD Wang",
+        "resets": 0,
+        "score": 667,
+        "time": 3334,
+        "timestamp": 1639438393734,
+        "uid": "<REDACTED>",
+        "user": ""
+      },
+      {
+        "coins": 31,
+        "deaths": 98,
+        "distance": 1511,
+        "isguest": false,
+        "jumps": 1,
+        "name": "<REDACTED>",
+        "resets": 0,
+        "score": 3024,
+        "time": 57470,
+        "timestamp": 1639974658472,
+        "uid": "<REDACTED>",
+        "user": ""
+      }
+    ]
+  }
+}
+
+```
+
+POST http://server:port/scoreboard?token={token}
+* parameter
+  * Token: required token from firebase
+* request
+  * JSON of the score object.
+```JSON
+{
+  "score": 3024,
+  "time": 57470,
+  "resets": 0,
+  "deaths": 98,
+  "coins": 31,
+  "distance": 1511,
+  "jumps": 1
+}
+```
+* response
+
+```json
+{"failed":false,"result":{}}
+```
+
+
+
+
+GET http://server:port/scoreboard
+* response:
+```json
+{
+  "failed": false,
+  "result": [
+    {
+      "coins": 44,
+      "deaths": 6,
+      "distance": 17,
+      "isguest": true,
+      "jumps": 0,
+      "name": "speedrunner",
+      "resets": 0,
+      "score": 9280,
+      "time": 21959,
+      "timestamp": 1639458901133,
+      "uid": "",
+      "user": ""
+    },
+    {
+      "coins": 48,
+      "deaths": 15,
+      "distance": 47,
+      "isguest": true,
+      "jumps": 0,
+      "name": "Guest",
+      "resets": 0,
+      "score": 8973,
+      "time": 47494,
+      "timestamp": 1639457277321,
+      "uid": "",
+      "user": ""
+    }
+  ]
+}
+
+```
+
+
+
+
+Github Page: https://cisc474groupgame.github.io/ </br> 
+or with deployed server @ https://cisc474.jdw.design/
+
